@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/11 22:12:02 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/11 22:56:45 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int argc, char **argv)
 		write(1, "--save", 6);
 	}
 
-	if (argc < 2)
+	if (argc < 1)
 	{
 		write(1, "Please, enter a valid map name", 30);
 		return (1);
@@ -35,7 +35,7 @@ int		main(int argc, char **argv)
 		write(1, "Failed to connect to the graphical system", 41);
 		return (1);
 	}
-	mlx_win = mlx_new_window(connection_identifier, 1920, 1080, "Hello world!");
+	mlx_win = mlx_new_window(connection_identifier, 500, 500, "Hello world!");
 	mlx_loop(connection_identifier);
 
 	return (0);
