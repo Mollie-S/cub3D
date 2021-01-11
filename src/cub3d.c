@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/11 15:50:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/11 22:12:02 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int		main(int argc, char **argv)
 {
 	void	*connection_identifier;
 	void	*mlx_win;
+
+	if (argv[2])
+	{
+		write(1, "--save", 6);
+	}
 
 	if (argc < 2)
 	{
