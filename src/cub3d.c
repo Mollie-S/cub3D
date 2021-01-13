@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/12 19:27:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/13 11:05:23 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,18 @@ typedef struct		s_data
 	int     endian;
 }               	t_data;
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
+{
+	char *dst;
+	dst = data->address + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
 int		main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_data	img;
+	t_data	data;
 
 	if (argv[2])
 	{
@@ -47,11 +54,13 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	mlx_win = mlx_new_window(mlx, 500, 500, "cub3D");
-	img.img = mlx_new_image(mlx, 500, 500);
-	img.address = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-		&img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	data.img = mlx_new_image(mlx, 500, 500);
+	data.bits_per_pixel = 16;
+	data.line_length = 100;
+	data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+		&data.endian);
+	my_mlx_pixel_put(&data, 10, 10, 0x00FF0000);
+	mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
 	mlx_loop(mlx);
 
 	while (1);
