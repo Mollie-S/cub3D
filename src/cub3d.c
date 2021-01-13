@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/13 11:05:23 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/13 12:21:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		main(int argc, char **argv)
 	data.line_length = 100;
 	data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
 		&data.endian);
-	my_mlx_pixel_put(&data, 10, 10, 0x00FF0000);
+	my_mlx_pixel_put(&data, 100, 100, 0x00FF0000);
 	mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
 	mlx_loop(mlx);
 
