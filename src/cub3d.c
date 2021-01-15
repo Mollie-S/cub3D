@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/15 12:01:15 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/15 18:45:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 	char *dst;
 	dst = data->address + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-void	draw_rectangle(t_data *data, int horizontal, int vertical, unsigned int color)
-{
-	int y = vertical;
-	while (y < 450)
-	{
-		int x = horizontal;
-		printf("%d\n", data->bits_per_pixel);
-		while (x < 450)
-		{
-			my_mlx_pixel_put(data, x, y, color);
-			x++;
-		}
-		y++;
-	}
 }
 
 int		main(int argc, char **argv)
@@ -75,7 +59,7 @@ int		main(int argc, char **argv)
 	data.img = mlx_new_image(mlx, 500, 500);
 	data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
 		&data.endian);
-	draw_rectangle(&data, 50, 50, 0x0000FF00);
+	my_mlx_pixel_put(&data, 50, 50, 0x0000FF00);
 	mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
 	mlx_loop(mlx);
 
