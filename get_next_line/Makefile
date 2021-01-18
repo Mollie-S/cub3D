@@ -6,11 +6,11 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/18 12:30:09 by osamara       #+#    #+#                  #
-#    Updated: 2021/01/18 12:31:41 by osamara       ########   odam.nl          #
+#    Updated: 2021/01/18 12:45:36 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = gnl.a
+NAME = libgnl.a
 INCL_DIR = include/
 
 SRC = get_next_line.c \

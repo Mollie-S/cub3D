@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/13 11:47:27 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/25 12:13:43 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/18 21:16:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 128
+#  define BUFFER_SIZE 1024
 # endif
 
 # define END_OF_FILE 0
