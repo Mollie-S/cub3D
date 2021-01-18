@@ -6,11 +6,9 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/15 18:45:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/17 16:22:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <unistd.h>
 

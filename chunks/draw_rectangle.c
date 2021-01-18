@@ -1,21 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_rectangle.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: osamara <osamara@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/15 18:41:56 by osamara       ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include <stdio.h>
 
 #include <unistd.h>
 
-#include "mlx.h"
-#include "data.h"
+#include "../mlx/mlx.h"
+// #include "data.h"
 
 typedef struct		s_data
 {
@@ -33,20 +23,20 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
     *(unsigned int*)dst = color;
 }
 
-void	draw_rectangle(t_data *data, int horizontal, int vertical, unsigned int color)
+void	draw_rectangle(t_data *data, int horizontal, int vertical, unsigned int color, int win_length, int win_height)
 {
     int y = vertical;
     unsigned blue = 0;
     unsigned green = 0;
     unsigned red = 0;
 
-    while (y < 450)
+    while (y <= win_height - vertical)
     {
         int x = horizontal;
         color = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
         blue += 1;
         // red += 5;
-        while (x < 450)
+        while (x <= win_length - horizontal)
         {
             my_mlx_pixel_put(data, x, y, color);
             x++;
@@ -61,6 +51,8 @@ int		main(int argc, char **argv)
     void	*mlx;
     void	*mlx_win;
     t_data	data;
+    int     win_length = 500;
+    int     win_height = 500;
 
     if (argv[2])
     {
@@ -78,11 +70,11 @@ int		main(int argc, char **argv)
         write(1, "Failed to connect to the graphical system", 41);
         return (1);
     }
-    mlx_win = mlx_new_window(mlx, 500, 500, "cub3D");
-    data.img = mlx_new_image(mlx, 500, 500);
+    mlx_win = mlx_new_window(mlx, win_length, win_height, "cub3D");
+    data.img = mlx_new_image(mlx, win_length, win_height);
     data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
         &data.endian);
-    draw_rectangle(&data, 50, 50, 0x0000FF00);
+    draw_rectangle(&data, 50, 50, 0x0000FF00, win_length, win_height);
     mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
     mlx_loop(mlx);
 
