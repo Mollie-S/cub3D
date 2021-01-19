@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/19 18:08:04 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/19 21:16:35 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,34 @@
 
 #include "parse_map.h"
 
-int		read_from_file()
+int		read_from_file(char *file)
 {
 	int		fd;
 	int		success;
 	char	*line;
 
 	line = NULL;
-	fd = open(argv[1], O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		write(1, "file error\n", 11);
-		return (1);
+		write(1, "Error\nCan't open the file\n", 26);
+		return (ERROR);
 	}
-
 	success = 1;
 	while (success != 0)
 	{
 		success = get_next_line(fd, &line);
 		if (success == -1)
 		{
-			write(1, "gnl error\n", 10);
-			return (1);
+			write(1, "Error\nCan't read the content\n", 28);
+			return (ERROR);
 		}
-		printf("%s\n", line);
+		printf("%s\n", line); // replace with pushing the line to the linked list and counting num of lines
 		free(line);
 		line = NULL;
 	}
 	write(1, "EOF\n", 4);
 	return (0);
-
 }
 
 int		parse_first_line(char *line, t_map *map)
