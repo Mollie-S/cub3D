@@ -6,45 +6,53 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/19 21:16:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/20 00:26:08 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 
-
+#include "libft.h"
 #include "parse_map.h"
+
+int		push_line_to_llist(char *line)
+{
+	ft_lstnew(line);
+	ft_lstadd_back();
+
+}
 
 int		read_from_file(char *file)
 {
 	int		fd;
-	int		success;
+	int		line_read;
 	char	*line;
 
 	line = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		write(1, "Error\nCan't open the file\n", 26);
+		write(1, "Can't open the file\n", 20);
 		return (ERROR);
 	}
-	success = 1;
-	while (success != 0)
+	line_read = 1;
+	while (line_read != END_OF_FILE)
 	{
-		success = get_next_line(fd, &line);
-		if (success == -1)
+		line_read = get_next_line(fd, &line);
+		if (line_read == -1)
 		{
-			write(1, "Error\nCan't read the content\n", 28);
+			write(1, "Can't read the content\n", 23);
 			return (ERROR);
 		}
-		printf("%s\n", line); // replace with pushing the line to the linked list and counting num of lines
+		push_line_to_llist(line); // pushing the line to the linked list and counting num of lines
 		free(line);
 		line = NULL;
 	}
-	write(1, "EOF\n", 4);
+	close(fd);
 	return (0);
 }
+
 
 int		parse_first_line(char *line, t_map *map)
 {
