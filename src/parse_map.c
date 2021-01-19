@@ -6,17 +6,53 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/19 15:48:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/19 18:08:04 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+#include <unistd.h>
+
+
 #include "parse_map.h"
+
+int		read_from_file()
+{
+	int		fd;
+	int		success;
+	char	*line;
+
+	line = NULL;
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		write(1, "file error\n", 11);
+		return (1);
+	}
+
+	success = 1;
+	while (success != 0)
+	{
+		success = get_next_line(fd, &line);
+		if (success == -1)
+		{
+			write(1, "gnl error\n", 10);
+			return (1);
+		}
+		printf("%s\n", line);
+		free(line);
+		line = NULL;
+	}
+	write(1, "EOF\n", 4);
+	return (0);
+
+}
 
 int		parse_first_line(char *line, t_map *map)
 {
 	int i;
 
-	if (map->num_lines == 0)
+	if (map->height == 0)
 	{
 		i = 0;
 		while (line[i] != 0)
