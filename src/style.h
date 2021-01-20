@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map.h                                              :+:    :+:            */
+/*   style.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 21:55:09 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/20 21:55:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef STYLE_H
+# define STYLE_H
 
-typedef struct		s_map
+typedef struct		s_style
 {
-	int			height;
-	int			width;
-	int			start_direction;
-	double		start_pos_x;
-	double		start_pos_y;
-	char		*fields;
-}					t_map;
-
+    char			*no_texture;
+    char			*so_texture;
+    char			*ea_texture;
+    char			*we_texture;
+    char			*sprite_texture;
+    unsigned int	floor_rgb;
+    unsigned int	ceiling_rgb;
+}					t_style;
 
 #endif

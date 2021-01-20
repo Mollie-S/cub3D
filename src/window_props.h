@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map.h                                              :+:    :+:            */
+/*   window_props.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 21:55:09 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/20 21:47:56 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/20 21:50:49 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef WINDOW_PROPS_H
+# define WINDOW_PROPS_H
 
-typedef struct		s_map
+typedef struct      s_window_props
 {
-	int			height;
-	int			width;
-	int			start_direction;
-	double		start_pos_x;
-	double		start_pos_y;
-	char		*fields;
-}					t_map;
-
+    int				resolution_x;
+    int				resolution_y;
+}                   t_window_props;
 
 #endif
