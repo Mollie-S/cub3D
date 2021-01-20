@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 11:41:42 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/20 12:28:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,30 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int*)dst = color;
 }
 
-int		main(int argc, char **argv)
+int		start_mlx()
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	data;
+
+	mlx = mlx_init();
+	if (mlx == NULL)
+	{
+		write(1, "Failed to connect to the graphical system", 41);
+		return (0);
+	}
+	mlx_win = mlx_new_window(mlx, 500, 500, "cub3D");
+	data.img = mlx_new_image(mlx, 500, 500);
+	data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+		&data.endian);
+	my_mlx_pixel_put(&data, 50, 50, 0x0000FF00);
+	mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
+	mlx_loop(mlx);
+	return (1);
+}
+
+int		main(int argc, char **argv)
+{
 
 	if (argv[2])
 	{
@@ -41,21 +60,12 @@ int		main(int argc, char **argv)
 	if (!open_file(argv[1]))
 	{
 		write(1, "Error.\n", 7);
-	}
-	mlx = mlx_init();
-	if (mlx == NULL)
-	{
-		write(1, "Failed to connect to the graphical system", 41);
 		return (1);
 	}
-	mlx_win = mlx_new_window(mlx, 500, 500, "cub3D");
-	data.img = mlx_new_image(mlx, 500, 500);
-	data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
-		&data.endian);
-	my_mlx_pixel_put(&data, 50, 50, 0x0000FF00);
-	mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
-	mlx_loop(mlx);
-
-	while (1);
+	if (!start_mlx())
+	{
+		write(1, "Error.\n", 7);
+		return (1);
+	}
 	return (0);
 }
