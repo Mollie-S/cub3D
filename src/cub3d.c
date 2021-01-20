@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/17 16:22:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/20 11:41:42 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 #include "mlx.h"
 #include "data.h"
-
-typedef struct		s_data
-{
-	void    *img;
-	char    *address;
-	int     bits_per_pixel;
-	int     line_length;
-	int     endian;
-}               	t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 {
@@ -46,6 +37,10 @@ int		main(int argc, char **argv)
 	{
 		write(1, "Please, enter a valid map name", 30);
 		return (1);
+	}
+	if (!open_file(argv[1]))
+	{
+		write(1, "Error.\n", 7);
 	}
 	mlx = mlx_init();
 	if (mlx == NULL)
