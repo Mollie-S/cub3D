@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 19:14:03 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/20 19:26:33 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ int		open_file(char *file)
 	return (0);
 }
 
-int		content_error(void)
-{
-	write(1, "Can't read the content\n", 23);
-	return(0);
-}
-
 int		read_from_file(int fd)
 {
 	char 		*line;
@@ -66,7 +60,8 @@ int		read_from_file(int fd)
 	{
 		return (ERROR);
 	}
-	// clear list after parsing the map
+	// clear list after parsing the map: 
+// 	ft_lstclear(list_start, void (*del)(void*)) ???
 	return (SUCCESS);
 }
 
@@ -81,4 +76,10 @@ int		push_line_to_llist(t_list **list_start, char *line)
 	}
 	ft_lstadd_back(list_start, new_node);
 	return (1);
+}
+
+int		content_error(void)
+{
+	write(1, "Can't read the content\n", 23);
+	return(0);
 }
