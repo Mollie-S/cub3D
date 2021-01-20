@@ -6,37 +6,43 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 00:26:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/20 12:18:50 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "libft.h"
+#include "../libft/libft.h"
 #include "parse_map.h"
 
-int		push_line_to_llist(char *line)
+int		push_line_to_llist(t_list list_start, char *line)
 {
-	ft_lstnew(line);
-	ft_lstadd_back();
+	t_list		*new_node;
+	int			num_lines;
 
-}
-
-int		read_from_file(char *file)
-{
-	int		fd;
-	int		line_read;
-	char	*line;
-
-	line = NULL;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	new_node = ft_lstnew(line); //create a new linked list node
+	if (!new_node)
 	{
-		write(1, "Can't open the file\n", 20);
 		return (ERROR);
 	}
+	num_lines = 0;
+	ft_lstadd_back(&list_start, new_node);
+	num_lines++;
+}
+
+int		read_from_file(int fd)
+{
+	int			line_read;
+	char		*line;
+	t_list		*list_start;
+
 	line_read = 1;
+	list_start = ft_lstnew(line); //create a new linked list
+	if (!list_start)
+	{
+		return (ERROR);
+	}
 	while (line_read != END_OF_FILE)
 	{
 		line_read = get_next_line(fd, &line);
@@ -45,9 +51,27 @@ int		read_from_file(char *file)
 			write(1, "Can't read the content\n", 23);
 			return (ERROR);
 		}
-		push_line_to_llist(line); // pushing the line to the linked list and counting num of lines
+		push_line_to_llist(&list_start, line); // pushing the line to the linked list and counting num of lines
 		free(line);
 		line = NULL;
+		return (1);
+	}
+
+	int		open_file(char *file)
+	{
+		int		fd;
+
+		line = NULL;
+		fd = open(file, O_RDONLY);
+		if (fd == -1)
+		{
+			write(1, "Can't open the file\n", 20);
+			return (ERROR);
+		}
+		if (!read_from_file(fd))
+		{
+			return (ERROR);
+		}
 	}
 	close(fd);
 	return (0);
