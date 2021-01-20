@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/18 19:10:45 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/19 17:51:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ typedef struct		s_map
 {
 	int				height;
 	int				width;
+	int				start_direction;
 	double			start_pos_x;
 	double			start_pos_y;
-	double			start_direction;
 }					t_map;
 
 
