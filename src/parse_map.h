@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:31 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/19 15:25:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/19 23:47:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "map.h"
 
 # define ERROR 0
+# define END_OF_FILE 0
 
 #endif
