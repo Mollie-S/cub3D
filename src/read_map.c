@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 19:26:33 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/21 11:37:49 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,17 @@ int		read_from_file(int fd)
 		line_read = get_next_line(fd, &line);
 		if (line_read == -1)
 		{
-			return (content_error());
+			return (content_error(line));
+		}
+		// check for all the identifiers first.
+		// free line and assign it to null if it's not a map
+		if (!push_line_to_llist(&list_start, line))
+		{
+			return (content_error(line));
 		}
 		if (!push_line_to_llist(&list_start, line))
 		{
-			return (content_error());
+			return (content_error(line));
 		}
 	}
 	if (!parse_map(list_start))
@@ -72,14 +78,15 @@ int		push_line_to_llist(t_list **list_start, char *line)
 	new_node = ft_lstnew(line);
 	if (!new_node)
 	{
-		return (content_error());
+		return (content_error(line));
 	}
 	ft_lstadd_back(list_start, new_node);
 	return (1);
 }
 
-int		content_error(void)
+int		content_error(char *line)
 {
 	write(1, "Can't read the content\n", 23);
+	free(line);
 	return(0);
 }
