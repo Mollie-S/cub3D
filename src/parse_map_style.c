@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/22 17:34:00 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/22 17:53:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int		parse_map_style_descriptor(char *line, int line_num)
 	else if (has_identifier(line, "S "))
 		style.sprite_texture = parse_texture_path(line);
 	else if (has_identifier(line, "C "))
-		style.ceiling_rgb = parse_color(line);
+		style.ceiling_rgb = parse_color(line, line_num);// how to deal with invalid colors?
 	else if (has_identifier(line, "F "))
-		style.floor_rgb = parse_color(line);
+		style.floor_rgb = parse_color(line, line_num);
 	free(line);
 	line = NULL;
 	return (SUCCESS);
@@ -78,14 +78,14 @@ char	*parse_texture_path(char *line)
 	return (texture_path);
 }
 
-int		parse_color(char *line)
+int		parse_color(char *line, int line_num)
 {
 	int i;
 	int	red;
 	int green;
 	int blue;
 	int num_chars;
-	// how to deal with the colors being 0,0,0 ? how to check that the color is valid?
+	// ints or unsigned ints?
 	i = 0;
 	red = -1;
 	green = -1;
@@ -94,30 +94,20 @@ int		parse_color(char *line)
 	{
 		num_chars = 0;
 		if ((line[i] = ' ' || ft_isdigit(line[i])) && red < 0)
-		{
 			red = ft_printf_atoi(line, &num_chars);
-		}
 		else if ((line[i] = ' ' || ft_isdigit(line[i])) && green < 0)
-		{
 			green = ft_printf_atoi(line + i, &num_chars);
-		}
 		else if ((line[i] = ' ' || ft_isdigit(line[i])) && blue < 0)
-		{
 			blue = ft_printf_atoi(line + i, &num_chars);
-		}
 		else if (line[i] = ',')
-		{
 			i++;
-		}
 		i += num_chars;
 	}
-	if (red >= 0 && green >= 0 && blue >= 0)
-	{
+	if ((red >= 0 && red >= 255)
+		&& (green >= 0 && green >= 255)
+		&& (blue >= 0 && blue >= 255))
 		return (red << 16 | green << 8 | blue);
-	}
+	// how to differentiate error and possible return value 0?
 	else
-	{
-		return (ERROR); // how to differentiate error and possible return value 0?
-	}
-
+		return (report_error(line_num, "Invalid color input"));
 }
