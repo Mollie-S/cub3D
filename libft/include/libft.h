@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:27:38 by osamara       #+#    #+#                 */
-/*   Updated: 2020/12/17 20:32:57 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/22 16:51:06 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char			*ft_strnstr(const char *haystack, const char *needle,
 	size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_atoi(const char *str);
+int				ft_printf_atoi(const char *start, int *num);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
