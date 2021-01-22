@@ -6,29 +6,77 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/21 12:57:41 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/22 12:28:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
+#include "../libft/include/libft.h"
+
 #include "parse_map_style.h"
 #include "style.h"
+#include "window_resolution.h"
 
-int		parse_map_style_descriptor(char *line)
+// longer way to initialize a structure
+	// style.no_texture = NULL;
+	// style.so_texture = NULL;
+	// style.ea_texture = NULL;
+	// style.we_texture = NULL;
+	// style.sprite_texture = NULL;
+	// style.floor_rgb = 0;
+	// style.ceiling_rgb = 0;
+
+int		parse_map_style_descriptor(char *line, int line_num)
 {
-	int	i;
 	t_style style;
 
-	i = 0;
-	style.no_texture = NULL;
-	style.so_texture = NULL;
-	style.ea_texture = NULL;
-	style.we_texture = NULL;
-	style.sprite_texture = NULL;
-	while (line[i] != 0)
+	style = (t_style){ 0, 0, 0, 0, 0, 0, 0 };
+
+	if (has_identifier(line, "R "))
 	{
-
+		if (!parse_window_resolution(line, line_num))
+			return (ERROR);
 	}
+	else if (has_identifier(line, "NO "))
+		style.no_texture = parse_texture_path(line); // don't forget it can return NULL if malloc fails, so check for NULLs afterwards
+	else if (has_identifier(line, "SO "))
+		style.so_texture = parse_texture_path(line);
+	else if (has_identifier(line, "EA "))
+		style.ea_texture = parse_texture_path(line);
+	else if (has_identifier(line, "WE "))
+		style.we_texture = parse_texture_path(line);
+	else if (has_identifier(line, "S "))
+		style.sprite_texture = parse_texture_path(line);
+	else if (has_identifier(line, "C "))
+		style.ceiling_rgb = parse_color(line);
+	else if (has_identifier(line, "F "))
+		style.floor_rgb = parse_color(line);
+	// check for all the identifiers first.
+	// free line and assign it to null if it's not a map
+	free(line);
+	line = NULL;
+	return (SUCCESS);
+}
 
+int		has_identifier(char *line, char *identifier)
+{
+	int	identifier_len;
+
+	identifier_len = ft_strlen(identifier);
+	return (ft_strncmp(line, identifier, identifier_len));
+}
+
+char	*parse_texture_path(char *line)
+{
+	int		i;
+	char	*texture_path;
+
+	i = 0;
+	while (line[i] != ' ')
+	{
+		i++;
+	}
+	texture_path = ft_strtrim(line + i, ' ');
+	return (texture_path);
 }
