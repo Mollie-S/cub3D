@@ -6,12 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/21 13:00:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/22 12:36:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "read_map.h"
 #include "../get_next_line/get_next_line.h"
@@ -40,48 +41,60 @@ int		read_from_file(int fd)
 	char 		*line;
 	t_list 		*list_start;
 	int			line_read;
+	int			line_num;
 
 	line = NULL;
 	list_start = NULL;
 	line_read = 1;
+	line_num = 0;
 	while (line_read != END_OF_FILE)
 	{
+		line_num++;
 		line_read = get_next_line(fd, &line);
 		if (line_read == -1)
 		{
-			return (content_error(line));
+			return (report_error(line_num, "Error getting a line."));
 		}
-		if (!handle_lines_read(line, &list_start))
+		if (!handle_lines_read(line, line_num))
 		{
-			return (parsing_error(line));
+			free(line);
+			return (ERROR);
+		}
+		if (!push_line_to_llist(list_start, line))
+		{
+			ft_lstclear(list_start, &free);
+			return (ERROR);
 		}
 	}
 	if (!parse_map(list_start))
 	{
-		return (parsing_error(line));
+		return (ERROR);
 	}
-	// clear list after parsing the map: 
-// 	ft_lstclear(list_start, void (*del)(void*)) ???
+	ft_lstclear(list_start, &free);
 	return (SUCCESS);
 }
 
-int		handle_lines_read(char *line, t_list **list_start)
+int		handle_lines_read(char *line, int line_num)
 {
-	if (map_style_descriptor(line))
+	int inside_map;
+
+	inside_map = 0;
+	if (is_empty_line(line))
 	{
-		if (!parse_map_style_descriptor(line))
+		if (!inside_map)
 		{
-			return (parsing_error(line));
+			free(line);
+			line = NULL;
+			return (SUCCESS);
 		}
-		// check for all the identifiers first.
-		// free line and assign it to null if it's not a map
+		else
+		{
+			return (report_error(line_num, "Empty line inside the map"));
+		}
 	}
-	else
+	else if (!parse_map_style_descriptor(line, line_num))
 	{
-		if (!push_line_to_llist(list_start, line))
-		{
-			return (content_error(line));
-		}
+		return (ERROR);
 	}
 	return (SUCCESS);
 }
@@ -103,32 +116,35 @@ int		push_line_to_llist(t_list **list_start, char *line)
 ** If an identifier is found the line is parsed and line freed
 ** If the line is empty it is immediately freed
 */
-int		map_style_descriptor(char *line)
+
+
+int		report_error(int line_num, char *message)
 {
-	int i;
+	char line_num_to_alpha;
+
+	line_num_to_alpha = ft_itoa(line_num);
+	write(1, "Line ", 5);
+	write(1, line_num_to_alpha, ft_strlen(line_num_to_alpha));
+	write(1, ": ", 2);
+	write(1, message, ft_strlen(message));
+	write(1, "\n", 1);
+	free(line_num_to_alpha);
+
+	return(ERROR);
+}
+
+int		is_empty_line(char *line)
+{
+	int	i;
 
 	i = 0;
-	if (line[0] == '\0')
+	while (line[i] != 0)
 	{
-		return (1);
+		if (line[i] != ' ')
+		{
+			return (0);
+		}
+		i++;
 	}
-	else if (line[0] == 'R' || line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
-		|| line[0] == 'E' || line[0] == 'F' || line[0] == 'C')
-	{
-		return (1);
-	}
-	return (0);
-}
-
-int		content_error(char *line)
-{
-	write(1, "Can't read the content\n", 23);
-	free(line);
-	return(ERROR);
-}
-int		parsing_error(char *line)
-{
-	write(1, "Invalid map\n", 12);
-	free(line);
-	return(ERROR);
+	return (1);
 }

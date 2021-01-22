@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:31 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 19:23:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/21 22:19:02 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 int		open_file(char *file);
 int		read_from_file(int fd);
 int		push_line_to_llist(t_list **list_start, char *line);
-int		content_error(void);
+int		handle_lines_read(char *line, int line_num);
+
+int		report_error(int line_num, char *message);
+
+
 
 #endif
