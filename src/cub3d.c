@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 12:28:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/22 12:45:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int		main(int argc, char **argv)
 		write(1, "Error.\n", 7);
 		return (1);
 	}
+	// check if every mallocced line is freed
+	// all structures freed?
 	return (0);
 }
