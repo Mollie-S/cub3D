@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 00:20:39 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 11:57:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,54 +85,53 @@ int		parse_color(char *line, unsigned int *color)
 	char	**array;
 	int		color_component;
 	int		red;
-	int		green;
+	int		green; // can I use enum here?? how??
 	int		blue;
 
-	array = ft_split(line, ',');
-	if (array == NULL || array[3] != NULL)
-	{
-		free_memory(array);
+	array = split_color_into_components(line);
+	if (array == NULL)
 		return (-1);
-	}
 	color_component = 0;
-	if (is_valid_color_component(array[0], &color_component))
+	if (is_valid_component(array[0], &color_component)
+		&& color_component >= 0 && color_component <= 255)
 		red = color_component;
 	else
-		return (-1);
-	if (is_valid_color_component(array[1], &color_component))
+		return (-1); // any way not to repeat error message?
+	if (is_valid_component(array[1], &color_component)
+		&& color_component >= 0 && color_component <= 255)
 		green = color_component;
 	else
 		return (-1);
-	if (is_valid_color_component(array[2], &color_component))
+	if (is_valid_component(array[2], &color_component)
+		&& color_component >= 0 && color_component <= 255)
 		blue = color_component;
 	else
 		return (-1);
-	free_memory(array);
+	free_array_memory(array);
 	return (red << 16 | green << 8 | blue);
 }
 
-int		is_valid_color_component(const char *string, int *color_component)
+int		is_valid_component(const char *string, int *component)
 {
 	int		num_chars;
 	int		accumulator;
-	int		is_valid_color;
+	int		is_valid_component;
 	char 	*trimmed_string;
 
 	num_chars = 0;
-	is_valid_color = 1;
+	is_valid_component = 1;
 	trimmed_string = ft_strtrim(string, ' ');
 	accumulator = ft_printf_atoi(trimmed_string, &num_chars);
-	if (trimmed_string[num_chars] != 0 || accumulator >= 0 && accumulator <= 255)
+	if (trimmed_string[num_chars] != 0)
 	{
-		is_valid_color = -1;
+		is_valid_component = -1;
 	}
-	*color_component = accumulator;
+	*component = accumulator;
 	free(trimmed_string);
-	return (is_valid_color);
+	return (is_valid_component);
 }
 
-//is it possible to do it like this???
-void		free_memory(char **array)
+void		free_array_memory(char **array)
 {
 	int i;
 
@@ -143,4 +142,31 @@ void		free_memory(char **array)
 		i++;
 	}
 	free(array);
+	array = NULL;
+}
+
+static char		**split_color_into_components(char *line)
+{
+	char	**array;
+	int		components_num;
+	int		i;
+
+	array = ft_split(line, ',');
+	if (array == NULL)
+	{
+		return (NULL);
+	}
+	i = 0;
+	components_num = 0;
+	while (array[i] != NULL)
+	{
+		components_num++;
+		i++;
+	}
+	if (components_num != 3)
+	{
+		free_array_memory(array);
+		return (NULL);
+	}
+	return (array);
 }
