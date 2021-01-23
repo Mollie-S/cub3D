@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:59:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 12:14:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 13:05:33 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,8 @@
 
 # define ERROR 0
 # define SUCCESS 1
+# define FALSE 0
+# define TRUE 1
+
 
 #endif
