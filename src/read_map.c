@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/22 12:36:07 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 12:15:00 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		handle_lines_read(char *line, int line_num)
 			return (report_error(line_num, "Empty line inside the map"));
 		}
 	}
-	else if (!parse_map_style_descriptor(line, line_num))
+	else if (!parse_map_header(line, line_num))
 	{
 		return (ERROR);
 	}

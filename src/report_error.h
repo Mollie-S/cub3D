@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_map_style.h                                  :+:    :+:            */
+/*   report_error.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/21 11:59:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/22 22:13:31 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/23 12:48:04 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/23 12:51:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_MAP_STYLE_H
-# define PARSE_MAP_STYLE_H
-
-# include "map.h"
+#ifndef REPORT_ERROR_H
+# define REPORT_ERROR_H
 
 # define ERROR 0
-# define SUCCESS 1
+
+int		report_error(int line_num, char *message);
 
 #endif

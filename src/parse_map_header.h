@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   window_resolution.h                                :+:    :+:            */
+/*   parse_map_header.h                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/20 21:47:56 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 12:17:53 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/21 11:59:47 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/23 12:14:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_RESOLUTION_H
-# define WINDOW_RESOLUTION_H
+#ifndef PARSE_MAP_HEADER_H
+# define PARSE_MAP_HEADER_H
 
-typedef struct      s_window_resolution
-{
-    int				x;
-    int				y;
-}                   t_window_resolution;
+# include "map.h"
+
+# define ERROR 0
+# define SUCCESS 1
 
 #endif

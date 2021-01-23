@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_map_style.c                                  :+:    :+:            */
+/*   parse_map_header.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 11:57:52 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 12:27:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "../libft/include/libft.h"
 
-#include "parse_map_style.h"
+#include "parse_map_header.h"
 #include "style.h"
 #include "window_resolution.h"
 
@@ -27,7 +27,7 @@
 	// style.floor_rgb = 0;
 	// style.ceiling_rgb = 0;
 
-int		parse_map_style_descriptor(char *line, int line_num)
+int		parse_map_header(char *line, int line_num)
 {
 	t_style 		style;
 	unsigned int	floor_color;
@@ -88,7 +88,7 @@ int		parse_color(char *line, unsigned int *color)
 	int		green; // can I use enum here?? how??
 	int		blue;
 
-	array = split_color_into_components(line);
+	array = split_into_components(line, ',');
 	if (array == NULL)
 		return (-1);
 	color_component = 0;
@@ -108,7 +108,8 @@ int		parse_color(char *line, unsigned int *color)
 	else
 		return (-1);
 	free_array_memory(array);
-	return (red << 16 | green << 8 | blue);
+	*color = red << 16 | green << 8 | blue;
+	return (SUCCESS);
 }
 
 int		is_valid_component(const char *string, int *component)
@@ -145,13 +146,13 @@ void		free_array_memory(char **array)
 	array = NULL;
 }
 
-static char		**split_color_into_components(char *line)
+static char		**split_into_components(char *line, char separator)
 {
 	char	**array;
 	int		components_num;
 	int		i;
 
-	array = ft_split(line, ',');
+	array = ft_split(line, separator);
 	if (array == NULL)
 	{
 		return (NULL);
@@ -169,4 +170,29 @@ static char		**split_color_into_components(char *line)
 		return (NULL);
 	}
 	return (array);
+}
+
+int		parse_window_resolution(char *line, int	line_num)
+{
+	char					**array;
+	int						resolution_component;
+	t_window_resolution		resolution;
+
+	array = split_into_components(line, ' ');
+	if (array == NULL)
+		return (report_error(line_num, "Unable to parse display resolution"));
+	resolution_component = 0;
+	resolution = (t_window_resolution){ 0, 0 };
+	if (is_valid_component(array[0], &resolution_component)
+		&& resolution_component > 0 && resolution_component <= 7680) // do I use the largest resolution or monitor resolution???
+		resolution.x = resolution_component;
+	else
+		return (report_error(line_num, "Invalid display resolution(x size)"));
+	if (is_valid_component(array[1], &resolution_component)
+		&& resolution_component > 0 && resolution_component <= 4320) // do I use the largest resolution currently available???
+		resolution.y = resolution_component;
+	else
+		return (report_error(line_num, "Invalid display resolution(y size)"));
+	free_array_memory(array);
+	return (SUCCESS);
 }
