@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 12:15:00 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 17:12:31 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "read_map.h"
 #include "../get_next_line/get_next_line.h"
 #include "parse_map.h"
+#include "report_error.h"
 
 int		open_file(char *file)
 {
@@ -118,20 +119,7 @@ int		push_line_to_llist(t_list **list_start, char *line)
 */
 
 
-int		report_error(int line_num, char *message)
-{
-	char line_num_to_alpha;
 
-	line_num_to_alpha = ft_itoa(line_num);
-	write(1, "Line ", 5);
-	write(1, line_num_to_alpha, ft_strlen(line_num_to_alpha));
-	write(1, ": ", 2);
-	write(1, message, ft_strlen(message));
-	write(1, "\n", 1);
-	free(line_num_to_alpha);
-
-	return(ERROR);
-}
 
 int		is_empty_line(char *line)
 {

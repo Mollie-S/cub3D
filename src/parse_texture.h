@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_map_header.h                                 :+:    :+:            */
+/*   parse_texture.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/21 11:59:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:09:50 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/23 17:04:08 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/23 17:05:03 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_MAP_HEADER_H
-# define PARSE_MAP_HEADER_H
+#ifndef PARSE_TEXTURE_H
+# define PARSE_TEXTURE_H
 
 # define ERROR 0
 # define SUCCESS 1
 
-int		parse_map_header(char *line, int line_num);
+int		parse_walls_textures(char *line, int line_num);
+char	*parse_texture_path(char *line);
+
 
 #endif

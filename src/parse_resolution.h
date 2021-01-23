@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_map_header.h                                 :+:    :+:            */
+/*   parse_resolution.h                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/21 11:59:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:09:50 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/23 16:13:25 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/23 16:52:59 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_MAP_HEADER_H
-# define PARSE_MAP_HEADER_H
+#ifndef PARSE_RESOLUTION_H
+# define PARSE_RESOLUTION_H
 
 # define ERROR 0
 # define SUCCESS 1
 
-int		parse_map_header(char *line, int line_num);
+int		parse_window_resolution(char *line, int line_num);
+int		parse_resolution_components(char *str_start, int line_num);
+
 
 #endif
