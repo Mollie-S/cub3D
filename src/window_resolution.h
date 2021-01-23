@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:47:56 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 12:17:53 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 18:48:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 typedef struct      s_window_resolution
 {
-    int				x;
-    int				y;
+	int				x;
+	int				y;
 }                   t_window_resolution;
 
 #endif

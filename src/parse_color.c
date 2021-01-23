@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 17:41:45 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 18:30:14 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		parse_floor_ceiling_colors(char *line, int line_num)
 	int					identifier_len;
 	t_style				style;
 	unsigned int		color;
-	int					is_valid_color;
+	int					is_valid_color_component;
 
 	identifier_len = 0;
 	style.floor_rgb = 0;
@@ -30,16 +30,16 @@ int		parse_floor_ceiling_colors(char *line, int line_num)
 	color = 0;
 	if (has_identifier(line, "C ", &identifier_len))
 	{
-		is_valid_color = parse_color(line + identifier_len, &color);
-		if (is_valid_color < 0)
+		is_valid_color_component = parse_color(line + identifier_len, &color);
+		if (is_valid_color_component)
 			style.ceiling_rgb = color;
 		else
 			return (report_error(line_num, "Invalid celing color."));
 	}
 	else if (has_identifier(line, "F ", &identifier_len))
 	{
-		is_valid_color = parse_color(line + identifier_len, &color);
-		if (is_valid_color < 0)
+		is_valid_color_component = parse_color(line + identifier_len, &color);
+		if (is_valid_color_component)
 			style.floor_rgb = color;
 		else
 			return (report_error(line_num, "Invalid floor color."));
@@ -58,34 +58,33 @@ int		parse_color(char *line, unsigned int *color)
 	num_components = 3;
 	array = split_into_components(line, ',', num_components);
 	if (array == NULL)
-		return (-1); // find the way to return ERROR (0) here
-	if (!is_valid_color(array, &red, &green, &blue))
-		return (-1);
+		return (ERROR);
+	if (!is_valid_color_component(array, &red, &green, &blue))
+		return (ERROR);
 	free_array_memory(array);
 	*color = red << 16 | green << 8 | blue;
 	return (SUCCESS);
 }
 
-
-int		is_valid_color(char **array, int *red, int *green, int *blue)
+int		is_valid_color_component(char **array, int *red, int *green, int *blue)
 {
-	int		color_component;
+	int		color_component_value;
 
-	color_component = 0;
-	if (is_valid_component(array[0], &color_component)
-		&& color_component >= 0 && color_component <= 255)
-		*red = color_component;
+	color_component_value = 0;
+	if (is_valid_component(array[0], &color_component_value)
+		&& color_component_value >= 0 && color_component_value <= 255)
+		*red = color_component_value;
 	else
-		return (-1); // any way not to repeat error message?
-	if (is_valid_component(array[1], &color_component)
-		&& color_component >= 0 && color_component <= 255)
-		*green = color_component;
+		return (ERROR); // any way not to repeat error message?
+	if (is_valid_component(array[1], &color_component_value)
+		&& color_component_value >= 0 && color_component_value <= 255)
+		*green = color_component_value;
 	else
-		return (-1);
-	if (is_valid_component(array[2], &color_component)
-		&& color_component >= 0 && color_component <= 255)
-		*blue = color_component;
+		return (ERROR);
+	if (is_valid_component(array[2], &color_component_value)
+		&& color_component_value >= 0 && color_component_value <= 255)
+		*blue = color_component_value;
 	else
-		return (-1);
+		return (ERROR);
 	return (SUCCESS);
 }

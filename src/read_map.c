@@ -6,16 +6,16 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 17:12:31 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 18:45:36 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdlib.h>
 
 #include "read_map.h"
 #include "../get_next_line/get_next_line.h"
+#include "parse_map_header.h"
 #include "parse_map.h"
 #include "report_error.h"
 

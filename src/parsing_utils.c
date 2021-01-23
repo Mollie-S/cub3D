@@ -45,7 +45,7 @@ int		is_valid_component(const char *string, int *component)
 	accumulator = ft_printf_atoi(trimmed_string, &num_chars);
 	if (trimmed_string[num_chars] != 0)
 	{
-		is_valid_component = -1;
+		is_valid_component = 0;
 	}
 	*component = accumulator;
 	free(trimmed_string);

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:06:52 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/23 18:43:29 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		parse_map_header(char *line, int line_num)
 	if (!parse_floor_ceiling_colors(line, line_num))
 		return (ERROR);
 	// uncomment if not chunks tests: 
-//    free(line);  /
+	free(line);
 	line = NULL;
 	return (SUCCESS);
 }
