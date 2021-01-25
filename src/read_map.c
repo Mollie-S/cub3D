@@ -6,133 +6,112 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:45:36 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/25 23:52:04 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <stdlib.h>
+#include <stdio.h>
+
+#include "../get_next_line/get_next_line.h"
 
 #include "read_map.h"
-#include "../get_next_line/get_next_line.h"
 #include "parse_map_header.h"
 #include "parse_map.h"
 #include "report_error.h"
 
-int		open_file(char *file)
+int		parse_cub_map(char *file, t_style *style, t_map *map)
 {
+	t_list 		*list_start;
+
+	list_start = NULL;
+
+	if (!load_cub_map(file, style, map, &list_start))
+		return (ERROR);
+	if (!parse_maze_map(list_start))
+		return (ERROR);
+	ft_lstclear(&list_start, &free);
+	return (SUCCESS);
+}
+
+int		load_cub_map(char *file, t_style *style, t_map *map, t_list **list_start)
+{
+	char 	*line;
 	int		fd;
 
+	line = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		write(1, "Can't open the file\n", 20);
+		perror("Can't open the file");
 		return (ERROR);
 	}
-	if (!read_from_file(fd))
+	if (!read_from_file(fd, line, list_start))
 	{
 		return (ERROR);
 	}
 	close(fd);
-	return (0);
+	return (SUCCESS);
 }
 
-int		read_from_file(int fd)
+int		read_from_file(int fd, char *line, t_list **list_start)
 {
-	char 		*line;
-	t_list 		*list_start;
-	int			line_read;
-	int			line_num;
+	int		gnl_result;
+	int 	inside_map;
+	int		line_num;
+	int		result;
 
-	line = NULL;
-	list_start = NULL;
-	line_read = 1;
+	gnl_result = 1;
 	line_num = 0;
-	while (line_read != END_OF_FILE)
+	inside_map = 0;
+	result = 0;
+	while (gnl_result != END_OF_FILE)
 	{
 		line_num++;
-		line_read = get_next_line(fd, &line);
-		if (line_read == -1)
-		{
+		gnl_result = get_next_line(fd, &line);
+		if (gnl_result == -1)
 			return (report_error(line_num, "Error getting a line."));
-		}
-		if (!handle_lines_read(line, line_num))
-		{
-			free(line);
-			return (ERROR);
-		}
-		if (!push_line_to_llist(list_start, line))
-		{
-			ft_lstclear(list_start, &free);
-			return (ERROR);
-		}
-	}
-	if (!parse_map(list_start))
-	{
-		return (ERROR);
-	}
-	ft_lstclear(list_start, &free);
-	return (SUCCESS);
-}
-
-int		handle_lines_read(char *line, int line_num)
-{
-	int inside_map;
-
-	inside_map = 0;
-	if (is_empty_line(line))
-	{
 		if (!inside_map)
 		{
-			free(line);
-			line = NULL;
-			return (SUCCESS);
+			result = parse_map_header(line, line_num);
+			if (result != NOT_FOUND)
+				free(line);
+			if (result == ERROR)
+				return (report_error(line_num, "Invalid map input."));
+			inside_map = (result == NOT_FOUND);
 		}
-		else
+		if (inside_map)
 		{
-			return (report_error(line_num, "Empty line inside the map"));
+			result = parse_map_line(line, line_num, list_start);
+			if (result == ERROR)
+			{
+				ft_lstclear(list_start, &free);
+				return (ERROR);
+			}
 		}
-	}
-	else if (!parse_map_header(line, line_num))
-	{
-		return (ERROR);
 	}
 	return (SUCCESS);
 }
 
-int		push_line_to_llist(t_list **list_start, char *line)
+int		parse_map_line(char *line, int line_num, t_list **list_start)
+{
+	if (!valid_characters) // write the function that checks valid chars in map
+		return (ERROR);
+	else
+		return (push_line_to_llist(list_start, line, line_num));
+}
+
+int		push_line_to_llist(t_list **list_start, char *line, int line_num)
 {
 	t_list *new_node;
 
 	new_node = ft_lstnew(line);
+	printf("%s", new_node->content);
 	if (!new_node)
 	{
-		return (content_error(line));
+		return (report_error(line_num, "Error allocating memory for a line."));
 	}
 	ft_lstadd_back(list_start, new_node);
-	return (1);
-}
-
-/*
-** If an identifier is found the line is parsed and line freed
-** If the line is empty it is immediately freed
-*/
-
-
-
-
-int		is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] != 0)
-	{
-		if (line[i] != ' ')
-		{
-			return (0);
-		}
-		i++;
-	}
-	return (1);
+	return (SUCCESS);
 }
