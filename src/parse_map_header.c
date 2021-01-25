@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:43:29 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/25 22:49:23 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,24 @@
 #include "parse_texture.h"
 #include "parse_color.h"
 
-int		parse_map_header(char *line, int line_num)
+int		parse_map_header(char *line, int line_num, int *is_inside_map)
 {
-	if (!parse_window_resolution(line, line_num))
-		return (ERROR);
-	if (!parse_walls_textures(line, line_num))
-		return (ERROR);
-	if (!parse_floor_ceiling_colors(line, line_num))
-		return (ERROR);
-	// uncomment if not chunks tests: 
-	free(line);
-	line = NULL;
-	return (SUCCESS);
+	int result;
+
+	result = is_empty_line(line);
+	if (result != NOT_FOUND)
+		return (result);
+	result = parse_window_resolution(line, line_num);
+	if (result != NOT_FOUND)
+		return (result);
+	result = parse_walls_textures(line, line_num);
+	if (result != NOT_FOUND)
+		return (result);
+	result = parse_floor_ceiling_colors(line, line_num);
+	if (result != NOT_FOUND)
+		return (result);
+
+	// else if (empty_line && is_inside_map)
+	// 	return (report_error(line_num, "Empty line inside the map"));
+	return (NOT_FOUND);
 }

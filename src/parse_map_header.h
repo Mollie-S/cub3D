@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:59:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:09:50 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/25 23:03:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # define SUCCESS 1
 
 int		parse_map_header(char *line, int line_num);
+
 
 #endif
