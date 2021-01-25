@@ -20,7 +20,7 @@
 # endif
 
 # define END_OF_FILE 0
-# define ERROR -1
+# define ERR -1
 # define NOT_FOUND 0
 # define FOUND 1
 

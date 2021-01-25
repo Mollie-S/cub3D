@@ -27,7 +27,7 @@ int		get_next_line(int fd, char **line)
 		if (b.size > 0)
 		{
 			newline_result = handle_newline(line, &b);
-			if (newline_result == ERROR || newline_result == FOUND)
+			if (newline_result == ERR || newline_result == FOUND)
 				return (newline_result);
 		}
 		if (!read_text(fd, line, &b))
@@ -52,7 +52,7 @@ int		read_text(int fd, char **line, t_vector *b)
 	ssize_t				bytes_read;
 
 	bytes_read = read(fd, (b->container + b->size), BUFFER_SIZE);
-	if (bytes_read == ERROR)
+	if (bytes_read == ERR)
 	{
 		free_memory(b);
 		return (0);

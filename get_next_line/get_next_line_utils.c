@@ -23,7 +23,7 @@ int			handle_newline(char **line, t_vector *b)
 		if ((b->capacity - b->size) < BUFFER_SIZE)
 		{
 			if (!realloc_buffer(b, newline_len))
-				return (ERROR);
+				return (ERR);
 		}
 		return (NOT_FOUND);
 	}
@@ -31,10 +31,10 @@ int			handle_newline(char **line, t_vector *b)
 	if (!*line)
 	{
 		free_memory(b);
-		return (ERROR);
+		return (ERR);
 	}
 	if (!realloc_buffer(b, newline_len))
-		return (ERROR);
+		return (ERR);
 	return (FOUND);
 }
 
