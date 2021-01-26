@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:02:04 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 11:16:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,48 @@
 #include "../libft/include/libft.h"
 
 #include "parsing_utils.h"
+#include "report_error.h"
+
+int		are_valid_characters(char *line, int line_num)
+{
+	char 	*chars_in_map;
+	int		i;
+	int		j;
+
+	chars_in_map = "012NSEW";
+	i = 0;
+	j = 0;
+	while (line[i] != 0)
+	{
+		while (chars_in_map[j])
+		{
+			if (line[i] != chars_in_map[j])
+			{
+				return (report_error(line_num, "Invalid characters."));
+			}
+			j++;
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
+int		is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != 0)
+	{
+		if (line[i] != ' ')
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 
 int		has_identifier(char *line, char *identifier, int *identifier_len)
 {
