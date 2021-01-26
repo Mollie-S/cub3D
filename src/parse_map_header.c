@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 13:02:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 14:41:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int		parse_map_header(char *line, int line_num, t_style *style)
 {
 	int result;
 
-	result = is_empty_line(line);
-	if (result != NOT_FOUND)
-		return (result);
+	if (is_empty_line(line))
+		return (SUCCESS);
 	result = parse_window_resolution(line, line_num, style->start_resolution);
 	if (result != NOT_FOUND)
 		return (result);

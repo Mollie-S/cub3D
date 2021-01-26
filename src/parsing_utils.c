@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 11:16:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 14:36:09 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int		is_empty_line(char *line)
 	{
 		if (line[i] != ' ')
 		{
-			return (0);
+			return (FALSE);
 		}
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 
