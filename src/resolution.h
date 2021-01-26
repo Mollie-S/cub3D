@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   style.h                                            :+:    :+:            */
+/*   resolution.h                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/25 17:09:00 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/20 21:47:56 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/25 17:08:32 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STYLE_H
-# define STYLE_H
+#ifndef RESOLUTION_H
+# define RESOLUTION_H
 
-# include "resolution.h"
-
-typedef struct		s_style
+typedef struct      s_resolution
 {
-	char			*no_texture;
-	char			*so_texture;
-	char			*ea_texture;
-	char			*we_texture;
-	char			*sprite_texture;
-	unsigned int	floor_rgb;
-	unsigned int	ceiling_rgb;
-	t_resolution    start_resolution;
-}					t_style;
+	int				x;
+	int				y;
+}                   t_resolution;
 
 #endif
