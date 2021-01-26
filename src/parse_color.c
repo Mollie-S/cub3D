@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:30:14 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 13:10:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,19 @@
 #include "parsing_utils.h"
 #include "report_error.h"
 
-int		parse_floor_ceiling_colors(char *line, int line_num)
+int		parse_floor_ceiling_colors(char *line, int line_num, t_style *style)
 {
 	int					identifier_len;
-	t_style				style;
 	unsigned int		color;
 	int					is_valid_color_component;
 
 	identifier_len = 0;
-	style.floor_rgb = 0;
-	style.ceiling_rgb = 0;
 	color = 0;
 	if (has_identifier(line, "C ", &identifier_len))
 	{
 		is_valid_color_component = parse_color(line + identifier_len, &color);
 		if (is_valid_color_component)
-			style.ceiling_rgb = color;
+			style->ceiling_rgb = color;
 		else
 			return (report_error(line_num, "Invalid celing color."));
 	}
@@ -40,7 +37,7 @@ int		parse_floor_ceiling_colors(char *line, int line_num)
 	{
 		is_valid_color_component = parse_color(line + identifier_len, &color);
 		if (is_valid_color_component)
-			style.floor_rgb = color;
+			style->floor_rgb = color;
 		else
 			return (report_error(line_num, "Invalid floor color."));
 	}

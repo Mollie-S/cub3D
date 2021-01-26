@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/20 21:55:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 12:36:31 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 typedef struct		s_map
 {
-	int			height;
-	int			width;
-	int			start_direction;
-	double		start_pos_x;
-	double		start_pos_y;
-	char		*fields;
+	size_t			height;
+	size_t			width;
+	int				start_direction;
+	double			start_pos_x;
+	double			start_pos_y;
+	char			**fields;
 }					t_map;
 
+void	init_maze_map(t_map *map);
+void	free_maze_map(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/25 17:09:00 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 12:36:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ typedef struct		s_style
 	unsigned int	ceiling_rgb;
 	t_resolution    start_resolution;
 }					t_style;
+
+void	init_map_style(t_style *style);
+void	free_map_style(t_style *style);
 
 #endif

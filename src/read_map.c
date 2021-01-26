@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/25 23:52:04 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 13:17:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "parse_map_header.h"
 #include "parse_map.h"
 #include "report_error.h"
+#include "parsing_utils.h"
 
 int		parse_cub_map(char *file, t_style *style, t_map *map)
 {
@@ -27,15 +28,15 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 
 	list_start = NULL;
 
-	if (!load_cub_map(file, style, map, &list_start))
+	if (!load_cub_map(file, style, &list_start))
 		return (ERROR);
-	if (!parse_maze_map(list_start))
+	if (!parse_maze_map(list_start, map))
 		return (ERROR);
 	ft_lstclear(&list_start, &free);
 	return (SUCCESS);
 }
 
-int		load_cub_map(char *file, t_style *style, t_map *map, t_list **list_start)
+int		load_cub_map(char *file, t_style *style, t_list **list_start)
 {
 	char 	*line;
 	int		fd;
@@ -47,7 +48,7 @@ int		load_cub_map(char *file, t_style *style, t_map *map, t_list **list_start)
 		perror("Can't open the file");
 		return (ERROR);
 	}
-	if (!read_from_file(fd, line, list_start))
+	if (!read_from_file(fd, line, style, list_start))
 	{
 		return (ERROR);
 	}
@@ -55,7 +56,7 @@ int		load_cub_map(char *file, t_style *style, t_map *map, t_list **list_start)
 	return (SUCCESS);
 }
 
-int		read_from_file(int fd, char *line, t_list **list_start)
+int		read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 {
 	int		gnl_result;
 	int 	inside_map;
@@ -74,7 +75,7 @@ int		read_from_file(int fd, char *line, t_list **list_start)
 			return (report_error(line_num, "Error getting a line."));
 		if (!inside_map)
 		{
-			result = parse_map_header(line, line_num);
+			result = parse_map_header(line, line_num, style);
 			if (result != NOT_FOUND)
 				free(line);
 			if (result == ERROR)
@@ -96,7 +97,7 @@ int		read_from_file(int fd, char *line, t_list **list_start)
 
 int		parse_map_line(char *line, int line_num, t_list **list_start)
 {
-	if (!valid_characters) // write the function that checks valid chars in map
+	if (!are_valid_characters(line, line_num))
 		return (ERROR);
 	else
 		return (push_line_to_llist(list_start, line, line_num));
