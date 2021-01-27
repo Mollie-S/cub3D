@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/27 15:34:38 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/27 17:32:15 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 
 #include "parse_map.h"
+#include "report_error.h"
 
 int		parse_maze_map(t_list *list_start, t_map *map)
 {
@@ -34,8 +35,8 @@ int		calculate_map_size(t_list *list_start, t_map *map)
 	size_t		line_len;
 
 	if (list_start == NULL)
-	{
-		perror("Error reading the map"); // should I  be more specific?
+	{// replace with another error function
+		perror("Error reading the map");
 		return (ERROR);
 	}
 	current = list_start;
@@ -56,71 +57,85 @@ int		calculate_map_size(t_list *list_start, t_map *map)
 	return (SUCCESS);
 }
 
-int        fill_map_fields(t_list * list_start, t_map * map)
+int		fill_map_fields(t_list *list_start, t_map *map)
 {
-	t_list	    *current;
-	char 	    *line;
+	t_list		*current;
 	size_t		fields_size;
-	int		    y;
+	int			y;
 
 	fields_size = map->height * map->width;
-	map->fields = (char *)malloc(sizeof(char) * fields_size);
+	map->fields = (char *)malloc(sizeof(char) * fields_size + 1);
 	if (map->fields == NULL)
 		return (ERROR);
 	ft_memset(map->fields, FIELD_BLACK_HOLE, fields_size);
 	current = list_start;
-	line = (char*)current->content;
 	y = 0;
 	while (current != NULL)
 	{
-		if (!check_start_position(line, map, y))
+		if (!check_start_position(current, map, y))
 			return (ERROR);
-		ft_memcpy(map->fields + y * map->width, line, ft_strlen(line));
+		ft_memcpy(map->fields + y * map->width, current->content,
+			ft_strlen((char*)current->content));
 		current = current->next;
 		y++;
 	}
+	map->fields[fields_size] = 0;
+	printf("%s\n", map->fields); // remove after tests
+
 	return (SUCCESS);
 }
 
-int		check_start_position(char *line, t_map *map, int y)
+int		check_start_position(t_list *current, t_map *map, int y)
 {
-	int 	i;
+	int		i;
 	int		start_direction;
+	char	*line;
 
 	i = 0;
 	start_direction = -1;
+	line = (char*)current->content;
 	while (line[i] != 0)
 	{
-		set_start_direction(line[i], &start_direction);
-		if (start_direction != -1)
+		if (set_start_direction(line[i], &start_direction) != NOT_FOUND
+			&& start_direction != -1)
 		{
-			if (map->start_direction != -1)
+			if (map->start_direction == -1)
 			{
 				map->start_direction = start_direction;
 				map->start_pos_x = i;
 				map->start_pos_y = y;
 				line[i] = FIELD_EMPTY;
 			}
-			else
-			{
-				perror("Player's start position is not unique.");
-				return (ERROR);
-			}
+			else // replace with the error function that doesn't accept line num
+				return (report_error(y,
+					"Two or more characters define the start position.\n"));
 		}
 		i++;
 	}
 	return (SUCCESS);
 }
 
-void		set_start_direction(char c, int *start_direction)
+int		set_start_direction(char c, int *start_direction)
 {
 	if (c == 'N')
+	{
 		*start_direction = 0;
+		return (SUCCESS);
+	}
 	else if (c == 'E')
+	{
 		*start_direction = 90;
+		return (SUCCESS);
+	}
 	else if (c == 'S')
+	{
 		*start_direction = 180;
+		return (SUCCESS);
+	}
 	else if (c == 'W')
+	{
 		*start_direction = 270;
-
+		return (SUCCESS);
+	}
+	return (NOT_FOUND);
 }
