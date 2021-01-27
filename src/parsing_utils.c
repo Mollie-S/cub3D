@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 14:36:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 16:17:09 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,25 @@ int		are_valid_characters(char *line, int line_num)
 	char 	*chars_in_map;
 	int		i;
 	int		j;
+	int		found;
 
 	chars_in_map = "012NSEW";
 	i = 0;
-	j = 0;
 	while (line[i] != 0)
 	{
+		j = 0;
+		found = 0;
 		while (chars_in_map[j])
 		{
-			if (line[i] != chars_in_map[j])
+			if (line[i] == chars_in_map[j])
 			{
-				return (report_error(line_num, "Invalid characters."));
+				found = 1;
+				break ;
 			}
 			j++;
 		}
+		if (!found)
+			return (report_error(line_num, "Invalid characters."));
 		i++;
 	}
 	return (TRUE);
@@ -56,7 +61,6 @@ int		is_empty_line(char *line)
 	}
 	return (TRUE);
 }
-
 
 int		has_identifier(char *line, char *identifier, int *identifier_len)
 {
