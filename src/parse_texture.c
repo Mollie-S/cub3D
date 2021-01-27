@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:00:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 13:09:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/27 15:40:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "../libft/include/libft.h"
 
 #include "parse_texture.h"
-#include "style.h"
 #include "parsing_utils.h"
 
 int		parse_walls_textures(char *line, int line_num, t_style *style)
@@ -25,20 +24,33 @@ int		parse_walls_textures(char *line, int line_num, t_style *style)
 	identifier_len = 0;
 
 	if (has_identifier(line, "NO ", &identifier_len))
+	{
 		style->no_texture = parse_texture_path(line + identifier_len); // don't forget it can return NULL if malloc fails, so check for NULLs afterwards
-	else if (has_identifier(line, "SO ", &identifier_len))
+		return (SUCCESS);
+	}
+	if (has_identifier(line, "SO ", &identifier_len))
+	{
 		style->so_texture = parse_texture_path(line + identifier_len);
-	else if (has_identifier(line, "EA ", &identifier_len))
+		return (SUCCESS);
+	}
+	if (has_identifier(line, "EA ", &identifier_len))
+	{
 		style->ea_texture = parse_texture_path(line + identifier_len);
-	else if (has_identifier(line, "WE ", &identifier_len))
+		return (SUCCESS);
+	}
+	if (has_identifier(line, "WE ", &identifier_len))
+	{
 		style->we_texture = parse_texture_path(line + identifier_len);
-	else if (has_identifier(line, "S ", &identifier_len))
+		return (SUCCESS);
+	}
+	if (has_identifier(line, "S ", &identifier_len))
+	{
 		style->sprite_texture = parse_texture_path(line + identifier_len);
-	//check if all the paths are filled and return error if fails
-
-	// remove!!
+		return (SUCCESS);
+	}
+	// remove write!!
 	write(1, &line_num, 1);
-	return (SUCCESS);
+	return (NOT_FOUND);
 }
 
 char	*parse_texture_path(char *line)
