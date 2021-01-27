@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/13 11:47:27 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/18 21:16:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 15:46:22 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define END_OF_FILE 0
 # define ERR -1
-# define NOT_FOUND 0
+# define GNL_NOT_FOUND 0
 # define FOUND 1
 
 typedef	struct	s_vector

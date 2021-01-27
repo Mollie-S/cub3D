@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/13 11:47:52 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/25 11:10:44 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/26 15:44:50 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int			handle_newline(char **line, t_vector *b)
 	ssize_t		newline_len;
 
 	newline_len = count_newline_len(b);
-	if (newline_len == NOT_FOUND)
+	if (newline_len == GNL_NOT_FOUND)
 	{
 		if ((b->capacity - b->size) < BUFFER_SIZE)
 		{
 			if (!realloc_buffer(b, newline_len))
 				return (ERR);
 		}
-		return (NOT_FOUND);
+		return (GNL_NOT_FOUND);
 	}
 	*line = copy_newline(b->container, newline_len - 1);
 	if (!*line)
@@ -58,7 +58,7 @@ ssize_t		count_newline_len(t_vector *b)
 			return (length);
 		}
 	}
-	return (NOT_FOUND);
+	return (GNL_NOT_FOUND);
 }
 
 char		*copy_newline(char *src, long long n)
