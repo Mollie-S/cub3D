@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:07:21 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 13:18:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/27 15:33:33 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 
 int		parse_maze_map(t_list *list_start, t_map *map);
 int		calculate_map_size(t_list *list_start, t_map *map);
+int		fill_map_fields(t_list *list_start, t_map *map);
+int		check_start_position(char *line, t_map *map, int y);
+void    set_start_direction(char c, int *start_direction);
+
 
 
 #endif
