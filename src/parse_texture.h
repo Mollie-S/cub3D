@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:04:08 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 15:12:49 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 16:47:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define NOT_FOUND -1
 
 int		parse_walls_textures(char *line, int line_num, t_style *style);
-char	*parse_texture_path(char *line);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 15:27:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 17:49:24 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,30 @@ int		parse_floor_ceiling_colors(char *line, int line_num, t_style *style)
 {
 	int					identifier_len;
 	unsigned int		color;
-	int					valid_color_component;
+	int					is_valid_color_component;
 
 	identifier_len = 0;
 	color = 0;
 	if (has_identifier(line, "C ", &identifier_len))
 	{
-		valid_color_component = parse_color(line + identifier_len, &color);
-		if (valid_color_component)
+		if (style->ceiling_rgb != INVALID_COLOR)
+			return (report_error_with_line(line_num, "Repeating celing color element."));
+		is_valid_color_component = parse_color(line + identifier_len, &color);
+		if (is_valid_color_component)
 			style->ceiling_rgb = color;
 		else
-			return (report_error(line_num, "Invalid celing color."));
+			return (report_error_with_line(line_num, "Invalid celing color."));
 		return (SUCCESS);
 	}
 	if (has_identifier(line, "F ", &identifier_len))
 	{
-		valid_color_component = parse_color(line + identifier_len, &color);
-		if (valid_color_component)
+		if (style->floor_rgb != INVALID_COLOR)
+			return (report_error_with_line(line_num, "Repeating floor color element."));
+		is_valid_color_component = parse_color(line + identifier_len, &color);
+		if (is_valid_color_component)
 			style->floor_rgb = color;
 		else
-			return (report_error(line_num, "Invalid floor color."));
+			return (report_error_with_line(line_num, "Invalid floor color."));
 		return (SUCCESS);
 	}
 	return (NOT_FOUND);
@@ -57,14 +61,14 @@ int		parse_color(char *line, unsigned int *color)
 	array = split_into_components(line, ',', num_components);
 	if (array == NULL)
 		return (ERROR);
-	if (!valid_color_component(array, &red, &green, &blue))
+	if (!is_valid_color_component(array, &red, &green, &blue))
 		return (ERROR);
 	free_array_memory(array);
 	*color = red << 16 | green << 8 | blue;
 	return (SUCCESS);
 }
 
-int		valid_color_component(char **array, int *red, int *green, int *blue)
+int		is_valid_color_component(char **array, int *red, int *green, int *blue)
 {
 	int		color_component_value;
 
