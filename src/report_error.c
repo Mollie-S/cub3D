@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   report_error.c                                     :+:    :+:            */
+/*   report_error_with_line.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -17,7 +17,7 @@
 
 #include "report_error.h"
 
-int		report_error(int line_num, char *message)
+int		report_error_with_line(int line_num, char *message)
 {
 	char *line_num_to_alpha;
 
@@ -28,6 +28,14 @@ int		report_error(int line_num, char *message)
 	write(1, message, ft_strlen(message));
 	write(1, "\n", 1);
 	free(line_num_to_alpha);
+
+	return(ERROR);
+}
+
+int		report_error(char *message)
+{
+	write(1, message, ft_strlen(message));
+	write(1, "\n", 1);
 
 	return(ERROR);
 }

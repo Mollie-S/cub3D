@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 12:48:04 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 12:51:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 13:40:12 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # define ERROR 0
 
-int		report_error(int line_num, char *message);
-
+int		report_error_with_line(int line_num, char *message);
+int		report_error(char *message);
 #endif
