@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 14:41:46 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/27 21:02:01 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		parse_map_header(char *line, int line_num, t_style *style)
 
 	if (is_empty_line(line))
 		return (SUCCESS);
-	result = parse_window_resolution(line, line_num, style->start_resolution);
+	result = parse_window_resolution(line, line_num, &style->start_resolution);
 	if (result != NOT_FOUND)
 		return (result);
 	result = parse_walls_textures(line, line_num, style);

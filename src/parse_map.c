@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/27 17:32:15 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/27 18:35:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "parse_map.h"
 #include "report_error.h"
 
-int		parse_maze_map(t_list *list_start, t_map *map)
+int		parse_map(t_list *list_start, t_map *map)
 {
 	if (!calculate_map_size(list_start, map))
 	{
