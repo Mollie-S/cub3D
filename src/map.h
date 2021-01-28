@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/27 13:52:32 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 14:18:03 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef struct		s_map
 	char			*fields;
 }					t_map;
 
-void				init_maze_map(t_map *map);
-//void    free_maze_map(t_map *map);
+void	init_map(t_map *map);
+int		validate_map(t_map *map);
+void    free_map(t_map *map);
+void	debug_print_map(t_map *map); // remove!!
 
 #endif

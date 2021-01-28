@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 11:44:27 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 14:17:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	init_map_style(&style);
-	init_maze_map(&map);
+	init_map(&map);
 	if (!parse_cub_map(argv[1], &style, &map))
 	{
 		return (1);
@@ -76,8 +76,14 @@ int		main(int argc, char **argv)
 	// 	return (1);
 	// }
 	// check if every mallocced line is freed
+	debug_print_map(&map); // remove this function!!! 
+
 	free_map_style(&style);
-	free_maze_map(&map);
-	// all structures freed? 
+//    free_map(&map);
+	// all structures freed?
 	return (0);
 }
+
+
+//  check that if screen_size is more than resolution.x and y. it must be adapted to the screen size
+//you get screen_size  from mlx_get_screen_size()

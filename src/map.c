@@ -6,15 +6,18 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 22:15:39 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 15:24:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h> // remove the header!!!
 #include <stdlib.h>
 
 #include "map.h"
+#include "report_error.h"
+#include "result.h"
 
-void	init_maze_map(t_map *map)
+void	init_map(t_map *map)
 {
 	map->height = 0;
 	map->width = 0;
@@ -24,8 +27,32 @@ void	init_maze_map(t_map *map)
 	map->fields = NULL;
 }
 
-void	free_maze_map(t_map *map)
+int		validate_map(t_map *map)
+{
+	if (map->fields == NULL)
+		return (report_error("Invalid map."));
+	return (SUCCESS);
+}
+
+void	free_map(t_map *map)
 {
 	free(map->fields);
 	// do I set other var to 0?  why?
+}
+
+// remove this function before submossion!
+void	debug_print_map(t_map *map)
+{
+	int y = 0;
+	while (y < map->height)
+	{
+		int x = 0;
+		while (x < map->width)
+		{
+			printf("%c", map->fields[y * map->width + x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
 }
