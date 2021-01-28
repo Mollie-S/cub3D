@@ -13,6 +13,8 @@
 #ifndef RESOLUTION_H
 # define RESOLUTION_H
 
+# define INVALID_RESOLUTION -1
+
 typedef struct      s_resolution
 {
 	int				x;

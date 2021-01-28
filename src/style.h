@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 12:36:11 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 18:08:44 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define STYLE_H
 
 # include "resolution.h"
+
+# define INVALID_COLOR 0xFFFFFFFF
 
 typedef struct		s_style
 {
@@ -28,6 +30,7 @@ typedef struct		s_style
 }					t_style;
 
 void	init_map_style(t_style *style);
+int     validate_style(t_style *style);
 void	free_map_style(t_style *style);
 
 #endif
