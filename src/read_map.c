@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 13:17:46 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 13:39:08 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@
 #include "read_map.h"
 #include "parse_map_header.h"
 #include "parse_map.h"
-#include "report_error.h"
 #include "parsing_utils.h"
+#include "report_error.h"
+#include "result.h"
+#include "validate_map.h"
+
 
 int		parse_cub_map(char *file, t_style *style, t_map *map)
 {
@@ -28,15 +31,19 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 
 	list_start = NULL;
 
-	if (!load_cub_map(file, style, &list_start))
+	if (!load_map_from_file(file, style, &list_start))
 		return (ERROR);
-	if (!parse_maze_map(list_start, map))
+	if (!parse_map(list_start, map))
 		return (ERROR);
 	ft_lstclear(&list_start, &free);
+	if (!validate_style(style))
+		return (ERROR);
+	if (!validate_map(map))
+		return (ERROR);
 	return (SUCCESS);
 }
 
-int		load_cub_map(char *file, t_style *style, t_list **list_start)
+int		load_map_from_file(char *file, t_style *style, t_list **list_start)
 {
 	char 	*line;
 	int		fd;
@@ -72,14 +79,15 @@ int		read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 		line_num++;
 		gnl_result = get_next_line(fd, &line);
 		if (gnl_result == -1)
-			return (report_error(line_num, "Error getting a line."));
+			return (report_error_with_line(line_num, "Error getting a line."));
 		if (!inside_map)
 		{
 			result = parse_map_header(line, line_num, style);
 			if (result != NOT_FOUND)
 				free(line);
 			if (result == ERROR)
-				return (report_error(line_num, "Invalid map input."));
+				return (ERROR);
+			// return (report_error_with_line(line_num, "Invalid map input."));
 			inside_map = (result == NOT_FOUND);
 		}
 		if (inside_map)
@@ -108,10 +116,9 @@ int		push_line_to_llist(t_list **list_start, char *line, int line_num)
 	t_list *new_node;
 
 	new_node = ft_lstnew(line);
-	printf("%s", new_node->content);
 	if (!new_node)
 	{
-		return (report_error(line_num, "Error allocating memory for a line."));
+		return (report_error_with_line(line_num, "Error allocating memory for a line."));
 	}
 	ft_lstadd_back(list_start, new_node);
 	return (SUCCESS);

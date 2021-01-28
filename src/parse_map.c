@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/27 18:35:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 18:14:51 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int		calculate_map_size(t_list *list_start, t_map *map)
 	size_t		line_len;
 
 	if (list_start == NULL)
-	{// replace with another error function
-		perror("Error reading the map");
-		return (ERROR);
-	}
+		return (report_error("Error reading the map"));
 	current = list_start;
 	line_len = 0;
 	while (current != NULL)
@@ -51,8 +48,7 @@ int		calculate_map_size(t_list *list_start, t_map *map)
 	}
 	if (map->height < 3 || map->width < 3)
 	{
-		perror("Invalid map height or width.\n");
-		return (ERROR);
+		return (report_error("Invalid map height or width."));
 	}
 	return (SUCCESS);
 }
@@ -64,7 +60,7 @@ int		fill_map_fields(t_list *list_start, t_map *map)
 	int			y;
 
 	fields_size = map->height * map->width;
-	map->fields = (char *)malloc(sizeof(char) * fields_size + 1);
+	map->fields = (char *)malloc(sizeof(char) * fields_size);
 	if (map->fields == NULL)
 		return (ERROR);
 	ft_memset(map->fields, FIELD_BLACK_HOLE, fields_size);
@@ -79,9 +75,6 @@ int		fill_map_fields(t_list *list_start, t_map *map)
 		current = current->next;
 		y++;
 	}
-	map->fields[fields_size] = 0;
-	printf("%s\n", map->fields); // remove after tests
-
 	return (SUCCESS);
 }
 
@@ -106,9 +99,8 @@ int		check_start_position(t_list *current, t_map *map, int y)
 				map->start_pos_y = y;
 				line[i] = FIELD_EMPTY;
 			}
-			else // replace with the error function that doesn't accept line num
-				return (report_error(y,
-					"Two or more characters define the start position.\n"));
+			else
+				return (report_error("Two or more characters define the start position."));
 		}
 		i++;
 	}
