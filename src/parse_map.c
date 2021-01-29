@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 18:14:51 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 19:08:41 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		fill_map_fields(t_list *list_start, t_map *map)
 	y = 0;
 	while (current != NULL)
 	{
-		if (!check_start_position(current, map, y))
+		if (!define_start_position(current, map, y))
 			return (ERROR);
 		ft_memcpy(map->fields + y * map->width, current->content,
 			ft_strlen((char*)current->content));
@@ -78,7 +78,7 @@ int		fill_map_fields(t_list *list_start, t_map *map)
 	return (SUCCESS);
 }
 
-int		check_start_position(t_list *current, t_map *map, int y)
+int		define_start_position(t_list *current, t_map *map, int y)
 {
 	int		i;
 	int		start_direction;
@@ -89,10 +89,10 @@ int		check_start_position(t_list *current, t_map *map, int y)
 	line = (char*)current->content;
 	while (line[i] != 0)
 	{
-		if (set_start_direction(line[i], &start_direction) != NOT_FOUND
+		if (define_start_direction(line[i], &start_direction) != NOT_FOUND
 			&& start_direction != -1)
 		{
-			if (map->start_direction == -1)
+			if (map->start_direction == INVALID_START_DIRECTION)
 			{
 				map->start_direction = start_direction;
 				map->start_pos_x = i;
@@ -107,7 +107,7 @@ int		check_start_position(t_list *current, t_map *map, int y)
 	return (SUCCESS);
 }
 
-int		set_start_direction(char c, int *start_direction)
+int		define_start_direction(char c, int *start_direction)
 {
 	if (c == 'N')
 	{

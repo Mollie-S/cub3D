@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_map.h                                        :+:    :+:            */
+/*   result.h                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/20 19:07:21 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 19:08:25 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/26 15:40:56 by osamara       #+#    #+#                 */
+/*   Updated: 2021/01/28 10:52:58 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_MAP_H
-# define PARSE_MAP_H
-
-# include "map.h"
-#include "../libft/include/libft.h"
+#ifndef RESULT_H
+# define RESULT_H
 
 # define ERROR 0
 # define SUCCESS 1
+# define END_OF_FILE 0
 # define NOT_FOUND -1
-
-int		parse_map(t_list *list_start, t_map *map);
-int		calculate_map_size(t_list *list_start, t_map *map);
-int		fill_map_fields(t_list *list_start, t_map *map);
-int		define_start_position(t_list *current, t_map *map, int y);
-int     define_start_direction(char c, int *start_direction);
-
-
 
 #endif

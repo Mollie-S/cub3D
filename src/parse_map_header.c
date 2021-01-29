@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/27 21:02:01 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 14:37:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,5 @@ int		parse_map_header(char *line, int line_num, t_style *style)
 		return (result);
 	return (NOT_FOUND);
 }
+
+// return error if the struct part is filled!!!
