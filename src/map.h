@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 14:18:03 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 19:04:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct		s_map
 	int				start_pos_y;
 	char			*fields;
 }					t_map;
+
+# define INVALID_START_DIRECTION -1
 
 void	init_map(t_map *map);
 int		validate_map(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 18:08:44 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 18:25:27 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ typedef struct		s_style
 void	init_map_style(t_style *style);
 int     validate_style(t_style *style);
 void	free_map_style(t_style *style);
+void	debug_print_style(t_style *style); //remove!
+
 
 #endif

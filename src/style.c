@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 18:07:51 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/28 18:29:40 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,20 @@ void	free_map_style(t_style *style)
 	free(style->ea_texture);
 	free(style->we_texture);
 	free(style->sprite_texture);
+}
+
+
+// remove this function before submossion!
+void	debug_print_style(t_style *style)
+{
+	printf("start_resolution.x:%d\n", style->start_resolution.x);
+	printf("start_resolution.y:%d\n", style->start_resolution.y);
+	printf("style->floor_rgb:%d\n", style->floor_rgb);
+	printf("style->ceiling_rgb:%d\n", style->ceiling_rgb);
+	printf("style->no_texture:%s\n", style->no_texture);
+	printf("style->so_texture:%s\n", style->so_texture);
+	printf("style->ea_texture:%s\n", style->ea_texture);
+	printf("style->we_texture:%s\n", style->we_texture);
+	printf("style->sprite_texture:%s\n", style->sprite_texture);
+
 }
