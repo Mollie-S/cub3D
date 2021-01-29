@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/01/18 21:15:18 by osamara       ########   odam.nl          #
+#    Updated: 2021/01/28 22:35:31 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,17 @@
 NAME =		cub3D
 
 SRC = \
-	src/cub3d.c 
+	src/cub3d.c \
+	src/style.c \
+	src/map.c \
+	src/read_map.c \
+	src/parse_map_header.c \
+	src/parse_resolution.c \
+	src/parse_color.c \
+	src/parse_texture.c \
+	src/parsing_utils.c \
+	src/report_error.c \
+	src/parse_map.c 
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra
