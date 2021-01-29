@@ -764,3 +764,22 @@ int     mlx_destroy_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_to_del)
   mlx_do_sync(mlx_ptr);
   return (0);
 }
+
+
+int	mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey)
+{
+  *sizex = [NSScreen mainScreen].frame.size.width;
+  *sizey = [NSScreen mainScreen].frame.size.height;
+	return (0);
+}
+
+
+// @_cdecl("mlx_get_screen_size")
+// public func mlx_get_screen_size_swift(_ mlxptr:UnsafeRawPointer, _ sizex:UnsafeMutablePointer<Int32>, _ sizey:UnsafeMutablePointer<Int32>) -> Int32
+// {
+// 	/// let mlx:MlxMain = _mlx_bridge(ptr:mlxptr)
+// 	sizex.pointee = Int32(NSScreen.main!.frame.size.width)
+// 	sizey.pointee = Int32(NSScreen.main!.frame.size.height)
+// 	return Int32(0)
+
+
