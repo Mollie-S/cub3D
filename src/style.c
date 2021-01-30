@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 18:29:40 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 10:11:21 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int     validate_style(t_style *style)
 	{
 		return (report_error("Window resolution must be at least 200"));
 	}
-	// do I check for the screen_szie and adjust x and y here?
 
 	if (style->ceiling_rgb == INVALID_COLOR || style->floor_rgb == INVALID_COLOR)
 	{
@@ -64,6 +63,11 @@ void	free_map_style(t_style *style)
 	free(style->ea_texture);
 	free(style->we_texture);
 	free(style->sprite_texture);
+	style->no_texture = NULL;
+	style->so_texture = NULL;
+	style->ea_texture = NULL;
+	style->we_texture = NULL;
+	style->sprite_texture = NULL;
 }
 
 

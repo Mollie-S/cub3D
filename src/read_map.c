@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 13:39:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 10:11:00 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #include "parsing_utils.h"
 #include "report_error.h"
 #include "result.h"
-#include "validate_map.h"
 
 
 int		parse_cub_map(char *file, t_style *style, t_map *map)
@@ -36,10 +35,12 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 	if (!parse_map(list_start, map))
 		return (ERROR);
 	ft_lstclear(&list_start, &free);
-	if (!validate_style(style))
+	if (!validate_style(style) || !validate_map(map))
+	{
+		free_map_style(style);
+		free_map(map);
 		return (ERROR);
-	if (!validate_map(map))
-		return (ERROR);
+	}
 	return (SUCCESS);
 }
 
