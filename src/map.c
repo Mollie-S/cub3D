@@ -6,14 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 10:09:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 15:20:55 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> // remove the header!!!
 #include <stdlib.h>
 
-#include "../libft/include/libft.h"
+#include "libft.h"
 
 #include "map.h"
 #include "report_error.h"
@@ -26,6 +26,12 @@ void			init_map(t_map *map)
 	map->start_direction = -1;
 	map->start_pos_x = -1;
 	map->start_pos_y = -1;
+	map->fields = NULL;
+}
+
+void			free_map(t_map *map)
+{
+	free(map->fields);
 	map->fields = NULL;
 }
 
@@ -43,7 +49,7 @@ static int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 		if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 			return (report_error("Your map is not surrounded by walls"));
 		check_array[field_index] = 1;
-		debug_print_map(map, check_array);
+		debug_print_floodfill_map(map, check_array);
 		if (!ft_floodfill(x + 1, y, check_array, map))
 			return (ERROR);
 		else if (!ft_floodfill(x - 1, y, check_array, map))
@@ -70,24 +76,14 @@ int				validate_map(t_map *map)
 	return (ft_floodfill(map->start_pos_x, map->start_pos_y, check_array, map));
 }
 
-void			free_map(t_map *map)
-{
-	free(map->fields);
-	map->fields = NULL;
-}
 
 // remove this function before submossion!
-void			debug_print_map(t_map *map, char *check_array)
+void			debug_print_floodfill_map(t_map *map, char *check_array)
 {
 	unsigned int y;
 	unsigned int x;
 
 	y = 0;
-	//    printf("map->height:%lu\n", map->height);
-	//    printf("map->width:%lu\n", map->width);
-	//    printf("map->start_direction:%d\n", map->start_direction);
-	//    printf("map->start_pos_x:%d\n", map->start_pos_x);
-	//    printf("map->start_pos_y:%d\n", map->start_pos_y);
 	while (y < map->height)
 	{
 		x = 0;
@@ -97,6 +93,30 @@ void			debug_print_map(t_map *map, char *check_array)
 				printf("%c", map->fields[y * map->width + x]);
 			else
 				printf("x");
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	printf("\n");
+}
+void			debug_print_map(t_map *map)
+{
+	unsigned int y;
+	unsigned int x;
+
+	y = 0;
+	printf("map->height:%lu\n", map->height);
+	printf("map->width:%lu\n", map->width);
+	printf("map->start_direction:%d\n", map->start_direction);
+	printf("map->start_pos_x:%d\n", map->start_pos_x);
+	printf("map->start_pos_y:%d\n", map->start_pos_y);
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			printf("%c", map->fields[y * map->width + x]);
 			x++;
 		}
 		printf("\n");

@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/01/28 22:35:31 by osamara       ########   odam.nl          #
+#    Updated: 2021/01/30 15:27:06 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,24 +18,20 @@ SRC = \
 	src/style.c \
 	src/map.c \
 	src/read_map.c \
-	src/parse_map_header.c \
-	src/parse_resolution.c \
-	src/parse_color.c \
-	src/parse_texture.c \
-	src/parsing_utils.c \
+	src/parsers/parse_map_header.c \
+	src/parsers/parse_resolution.c \
+	src/parsers/parse_color.c \
+	src/parsers/parse_texture.c \
+	src/parsers/parsing_utils.c \
 	src/report_error.c \
-	src/parse_map.c 
+	src/parsers/parse_map.c 
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra
 
-# INCLUDES =	./get_next_line \
-# 			./libft \
-# 			./mlx
-
-INCLUDES = ./libft \
+INCLUDES =	./get_next_line \
+			./libft \
 			./mlx
-			
 
 all:		$(NAME)
 
@@ -50,7 +46,7 @@ $(NAME):	$(OBJ) $(INCLUDES)
 			-o $(NAME) $(OBJ) $(CFLAGS)
 
 %.o:		%.c
-			$(CC) $(CFLAGS)  -Ilibft -Imlx -c $< -o $@
+			$(CC) $(CFLAGS)  -Ilibft/include -Iget_next_line -Isrc -Imlx -c $< -o $@
 
 clean:
 			/bin/rm -f $(OBJ)

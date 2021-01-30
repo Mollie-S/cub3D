@@ -1,8 +1,21 @@
+SO ./pictures/bluestone.png
 R 600 600
+F 220,100,0
 
+
+NO     ./pictures/purple stone.png
+WE ./pictures/colorstone.png
+EA ./pictures/greystone.png
+
+
+
+  
+C  0,0,50  
+
+S ./pictures/pillar.png
 
 1111111111
 1000000001
-1000000001
-1000000N01
-1111111111
+10001000S1
+1001110001
+1111 11111

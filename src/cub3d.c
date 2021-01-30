@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/29 11:21:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 10:57:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "read_map.h"
 #include "style.h"
 #include "map.h"
+#include "report_error.h"
 
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
@@ -40,8 +41,7 @@ int		start_mlx(t_resolution *start_resolution)
 	mlx = mlx_init();
 	if (mlx == NULL)
 	{
-		perror("Failed to connect to the graphical system");
-		return (0);
+		return (report_error("Failed to connect to the graphical system"));
 	}
 	mlx_get_screen_size(mlx, &sizex, &sizey);
 	if (start_resolution->x > sizex || start_resolution->y > sizey)
@@ -78,6 +78,11 @@ int		main(int argc, char **argv)
 	if (argc < 2)
 	{
 		perror("Please, enter a valid map name");
+		return (1);
+	}
+	if (argc > 2)
+	{
+		perror("Only one map is allowed!");
 		return (1);
 	}
 	init_map_style(&style);

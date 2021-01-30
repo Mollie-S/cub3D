@@ -6,14 +6,15 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:31 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 12:28:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 15:19:48 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef READ_MAP_H
 # define READ_MAP_H
 
-# include "../libft/include/libft.h"
+# include "libft.h"
+
 # include "style.h"
 # include "map.h"
 

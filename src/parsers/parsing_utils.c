@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-#include "../libft/include/libft.h"
+#include "libft.h"
 
 #include "parsing_utils.h"
 #include "report_error.h"

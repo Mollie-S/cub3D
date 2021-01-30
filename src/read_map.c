@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 10:11:00 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 15:20:43 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../get_next_line/get_next_line.h"
+#include "get_next_line.h"
 
 #include "read_map.h"
-#include "parse_map_header.h"
-#include "parse_map.h"
-#include "parsing_utils.h"
+#include "parsers/parse_map_header.h"
+#include "parsers/parse_map.h"
+#include "parsers/parsing_utils.h"
 #include "report_error.h"
 #include "result.h"
 
@@ -88,7 +88,6 @@ int		read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 				free(line);
 			if (result == ERROR)
 				return (ERROR);
-			// return (report_error_with_line(line_num, "Invalid map input."));
 			inside_map = (result == NOT_FOUND);
 		}
 		if (inside_map)

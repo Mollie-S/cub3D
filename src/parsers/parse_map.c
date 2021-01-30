@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 19:08:41 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/29 23:12:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		define_start_position(t_list *current, t_map *map, int y)
 				map->start_direction = start_direction;
 				map->start_pos_x = i;
 				map->start_pos_y = y;
-				line[i] = FIELD_EMPTY;
+				line[i] = FIELD_FLOOR;
 			}
 			else
 				return (report_error("Two or more characters define the start position."));

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:07:21 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 19:08:25 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 14:19:59 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSE_MAP_H
 
 # include "map.h"
-#include "../libft/include/libft.h"
+#include "libft.h"
 
 # define ERROR 0
 # define SUCCESS 1
