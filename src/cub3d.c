@@ -6,12 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 10:57:26 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 17:27:13 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h> // needed for system( function, remove)
 
 #include "mlx.h"
 #include "data.h"
@@ -101,8 +102,8 @@ int		main(int argc, char **argv)
 	debug_print_style(&style);// remove this function!!! 
 
 	free_map_style(&style);
-	//    free_map(&map);
-		// all structures freed?
+	free_map(&map);
+	// all structures freed?
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:13:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 17:55:02 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 17:21:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int		parse_resolution_components(char *str_start, int line_num, t_resolution *st
 	if (is_valid_component(array[0], &resolution_component))
 		start_resolution->x = resolution_component;
 	else
-		return (report_error_with_line(line_num, "Invalid resolution input(x size)"));
+		return (report_error_with_line(line_num, "Invalid resolution input(x)"));
 	if (is_valid_component(array[1], &resolution_component))
 		start_resolution->y = resolution_component;
 	else
-		return (report_error_with_line(line_num, "Invalid resolution input(y size)"));
+		return (report_error_with_line(line_num, "Invalid resolution input(y)"));
 	free_array_memory(array);
 	return (SUCCESS);
 }

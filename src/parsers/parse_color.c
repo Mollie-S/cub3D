@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 17:49:24 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/30 17:22:55 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int		parse_color(char *line, unsigned int *color)
 		return (ERROR);
 	if (!is_valid_color_component(array, &red, &green, &blue))
 		return (ERROR);
-	free_array_memory(array);
 	*color = red << 16 | green << 8 | blue;
+	free_array_memory(array);
 	return (SUCCESS);
 }
 
