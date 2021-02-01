@@ -6,19 +6,21 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:16 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/31 22:28:45 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/01 21:43:43 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_STATE_H
 # define ENGINE_STATE_H
 
-typedef struct s_engine_state
+# define TILE_SIZE 1
+
+typedef struct		s_engine_state
 {
-    double      start_pos_x;
-    double      start_pos_y;
-    int         fov;
-}               t_engine_state;
+	double		pos_x;
+	double		pos_y;
+	int			FOV;
+}					t_engine_state;
 
 
 #endif
