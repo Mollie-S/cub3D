@@ -6,15 +6,12 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:24 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 11:19:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/03 19:49:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_UTILS_H
 # define PARSING_UTILS_H
-
-# define FALSE 0
-# define TRUE 1
 
 int		        are_valid_characters(char *line, int line_num);
 int		        is_empty_line(char *line);

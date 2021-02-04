@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/28 16:49:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/04 10:58:16 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include "parsing_utils.h"
 #include "report_error.h"
+#include "result.h"
 
 int		are_valid_characters(char *line, int line_num)
 {
