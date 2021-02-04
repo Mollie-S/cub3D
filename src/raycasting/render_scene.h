@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:12 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/04 10:06:59 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/04 17:39:48 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include "engine_state.h"
 #include "map.h"
-#include "result.h"
 
 typedef struct      s_intersection
 {

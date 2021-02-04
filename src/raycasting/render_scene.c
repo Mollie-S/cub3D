@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/04 11:01:34 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/04 18:19:53 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@
 */
 
 
-int			distance_to_wall(t_intersection *intersection, t_engine_state *engine_state, t_map *map, double radian) //too many args passed
+double			distance_to_wall(t_intersection *intersection, t_engine_state *engine_state, t_map *map, double radian)
 {
-	int			field_index;
+	size_t		field_index;
 	double		distance;
 
 
-	field_index = map->width * (int)intersection->y + (int)intersection->x;
 	distance = 0;
 	while (intersection->x < map->width && intersection->y < map->height)
 	{
+		field_index = map->width * (size_t)intersection->y + (size_t)intersection->x;
 		if (map->fields[field_index] == FIELD_WALL)
 		{
-			distance = fabs(engine_state->pos_x - intersection->x) / cos(radian);
+			distance = fabs((engine_state->pos_x - intersection->x) / cos(radian)); // if cos(radian) == 0? it should be 1
 			break ;
 		}
 		intersection->x += intersection->step_x;
@@ -55,11 +55,11 @@ double		calc_dist_on_horiz_inters(t_engine_state *engine_state, t_map *map, doub
 {
 	t_intersection	horiz_intersection;
 
-	horiz_intersection.y = floor(engine_state->pos_y) - 1;
+	horiz_intersection.y = floor(engine_state->pos_y) - TILE_SIZE;
 	horiz_intersection.step_y = -TILE_SIZE;
 	if (ray_angle >= 90 && ray_angle < 270)
 	{
-		horiz_intersection.y = floor(engine_state->pos_y) + 1;
+		horiz_intersection.y = floor(engine_state->pos_y) + TILE_SIZE;
 		horiz_intersection.step_y = TILE_SIZE;
 	}
 	horiz_intersection.x = engine_state->pos_x + fabs((engine_state->pos_y - horiz_intersection.y) * tan(radian));
@@ -95,11 +95,11 @@ double		calc_dist_on_vert_inters(t_engine_state *engine_state, t_map *map, doubl
 {
 	t_intersection	vert_intersection;
 
-	vert_intersection.x = floor(engine_state->pos_x) + 1;
+	vert_intersection.x = floor(engine_state->pos_x) + TILE_SIZE;
 	vert_intersection.step_x = TILE_SIZE;
 	if (ray_angle >= 180 && ray_angle < 360)
 	{
-		vert_intersection.x = floor(engine_state->pos_x) - 1;
+		vert_intersection.x = floor(engine_state->pos_x) - TILE_SIZE;
 		vert_intersection.step_x = -vert_intersection.step_x;
 	}
 	vert_intersection.y = engine_state->pos_y - fabs((engine_state->pos_x - vert_intersection.x) / tan(radian));
@@ -150,6 +150,10 @@ void		init_engine_state(t_engine_state *engine_state, t_map *map)
 	engine_state->pos_y = map->start_pos_y + 0.5;
 }
 
+/*
+**	adding (double)(0.0001) to radian to avoid division by 0 in case with tan(radian) or cos(radian)
+*/
+
 void		render_scene(t_map *map)
 {
 	t_engine_state	engine_state;
@@ -159,7 +163,7 @@ void		render_scene(t_map *map)
 
 	init_engine_state(&engine_state, map);
 	ray_angle = map->start_direction - engine_state.FOV / 2.0;
-	radian = ray_angle * (M_PI / 180);
+	radian = ray_angle * (M_PI / 180) + (double)(0.0001);
 	// I need to loop n times (pix per pix through resolution )to draw lines
 	dist_to_wall = calculate_dist_to_wall(&engine_state, map, ray_angle, radian);
 }
