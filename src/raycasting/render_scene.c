@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/05 12:19:38 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/05 15:57:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,29 @@ double			distance_to_wall(t_intersection *intersection, t_engine_state *engine_s
 	return (distance);
 }
 
-double		calc_dist_on_horiz_inters(t_engine_state *engine_state, t_map *map)
+double		dist_to_hor_inters(t_engine_state *engine_state, t_map *map)
 {
-	t_intersection	horiz_inters;
+	t_intersection	hor_inters;
 
-	horiz_inters.y = floor(engine_state->pos_y) - TILE_SIZE;
-	horiz_inters.step_y = -TILE_SIZE;
+	hor_inters.y = floor(engine_state->pos_y) - TILE_SIZE;
+	hor_inters.step_y = -TILE_SIZE;
 	if (engine_state->ray_angle >= 90 && engine_state->ray_angle < 270)
 	{
-		horiz_inters.y = floor(engine_state->pos_y) + TILE_SIZE;
-		horiz_inters.step_y = TILE_SIZE;
+		hor_inters.y = floor(engine_state->pos_y) + TILE_SIZE;
+		hor_inters.step_y = TILE_SIZE;
 	}
-	horiz_inters.x = engine_state->pos_x + fabs((engine_state->pos_y - horiz_inters.y) * tan(engine_state->radian));
-	horiz_inters.step_x = TILE_SIZE * fabs(tan(engine_state->radian));
+	hor_inters.x = engine_state->pos_x + fabs((engine_state->pos_y - hor_inters.y) * tan(engine_state->radian));
+	hor_inters.step_x = TILE_SIZE * fabs(tan(engine_state->radian));
 	if (engine_state->ray_angle >= 180 && engine_state->ray_angle < 360)
 	{
-		horiz_inters.x = engine_state->pos_x - fabs((engine_state->pos_y - horiz_inters.y) * tan(engine_state->radian));
-		horiz_inters.step_x = -horiz_inters.step_x;
+		hor_inters.x = engine_state->pos_x - fabs((engine_state->pos_y - hor_inters.y) * tan(engine_state->radian));
+		hor_inters.step_x = -hor_inters.step_x;
 	}
-	printf("horiz_x_step: %g\n", horiz_inters.step_x);
-	printf("horiz_y_step: %g\n", horiz_inters.step_y);
-	printf("horiz_inters.x:%g\n", horiz_inters.x);
-	printf("horiz_inters.y:%g\n", horiz_inters.y);
-	return (distance_to_wall(&horiz_inters, engine_state, map));
+	printf("horiz_x_step: %g\n", hor_inters.step_x);
+	printf("horiz_y_step: %g\n", hor_inters.step_y);
+	printf("hor_inters.x:%g\n", hor_inters.x);
+	printf("hor_inters.y:%g\n", hor_inters.y);
+	return (distance_to_wall(&hor_inters, engine_state, map));
 }
 
 /*
@@ -90,7 +90,7 @@ double		calc_dist_on_horiz_inters(t_engine_state *engine_state, t_map *map)
 **
 */
 
-double		calc_dist_on_vert_inters(t_engine_state *engine_state, t_map *map)
+double		dist_to_ver_inters(t_engine_state *engine_state, t_map *map)
 {
 	t_intersection	vert_inters;
 
@@ -115,7 +115,7 @@ double		calc_dist_on_vert_inters(t_engine_state *engine_state, t_map *map)
 	return (distance_to_wall(&vert_inters, engine_state, map));
 }
 
-init_intersection_result(t_intersection_result *inters_result)
+void		init_intersection_result(t_intersection_result *inters_result)
 {
 	inters_result->dist_to_wall = 0;
 	inters_result->is_side_wall = 0;
@@ -147,22 +147,25 @@ void		print_data(t_engine_state *engine_state,
 	printf("dist_horiz: %g\n", inters_result->dist_to_wall);
 }
 
-void		render_scene(t_map *map)
+void		render_scene(t_map *map, t_style *style)
 {
 	t_engine_state			engine_state;
-	t_intersection			*intersection;
-	t_intersection_result	*inters_result;
-	double					dist_hr_inters;
+	// t_intersection			intersection;
+	t_intersection_result	inters_result;
+	double					dist_hor_inters;
 	double					dist_ver_inters;
 
 	init_engine_state(&engine_state, map);
 	init_intersection_result(&inters_result);
 	// I need to loop n times (pix per pix through resolution )to draw lines
-	inters_result->dist_to_wall = calculate_dist_to_wall(&engine_state, &inters_result, map);
-	dist_hr_inters = calc_dist_on_horiz_inters(&engine_state, map);
-	dist_ver_inters = calc_dist_on_vert_inters(&engine_state, map);
-	if (dist_ver_inters < dist_hr_inters)
+	dist_hor_inters = dist_to_hor_inters(&engine_state, map);
+	dist_ver_inters = dist_to_ver_inters(&engine_state, map);
+	if (dist_ver_inters < dist_hor_inters)
 	{
-		inters_result->is_side_wall = 1;
-		if (intersection->) // how to check if the wall is right or left??
+		inters_result.is_side_wall = 1;
+		// if (intersection->) // how to check if the wall is right or left??
+		inters_result.dist_to_wall = dist_ver_inters;
 	}
+	else
+		inters_result.dist_to_wall = dist_hor_inters;
+}

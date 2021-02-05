@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 15:28:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/05 15:45:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct		s_style
 	char			*textures[TEXTURE_COUNT];
 	unsigned int	floor_rgb;
 	unsigned int	ceiling_rgb;
-	t_resolution    start_resolution;
+	t_resolution    resolution;
 }					t_style;
 
 void	init_map_style(t_style *style);

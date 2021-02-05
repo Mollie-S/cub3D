@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 14:51:02 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/05 15:45:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	init_map_style(t_style *style)
 {
 	int i;
 
-	style->start_resolution.x = -1;
-	style->start_resolution.y = -1;
+	style->resolution.x = -1;
+	style->resolution.y = -1;
 	style->floor_rgb = INVALID_COLOR;
 	style->ceiling_rgb = INVALID_COLOR;
 	i = 0;
@@ -37,12 +37,12 @@ int     validate_style(t_style *style)
 {
 	int i;
 
-	if (style->start_resolution.x == INVALID_RESOLUTION
-		|| style->start_resolution.y == INVALID_RESOLUTION)
+	if (style->resolution.x == INVALID_RESOLUTION
+		|| style->resolution.y == INVALID_RESOLUTION)
 	{
 		return (report_error("Resolution element is invalid or missing."));
 	}
-	else if (style->start_resolution.x < 200 || style->start_resolution.y < 200)
+	else if (style->resolution.x < 200 || style->resolution.y < 200)
 	{
 		return (report_error("Window resolution must be at least 200"));
 	}
@@ -88,8 +88,8 @@ void	debug_print_style(t_style *style)
 {
 	int i;
 
-	printf("start_resolution.x:%d\n", style->start_resolution.x);
-	printf("start_resolution.y:%d\n", style->start_resolution.y);
+	printf("resolution.x:%d\n", style->resolution.x);
+	printf("resolution.y:%d\n", style->resolution.y);
 	printf("style->floor_rgb:%d\n", style->floor_rgb);
 	printf("style->ceiling_rgb:%d\n", style->ceiling_rgb);
 	i = 0;

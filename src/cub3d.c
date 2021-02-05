@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 17:27:13 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/05 15:56:36 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,20 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int*)dst = color;
 }
 
-int		start_mlx(t_resolution *start_resolution)
+int		start_mlx(t_resolution *resolution)
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	data;
-	int 	sizex;
-	int		sizey;
-	int 	x;
-	int		y;
 
 	mlx = mlx_init();
 	if (mlx == NULL)
 	{
 		return (report_error("Failed to connect to the graphical system"));
 	}
-	mlx_get_screen_size(mlx, &sizex, &sizey);
-	if (start_resolution->x > sizex || start_resolution->y > sizey)
-	{
-		x = sizex;
-		y = sizey;
-	}
-	else
-	{
-		x = start_resolution->x;
-		y = start_resolution->y;
-	}
-
-	mlx_win = mlx_new_window(mlx, x, y, "cub3D");
-	data.img = mlx_new_image(mlx, 500, 500);
+	check_plane_size(mlx, resolution);
+	mlx_win = mlx_new_window(mlx, resolution->x, resolution->y, "cub3D");
+	data.img = mlx_new_image(mlx, resolution->x, resolution->y);
 	data.address = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
 		&data.endian);
 	my_mlx_pixel_put(&data, 50, 50, 0x0000FF00);
@@ -65,6 +50,18 @@ int		start_mlx(t_resolution *start_resolution)
 	mlx_loop(mlx);
 
 	return (1);
+}
+void	check_plane_size(void *mlx, t_resolution *resolution)
+{
+	int 	sizex;
+	int		sizey;
+
+	mlx_get_screen_size(mlx, &sizex, &sizey);
+	if (resolution->x > sizex || resolution->y > sizey)
+	{
+		resolution->x = sizex;
+		resolution->y = sizey;
+	}
 }
 
 int		main(int argc, char **argv)
@@ -92,7 +89,7 @@ int		main(int argc, char **argv)
 	{
 		return (1);
 	}
-	if (!start_mlx(&style.start_resolution))
+	if (!start_mlx(&style.resolution))
 	{
 		write(1, "Error.\n", 7);
 		return (1);
