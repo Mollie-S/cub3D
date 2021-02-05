@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 20:30:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/01/31 23:10:14 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "parsers/parse_map_header.h"
 #include "parsers/parse_map.h"
 #include "parsers/parsing_utils.h"
+#include "raycasting/render_scene.h"
 #include "report_error.h"
 #include "result.h"
 
@@ -42,7 +43,7 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 		return (ERROR);
 	}
 	// initialize_structure_for_rays??? here or in main?
-	// render_scene();
+	render_scene(map); // can it return an error?
 	return (SUCCESS);
 }
 

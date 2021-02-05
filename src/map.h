@@ -13,6 +13,7 @@
 #ifndef MAP_H
 # define MAP_H
 
+# include <stddef.h>
 /*
 ** it could have been better not to initialize enum to let them be 0,1 etc
 ** but this way it's more visual for testing the map I'm parsing
