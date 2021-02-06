@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/05 15:57:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/06 16:16:16 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ double			distance_to_wall(t_intersection *intersection, t_engine_state *engine_s
 		field_index = map->width * (size_t)intersection->y + (size_t)intersection->x;
 		if (map->fields[field_index] == FIELD_WALL)
 		{
-			distance = fabs((engine_state->pos_x - intersection->x) / cos(engine_state->radian));
+			distance = fabs((engine_state->pos_x - intersection->x)
+				/ cos(DEG2RAD(engine_state->ray_angle)));
 			break ;
 		}
 		intersection->x += intersection->step_x;
@@ -61,11 +62,13 @@ double		dist_to_hor_inters(t_engine_state *engine_state, t_map *map)
 		hor_inters.y = floor(engine_state->pos_y) + TILE_SIZE;
 		hor_inters.step_y = TILE_SIZE;
 	}
-	hor_inters.x = engine_state->pos_x + fabs((engine_state->pos_y - hor_inters.y) * tan(engine_state->radian));
-	hor_inters.step_x = TILE_SIZE * fabs(tan(engine_state->radian));
+	hor_inters.x = engine_state->pos_x + fabs((engine_state->pos_y - hor_inters.y)
+		* tan(DEG2RAD(engine_state->ray_angle)));
+	hor_inters.step_x = TILE_SIZE * fabs(tan(DEG2RAD(engine_state->ray_angle)));
 	if (engine_state->ray_angle >= 180 && engine_state->ray_angle < 360)
 	{
-		hor_inters.x = engine_state->pos_x - fabs((engine_state->pos_y - hor_inters.y) * tan(engine_state->radian));
+		hor_inters.x = engine_state->pos_x - fabs((engine_state->pos_y - hor_inters.y)
+			* tan(DEG2RAD(engine_state->ray_angle)));
 		hor_inters.step_x = -hor_inters.step_x;
 	}
 	printf("horiz_x_step: %g\n", hor_inters.step_x);
@@ -101,11 +104,13 @@ double		dist_to_ver_inters(t_engine_state *engine_state, t_map *map)
 		vert_inters.x = floor(engine_state->pos_x) - TILE_SIZE;
 		vert_inters.step_x = -vert_inters.step_x;
 	}
-	vert_inters.y = engine_state->pos_y - fabs((engine_state->pos_x - vert_inters.x) / tan(engine_state->radian));
-	vert_inters.step_y = -TILE_SIZE / fabs(tan(engine_state->radian));
+	vert_inters.y = engine_state->pos_y - fabs((engine_state->pos_x - vert_inters.x)
+		/ tan(DEG2RAD(engine_state->ray_angle)));
+	vert_inters.step_y = -TILE_SIZE / fabs(tan(DEG2RAD(engine_state->ray_angle)));
 	if (engine_state->ray_angle >= 90 && engine_state->ray_angle < 270)
 	{
-		vert_inters.y = engine_state->pos_y + fabs((engine_state->pos_x - vert_inters.x) / tan(engine_state->radian));
+		vert_inters.y = engine_state->pos_y + fabs((engine_state->pos_x - vert_inters.x)
+			/ tan(DEG2RAD(engine_state->ray_angle)));
 		vert_inters.step_y = -vert_inters.step_y;
 	}
 	printf("vert_x_step: %g\n", vert_inters.step_x);
@@ -127,13 +132,13 @@ void		init_intersection_result(t_intersection_result *inters_result)
 /*
 **	adding (double)(0.0001) to radian to avoid division by 0 in case with tan(radian) or cos(radian)
 */
-void		init_engine_state(t_engine_state *engine_state, t_map *map)
+void		init_engine_state(t_engine_state *engine_state, t_map *map, t_resolution *resolution)
 {
 	engine_state->FOV = 60.0;
+	engine_state->dist_to_plane = (resolution->x / 2.0) / tan(DEG2RAD(engine_state->FOV));
 	engine_state->pos_x = map->start_pos_x + 0.5;
 	engine_state->pos_y = map->start_pos_y + 0.5;
 	engine_state->ray_angle = map->start_direction - engine_state->FOV / 2.0;
-	engine_state->radian = engine_state->ray_angle * (M_PI / 180) + (double)(0.0001);
 }
 
 //remove this function!
@@ -154,18 +159,26 @@ void		render_scene(t_map *map, t_style *style)
 	t_intersection_result	inters_result;
 	double					dist_hor_inters;
 	double					dist_ver_inters;
+	int						i;
 
-	init_engine_state(&engine_state, map);
+	init_engine_state(&engine_state, map, &style->resolution);
 	init_intersection_result(&inters_result);
-	// I need to loop n times (pix per pix through resolution )to draw lines
-	dist_hor_inters = dist_to_hor_inters(&engine_state, map);
-	dist_ver_inters = dist_to_ver_inters(&engine_state, map);
-	if (dist_ver_inters < dist_hor_inters)
+	i = 0;
+	while (i <= style->resolution.x) // I need to cast 1 ray more than the plane length, right?
 	{
-		inters_result.is_side_wall = 1;
-		// if (intersection->) // how to check if the wall is right or left??
-		inters_result.dist_to_wall = dist_ver_inters;
+		inters_result.is_side_wall = 0; // I probably don't need it in structure, unless I move this functionality to another place
+		dist_hor_inters = dist_to_hor_inters(&engine_state, map);
+		dist_ver_inters = dist_to_ver_inters(&engine_state, map);
+		if (dist_ver_inters < dist_hor_inters)
+		{
+			inters_result.is_side_wall = 1;
+			// if (intersection->) // how to check if the wall is right or left??
+			inters_result.dist_to_wall = dist_ver_inters;
+		}
+		else
+			inters_result.dist_to_wall = dist_hor_inters;
+		// draw a line;
+		engine_state.ray_angle =
+			i++;
 	}
-	else
-		inters_result.dist_to_wall = dist_hor_inters;
 }
