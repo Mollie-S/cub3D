@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:16 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/06 15:53:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/06 22:09:57 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 
 typedef struct		s_engine_state
 {
-	double		FOV;
 	double		dist_to_plane;
 	double		pos_x;
 	double		pos_y;
 	double		ray_angle;
-	// double		radian;
 }					t_engine_state;
 
 
