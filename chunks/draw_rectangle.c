@@ -78,6 +78,6 @@ int		main(int argc, char **argv)
     mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
     mlx_loop(mlx);
 
-    while (1);
+    // while (1);
     return (0);
 }
