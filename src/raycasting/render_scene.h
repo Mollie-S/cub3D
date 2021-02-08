@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:12 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:31:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 23:55:44 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 /*
 **	adding (double)(0.0001) to radian to avoid division by 0 in case with tan(radian) or cos(radian)
 */
-
-# define FOV 60
-# define DEG2RAD(angle) ((angle) * M_PI / 180.0 + (double)(0.0001))
-# define RAD2DEG(angle) ((angle) * 180.0 / M_PI
 
 
 void		render_scene(t_game_engine_state *state);

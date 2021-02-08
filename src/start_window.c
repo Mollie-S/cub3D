@@ -6,18 +6,17 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 21:33:17 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 21:42:30 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 23:52:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-#include "mlx.h"
+#include "start_window.h"
 
 #include "result.h"
-#include "window.h"
-#include "resolution.h"
 #include "report_error.h"
+
+#include "mlx.h"
+#include <stddef.h>
 
 static void		check_plane_size(void *mlx, t_resolution *resolution)
 {

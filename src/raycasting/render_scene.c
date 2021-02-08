@@ -6,16 +6,15 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:33:24 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 00:00:10 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
 
 #include "distance.h"
+#include "draw_scene.h"
 #include "utils.h"
-
-#include "mlx.h"
 
 #include <math.h>
 
@@ -52,7 +51,7 @@ void			render_scene(t_game_engine_state *state)
 		tracer.ray_angle = state->map->start_direction + RAD2DEG(atan((i - state->style->resolution.x / 2.0)
 			/ state->dist_to_plane)));
 			tracer.ray_angle = wrap_angle(tracer.ray_angle);
-			define_current_wall(&state, &tracer, &inters_result);
+			define_current_wall(state, &tracer, &inters_result);
 			inters_result.dist_to_wall *= cos(DEG2RAD(state->map->start_direction - tracer.ray_angle));
 			inters_result.wall_height = 1.0 / inters_result.dist_to_wall * state->dist_to_plane;
 			draw_vertical_line(state->window, &inters_result, &state->style->resolution, &i);

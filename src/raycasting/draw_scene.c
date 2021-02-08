@@ -6,11 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:29:43 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 00:18:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw_scene.h"
+
+#include "mlx.h"
 
 void	draw_vertical_line(t_window *window, t_intersection_result *inters_res, t_resolution *resolution, int *num)
 {
@@ -45,4 +47,5 @@ void	my_mlx_pixel_put(t_window *window, int x, int y, unsigned int color)
 void	draw_image(t_window *window) // should be either removed or extended
 {
 	mlx_put_image_to_window(window->mlx, window->mlx_win, window->img, 0, 0);
+	mlx_loop(window->mlx);
 }

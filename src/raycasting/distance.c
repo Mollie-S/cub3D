@@ -6,11 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:43:34 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:04:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 23:57:48 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "distance.h"
+
+#include "utils.h"
 
 #include <math.h>
 
@@ -47,7 +49,7 @@ double		dist_to_hor_inters(t_game_engine_state *state, t_tracer *hor_inters)
             * tan(DEG2RAD(hor_inters->ray_angle)));
         hor_inters->step_x = -hor_inters->step_x;
     }
-    return (distance_to_wall(hor_inters, state));
+    return (distance_to_wall(state, hor_inters));
 }
 
 /*
@@ -84,7 +86,7 @@ double		dist_to_ver_inters(t_game_engine_state *state, t_tracer *vert_inters)
             / tan(DEG2RAD(vert_inters->ray_angle)));
         vert_inters->step_y = -vert_inters->step_y;
     }
-    return (distance_to_wall(vert_inters, state));
+    return (distance_to_wall(state, vert_inters));
 }
 
 double			distance_to_wall(t_game_engine_state *state, t_tracer *tracer)

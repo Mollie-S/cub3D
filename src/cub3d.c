@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 21:34:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 23:54:13 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 #include <unistd.h>
 #include <stdlib.h> // needed for system( function, remove)
 
-#include "mlx.h"
-#include "data.h"
 #include "read_map.h"
+#include "start_window.h"
+#include "game_engine/game_loop.h"
+#include "window.h"
 #include "style.h"
 #include "map.h"
-#include "report_error.h"
-#include "raycasting/intersection.h"
-
 
 int		main(int argc, char **argv)
 {
@@ -49,7 +47,7 @@ int		main(int argc, char **argv)
 	{
 		return (1);
 	}
-	if (!start_window(&window, &style->resolution))
+	if (!start_window(&window, &style.resolution))
 		return (1);
 	game_loop(&window, &style, &map);
 	// check if every mallocced line is freed
