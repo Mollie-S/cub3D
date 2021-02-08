@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:12 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 09:08:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 13:55:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "map.h"
 # include "style.h"
-# include "engine_state.h"
+# include "camera_state.h"
 # include "intersection.h"
 # include "window.h"
 
@@ -28,7 +28,7 @@
 # define RAD2DEG(angle) ((angle) * 180.0 / M_PI
 
 void		render_scene(t_map *map, t_style *style);
-void		init_engine_state(t_engine_state *engine_state, t_map *map, t_resolution *resolution);
+void		init_camera_state(t_camera_state *camera_state, t_map *map, t_resolution *resolution);
 
 
 #endif

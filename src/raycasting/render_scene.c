@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 10:49:24 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 14:33:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_image(t_window *window)
 */
 
 
-double			distance_to_wall(t_intersection *intersection, t_engine_state *engine_state, t_map *map)
+double			distance_to_wall(t_intersection *intersection, t_camera_state *camera_state, t_map *map)
 {
 	size_t		field_index;
 	double		distance;
@@ -79,13 +79,11 @@ double			distance_to_wall(t_intersection *intersection, t_engine_state *engine_s
 	while (intersection->x < map->width && intersection->y < map->height
 		&& intersection->x >= 0 && intersection->y >= 0)
 	{
-		// printf("intersection->x: %g\n", intersection->x);
-		// printf("intersection->y: %g\n", intersection->y);
 		field_index = map->width * (size_t)intersection->y + (size_t)intersection->x;
 		if (map->fields[field_index] == FIELD_WALL)
 		{
-			distance = fabs((engine_state->pos_x - intersection->x)
-				/ sin(DEG2RAD(engine_state->ray_angle)));
+			distance = fabs((camera_state->pos_x - intersection->x)
+				/ sin(DEG2RAD(camera_state->ray_angle)));
 			break ;
 		}
 		intersection->x += intersection->step_x;
@@ -94,29 +92,29 @@ double			distance_to_wall(t_intersection *intersection, t_engine_state *engine_s
 	return (distance);
 }
 
-double		dist_to_hor_inters(t_engine_state *engine_state, t_intersection *hor_inters, t_map *map)
+double		dist_to_hor_inters(t_camera_state *camera_state, t_intersection *hor_inters, t_map *map)
 {
-	hor_inters->y = floor(engine_state->pos_y);
+	hor_inters->y = floor(camera_state->pos_y);
 	hor_inters->step_y = -TILE_SIZE;
-	if (engine_state->ray_angle >= 90 && engine_state->ray_angle < 270)
+	if (camera_state->ray_angle >= 90.0 && camera_state->ray_angle < 270.0)
 	{
-		hor_inters->y = floor(engine_state->pos_y) + TILE_SIZE;
+		hor_inters->y = floor(camera_state->pos_y) + TILE_SIZE;
 		hor_inters->step_y = TILE_SIZE;
 	}
-	hor_inters->x = engine_state->pos_x + fabs((engine_state->pos_y - hor_inters->y)
-		* tan(DEG2RAD(engine_state->ray_angle)));
-	hor_inters->step_x = TILE_SIZE * fabs(tan(DEG2RAD(engine_state->ray_angle)));
-	if (engine_state->ray_angle >= 180 && engine_state->ray_angle < 360)
+	hor_inters->x = camera_state->pos_x + fabs((camera_state->pos_y - hor_inters->y)
+		* tan(DEG2RAD(camera_state->ray_angle)));
+	hor_inters->step_x = TILE_SIZE * fabs(tan(DEG2RAD(camera_state->ray_angle)));
+	if (camera_state->ray_angle >= 180.0 && camera_state->ray_angle < 360.0)
 	{
-		hor_inters->x = engine_state->pos_x - fabs((engine_state->pos_y - hor_inters->y)
-			* tan(DEG2RAD(engine_state->ray_angle)));
+		hor_inters->x = camera_state->pos_x - fabs((camera_state->pos_y - hor_inters->y)
+			* tan(DEG2RAD(camera_state->ray_angle)));
 		hor_inters->step_x = -hor_inters->step_x;
 	}
 	// printf("horiz_x_step: %g\n", hor_inters->step_x);
 	// printf("horiz_y_step: %g\n", hor_inters->step_y);
 	// printf("hor_inters->x:%g\n", hor_inters->x);
 	// printf("hor_inters->y:%g\n", hor_inters->y);
-	return (distance_to_wall(hor_inters, engine_state, map));
+	return (distance_to_wall(hor_inters, camera_state, map));
 }
 
 /*
@@ -134,36 +132,59 @@ double		dist_to_hor_inters(t_engine_state *engine_state, t_intersection *hor_int
 **
 */
 
-double		dist_to_ver_inters(t_engine_state *engine_state, t_intersection *vert_inters, t_map *map)
+double		dist_to_ver_inters(t_camera_state *camera_state, t_intersection *vert_inters, t_map *map)
 {
-	vert_inters->x = floor(engine_state->pos_x) + TILE_SIZE;
+	vert_inters->x = floor(camera_state->pos_x) + TILE_SIZE;
 	vert_inters->step_x = TILE_SIZE;
-	if (engine_state->ray_angle >= 180 && engine_state->ray_angle < 360)
+	if (camera_state->ray_angle >= 180.0 && camera_state->ray_angle < 360.0)
 	{
 		vert_inters->x -= TILE_SIZE;
 		vert_inters->step_x = -vert_inters->step_x;
 	}
-	vert_inters->y = engine_state->pos_y - fabs((engine_state->pos_x - vert_inters->x)
-		/ tan(DEG2RAD(engine_state->ray_angle)));
-	vert_inters->step_y = -TILE_SIZE / fabs(tan(DEG2RAD(engine_state->ray_angle)));
-	if (engine_state->ray_angle >= 90 && engine_state->ray_angle < 270)
+	vert_inters->y = camera_state->pos_y - fabs((camera_state->pos_x - vert_inters->x)
+		/ tan(DEG2RAD(camera_state->ray_angle)));
+	vert_inters->step_y = -TILE_SIZE / fabs(tan(DEG2RAD(camera_state->ray_angle)));
+	if (camera_state->ray_angle >= 90.0 && camera_state->ray_angle < 270.0)
 	{
-		vert_inters->y = engine_state->pos_y + fabs((engine_state->pos_x - vert_inters->x)
-			/ tan(DEG2RAD(engine_state->ray_angle)));
+		vert_inters->y = camera_state->pos_y + fabs((camera_state->pos_x - vert_inters->x)
+			/ tan(DEG2RAD(camera_state->ray_angle)));
 		vert_inters->step_y = -vert_inters->step_y;
 	}
-	// printf("vert_x_step: %g\n", vert_inters->step_x);
-	// printf("vert_y_step: %g\n", vert_inters->step_y);
-	// printf("vert_x:%g\n", vert_inters->x);
-	// printf("vert_y:%g\n", vert_inters->y);
-	return (distance_to_wall(vert_inters, engine_state, map));
+	return (distance_to_wall(vert_inters, camera_state, map));
+}
+
+void		define_current_wall(t_camera_state *camera_state, t_intersection *intersection, t_intersection_result *inters_result, t_map *map)
+{
+	double		dist_x;
+	double		dist_y;
+
+	dist_x = dist_to_hor_inters(camera_state, intersection, map);
+	dist_y = dist_to_ver_inters(camera_state, intersection, map);
+	if (dist_y < dist_x)
+	{
+		inters_result->is_side_wall = 1;
+		if (intersection->step_x < 0) // if it's a west wall
+			inters_result->current_color = 0x00FFFFFF; //white
+		else
+			inters_result->current_color = 0x00FF0000; // east wall red
+		//define texture coordinates, define texture path
+		inters_result->dist_to_wall = dist_y;
+	}
+	else
+	{
+		inters_result->dist_to_wall = dist_x;
+		if (intersection->step_y < 0) //north wall
+			inters_result->current_color = 0x0000FF00; //green
+		else
+			inters_result->current_color = 0x000000FF; //south wall blue
+		//define texture coordinates, define texture path
+	}
 }
 
 void		init_intersection_result(t_intersection_result *inters_result)
 {
 	inters_result->dist_to_wall = 0;
 	inters_result->wall_height = 0;
-	// inters_result->wall_height = inters_result->dist_to_wall * 500; // temporary result = h in pixels * distance to wall
 	inters_result->is_side_wall = 0;
 	inters_result->current_texture = NULL;
 	inters_result->current_color = 0;
@@ -171,24 +192,13 @@ void		init_intersection_result(t_intersection_result *inters_result)
 	inters_result->texture_y = 0;
 }
 
-void		init_engine_state(t_engine_state *engine_state, t_map *map, t_resolution *resolution)
+void		init_camera_state(t_camera_state *camera_state, t_map *map, t_resolution *resolution)
 {
-	engine_state->dist_to_plane = (resolution->x / 2.0) / tan(DEG2RAD(FOV / 2.0));
-	engine_state->pos_x = map->start_pos_x + 0.5;
-	engine_state->pos_y = map->start_pos_y + 0.5;
-	engine_state->ray_angle = map->start_direction;
+	camera_state->dist_to_plane = (resolution->x / 2.0) / tan(DEG2RAD(FOV / 2.0));
+	camera_state->pos_x = map->start_pos_x + 0.5;
+	camera_state->pos_y = map->start_pos_y + 0.5;
+	camera_state->ray_angle = map->start_direction;
 }
-
-//remove this function!
-// void		print_data(t_engine_state *engine_state,
-// 	t_intersection_result *inters_result, t_map *map)
-// {
-
-// 	// printf("ray angle: %g\n", engine_state->ray_angle);
-// 	// printf("pos_x: %g\n", engine_state->pos_x);
-// 	// printf("pos_y: %g\n", engine_state->pos_y);
-// 	// printf("dist_horiz: %g\n", inters_result->dist_to_wall);
-// }
 
 double		wrap_angle(double angle)
 {
@@ -226,7 +236,6 @@ t_window		start_window(t_window *window, t_resolution *resolution)
 	window->img = mlx_new_image(window->mlx, resolution->x, resolution->y);
 	window->address = mlx_get_data_addr(window->img, &window->bits_per_pixel, &window->line_length,
 		&window->endian);
-	// my_mlx_pixel_put(&data, 50, 50, 0x0000FF00);
 	return (*window);
 }
 
@@ -234,47 +243,24 @@ t_window		start_window(t_window *window, t_resolution *resolution)
 void		render_scene(t_map *map, t_style *style)
 {
 	t_window				window;
-	t_engine_state			engine_state;
+	t_camera_state			camera_state;
 	t_intersection			intersection;
 	t_intersection_result	inters_result;
-	double					dist_hor_inters;
-	double					dist_ver_inters;
 	int						i;
-	double					start_ray_angle;
 
-	init_engine_state(&engine_state, map, &style->resolution);
+	init_camera_state(&camera_state, map, &style->resolution);
 	init_intersection_result(&inters_result);
 	window = start_window(&window, &style->resolution); // how to return error here?
 	i = 0;
-	start_ray_angle = engine_state.ray_angle;
 	while (i < style->resolution.x)
 	{
 		inters_result.is_side_wall = 0; // I probably don't need it in structure, unless I move this functionality to another place
-		engine_state.ray_angle = start_ray_angle + RAD2DEG(atan((i - style->resolution.x / 2.0)
-			/ engine_state.dist_to_plane)));
-			engine_state.ray_angle = wrap_angle(engine_state.ray_angle);
-			dist_hor_inters = dist_to_hor_inters(&engine_state, &intersection, map);
-			dist_ver_inters = dist_to_ver_inters(&engine_state, &intersection, map);
-			if (dist_ver_inters < dist_hor_inters)
-			{
-				inters_result.is_side_wall = 1;
-				if (intersection.step_x < 0) // if it's a west wall
-					inters_result.current_color = 0x00FFFFFF;
-				else
-					inters_result.current_color = 0x00FF0000;
-				//define texture coordinates, define texture path
-				inters_result.dist_to_wall = dist_ver_inters;
-			}
-			else
-			{
-				inters_result.dist_to_wall = dist_hor_inters;
-				if (intersection.step_y < 0) //south wall
-					inters_result.current_color = 0x0000FF00;
-				else
-					inters_result.current_color = 0x000000FF;
-				//define texture coordinates, define texture path
-			}
-			inters_result.wall_height = TILE_SIZE / inters_result.dist_to_wall * engine_state.dist_to_plane;
+		camera_state.ray_angle = map->start_direction + RAD2DEG(atan((i - style->resolution.x / 2.0)
+			/ camera_state.dist_to_plane)));
+			camera_state.ray_angle = wrap_angle(camera_state.ray_angle);
+			define_current_wall(&camera_state, &intersection, &inters_result, map);
+			inters_result.dist_to_wall *= cos(DEG2RAD(map->start_direction - camera_state.ray_angle));
+			inters_result.wall_height = TILE_SIZE / inters_result.dist_to_wall * camera_state.dist_to_plane;
 			draw_vertical_line(&window, &inters_result, &style->resolution, &i);
 			i++;
 	}
