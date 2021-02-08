@@ -6,14 +6,54 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/07 00:03:22 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 09:07:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdio.h> //remove
 
+#include "mlx.h"
 #include "render_scene.h"
+
+
+
+void	my_mlx_pixel_put(t_window *window, int x, int y, unsigned int color)
+{
+	char *dst;
+
+	dst = window->address + (y * window->line_length + x * (window->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	draw_vertical_line(t_window *window, t_intersection_result *inters_res, t_resolution *resolution, int *num)
+{
+	int		line_start;
+	int		line_end;
+	int		x;
+	int		y;
+
+	line_start = resolution->y / 2 - (int)inters_res->wall_height / 2;
+	line_end = resolution->y / 2 + (int)inters_res->wall_height / 2;
+	y = line_start;
+	while (y <= line_end)
+	{
+		x = *num;
+		if (x == *num)
+		{
+			my_mlx_pixel_put(window, x, y, inters_res->current_color);
+			x++;
+		}
+		y++;
+	}
+
+}
+
+void	draw_image(t_window *window)
+{
+	mlx_put_image_to_window(window->mlx, window->mlx_win, window->img, 0, 0);
+	mlx_loop(window->mlx);
+}
 
 /*
 **	horizontal intersection
@@ -119,11 +159,14 @@ double		dist_to_ver_inters(t_engine_state *engine_state, t_intersection *vert_in
 	return (distance_to_wall(vert_inters, engine_state, map));
 }
 
-void		init_intersection_result(t_intersection_result *inters_result)
+void		init_intersection_result(t_intersection_result *inters_result, t_engine_state *engine_state)
 {
 	inters_result->dist_to_wall = 0;
+	inters_result->wall_height = TILE_SIZE / inters_result->dist_to_wall * engine_state->dist_to_plane;
+	// inters_result->wall_height = inters_result->dist_to_wall * 500; // temporary result = h in pixels * distance to wall
 	inters_result->is_side_wall = 0;
 	inters_result->current_texture = NULL;
+	inters_result->current_color = 0;
 	inters_result->texture_x = 0;
 	inters_result->texture_y = 0;
 }
@@ -137,15 +180,15 @@ void		init_engine_state(t_engine_state *engine_state, t_map *map, t_resolution *
 }
 
 //remove this function!
-void		print_data(t_engine_state *engine_state,
-	t_intersection_result *inters_result, t_map *map)
-{
+// void		print_data(t_engine_state *engine_state,
+// 	t_intersection_result *inters_result, t_map *map)
+// {
 
-	// printf("ray angle: %g\n", engine_state->ray_angle);
-	// printf("pos_x: %g\n", engine_state->pos_x);
-	// printf("pos_y: %g\n", engine_state->pos_y);
-	// printf("dist_horiz: %g\n", inters_result->dist_to_wall);
-}
+// 	// printf("ray angle: %g\n", engine_state->ray_angle);
+// 	// printf("pos_x: %g\n", engine_state->pos_x);
+// 	// printf("pos_y: %g\n", engine_state->pos_y);
+// 	// printf("dist_horiz: %g\n", inters_result->dist_to_wall);
+// }
 
 double		wrap_angle(double angle)
 {
@@ -156,8 +199,41 @@ double		wrap_angle(double angle)
 	return (angle);
 }
 
+
+void	check_plane_size(void *mlx, t_resolution *resolution)
+{
+	int 	sizex;
+	int		sizey;
+
+	mlx_get_screen_size(mlx, &sizex, &sizey);
+	if (resolution->x > sizex || resolution->y > sizey)
+	{
+		resolution->x = sizex;
+		resolution->y = sizey;
+	}
+}
+
+t_window		start_window(t_window *window, t_resolution *resolution)
+{
+	window->mlx = mlx_init();
+	// if (window->mlx == NULL)   !!! correct  this!
+	// {
+	// 	// return (report_error("Failed to connect to the graphical system"));
+	// 	return ; // should retuen an error 
+	// }
+	check_plane_size(window->mlx, resolution);
+	window->mlx_win = mlx_new_window(window->mlx, resolution->x, resolution->y, "cub3D");
+	window->img = mlx_new_image(window->mlx, resolution->x, resolution->y);
+	window->address = mlx_get_data_addr(window->img, &window->bits_per_pixel, &window->line_length,
+		&window->endian);
+	// my_mlx_pixel_put(&data, 50, 50, 0x0000FF00);
+	return (*window);
+}
+
+
 void		render_scene(t_map *map, t_style *style)
 {
+	t_window				window;
 	t_engine_state			engine_state;
 	t_intersection			intersection;
 	t_intersection_result	inters_result;
@@ -167,7 +243,8 @@ void		render_scene(t_map *map, t_style *style)
 	double					start_ray_angle;
 
 	init_engine_state(&engine_state, map, &style->resolution);
-	init_intersection_result(&inters_result);
+	init_intersection_result(&inters_result, &engine_state);
+	window = start_window(&window, &style->resolution); // how to return error here?
 	i = 0;
 	start_ray_angle = engine_state.ray_angle;
 	while (i < style->resolution.x)
@@ -178,19 +255,27 @@ void		render_scene(t_map *map, t_style *style)
 			engine_state.ray_angle = wrap_angle(engine_state.ray_angle);
 			dist_hor_inters = dist_to_hor_inters(&engine_state, &intersection, map);
 			dist_ver_inters = dist_to_ver_inters(&engine_state, &intersection, map);
-			// printf("dist_hor_inters: %g\n", dist_hor_inters);
-			// printf("dist_ver_inters: %g\n", dist_ver_inters);
 			if (dist_ver_inters < dist_hor_inters)
 			{
 				inters_result.is_side_wall = 1;
-				// if (intersection.step_x < 0)
-					//define texture coordinates, define texture path
+				if (intersection.step_x < 0) // if it's a west wall
+					inters_result.current_color = 0x00FFFFFF;
+				else
+					inters_result.current_color = 0x00FF0000;
+				//define texture coordinates, define texture path
 				inters_result.dist_to_wall = dist_ver_inters;
 			}
 			else
+			{
 				inters_result.dist_to_wall = dist_hor_inters;
-			// printf("dist_to_wall: %g\n", inters_result.dist_to_wall);
-			// draw a line;
+				if (intersection.step_y < 0) //south wall
+					inters_result.current_color = 0x0000FF00;
+				else
+					inters_result.current_color = 0x000000FF;
+				//define texture coordinates, define texture path
+			}
+			draw_vertical_line(&window, &inters_result, &style->resolution, &i);
 			i++;
 	}
+	draw_image(&window);
 }

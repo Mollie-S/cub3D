@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:12 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/07 00:01:26 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 09:08:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "style.h"
 # include "engine_state.h"
 # include "intersection.h"
+# include "window.h"
 
 /*
 **	adding (double)(0.0001) to radian to avoid division by 0 in case with tan(radian) or cos(radian)
