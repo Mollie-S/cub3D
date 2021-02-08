@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/02/08 08:55:04 by osamara       ########   odam.nl          #
+#    Updated: 2021/02/08 23:46:30 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,18 @@ SRC = \
 	src/map.c \
 	src/read_map.c \
 	src/report_error.c \
+	src/start_window.c \
+	src/utils.c \
 	src/parsers/parse_map_header.c \
 	src/parsers/parse_resolution.c \
 	src/parsers/parse_color.c \
 	src/parsers/parse_texture.c \
 	src/parsers/parsing_utils.c \
 	src/parsers/parse_map.c \
-	src/raycasting/render_scene.c
+	src/raycasting/distance.c \
+	src/raycasting/draw_scene.c \
+	src/raycasting/render_scene.c \
+	src/game_engine/game_loop.c
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra -O0 -g
