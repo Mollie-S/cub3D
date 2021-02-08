@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 14:33:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 19:02:56 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,12 @@ double			distance_to_wall(t_intersection *intersection, t_camera_state *camera_s
 	while (intersection->x < map->width && intersection->y < map->height
 		&& intersection->x >= 0 && intersection->y >= 0)
 	{
-		field_index = map->width * (size_t)intersection->y + (size_t)intersection->x;
+		if (intersection->step_x < 0 && intersection->type == VERTICAL)
+			field_index = map->width * (size_t)intersection->y + (size_t)intersection->x - 1;
+		else if (intersection->step_y < 0 && intersection->type == HORIZONTAL)
+			field_index = map->width * ((size_t)intersection->y - 1) + (size_t)intersection->x;
+		else
+			field_index = map->width * (size_t)intersection->y + (size_t)intersection->x;
 		if (map->fields[field_index] == FIELD_WALL)
 		{
 			distance = fabs((camera_state->pos_x - intersection->x)
@@ -94,6 +99,7 @@ double			distance_to_wall(t_intersection *intersection, t_camera_state *camera_s
 
 double		dist_to_hor_inters(t_camera_state *camera_state, t_intersection *hor_inters, t_map *map)
 {
+	hor_inters->type = HORIZONTAL;
 	hor_inters->y = floor(camera_state->pos_y);
 	hor_inters->step_y = -TILE_SIZE;
 	if (camera_state->ray_angle >= 90.0 && camera_state->ray_angle < 270.0)
@@ -134,11 +140,12 @@ double		dist_to_hor_inters(t_camera_state *camera_state, t_intersection *hor_int
 
 double		dist_to_ver_inters(t_camera_state *camera_state, t_intersection *vert_inters, t_map *map)
 {
+	vert_inters->type = VERTICAL;
 	vert_inters->x = floor(camera_state->pos_x) + TILE_SIZE;
 	vert_inters->step_x = TILE_SIZE;
 	if (camera_state->ray_angle >= 180.0 && camera_state->ray_angle < 360.0)
 	{
-		vert_inters->x -= TILE_SIZE;
+		vert_inters->x = floor(camera_state->pos_x);
 		vert_inters->step_x = -vert_inters->step_x;
 	}
 	vert_inters->y = camera_state->pos_y - fabs((camera_state->pos_x - vert_inters->x)
@@ -160,6 +167,8 @@ void		define_current_wall(t_camera_state *camera_state, t_intersection *intersec
 
 	dist_x = dist_to_hor_inters(camera_state, intersection, map);
 	dist_y = dist_to_ver_inters(camera_state, intersection, map);
+	printf("horizont_int_distance: %g\n", dist_x);
+	printf("vertical_int_distance: %g\n", dist_y);
 	if (dist_y < dist_x)
 	{
 		inters_result->is_side_wall = 1;

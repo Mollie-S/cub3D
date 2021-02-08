@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/04 20:04:19 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/07 15:51:43 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 18:49:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct      s_intersection
 	double	y;
 	double	step_x;
 	double	step_y;
+	char	type;
 }                   t_intersection;
 
 typedef struct      s_intersection_result
