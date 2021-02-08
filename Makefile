@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/01/30 15:27:06 by osamara       ########   odam.nl          #
+#    Updated: 2021/02/08 08:55:04 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,17 @@ SRC = \
 	src/style.c \
 	src/map.c \
 	src/read_map.c \
+	src/report_error.c \
 	src/parsers/parse_map_header.c \
 	src/parsers/parse_resolution.c \
 	src/parsers/parse_color.c \
 	src/parsers/parse_texture.c \
 	src/parsers/parsing_utils.c \
-	src/report_error.c \
-	src/parsers/parse_map.c 
+	src/parsers/parse_map.c \
+	src/raycasting/render_scene.c
 
 OBJ = $(SRC:.c=.o)
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -O0 -g
 
 INCLUDES =	./get_next_line \
 			./libft \
