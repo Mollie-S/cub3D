@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/07 09:00:58 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 21:07:45 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@ typedef enum		e_texture_index {
 	TEXTURE_COUNT
 }					t_texture_index;
 
-typedef enum		e_color_index {
-	COLOR_NO = 0x00FFFFFF,
-	COLOR_SO = 0x0000FF00,
-	COLOR_EA = 0x00FF0000,
-	COLOR_WE = 0x000000FF,
-	// TEXTURE_SPRITE,
-	COLOR_COUNT
-}					t_color_index;
-
 typedef struct		s_texture_identifier
 {
 	char			*identifier;
@@ -44,7 +35,6 @@ typedef struct		s_texture_identifier
 typedef struct		s_style
 {
 	char			*textures[TEXTURE_COUNT];
-	char			*colors[COLOR_COUNT]; //remove, it's for testing purposes!
 	unsigned int	floor_rgb;
 	unsigned int	ceiling_rgb;
 	t_resolution    resolution;

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 09:11:14 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 23:34:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 		free_map(map);
 		return (ERROR);
 	}
-	// initialize_structure_for_rays??? here or in main?
-	render_scene(map, style); // can it return an error?
 	return (SUCCESS);
 }
 
@@ -61,6 +59,7 @@ int		load_map_from_file(char *file, t_style *style, t_list **list_start)
 	}
 	if (!read_from_file(fd, line, style, list_start))
 	{
+		close(fd);
 		return (ERROR);
 	}
 	close(fd);

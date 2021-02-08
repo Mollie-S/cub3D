@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 10:05:38 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 21:34:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 
 int		main(int argc, char **argv)
 {
-	t_style  style;
-	t_map	 map;
+	t_style		style;
+	t_map	 	map;
+	t_window	window;
 
 	if (argv[2])
 	{
@@ -48,6 +49,9 @@ int		main(int argc, char **argv)
 	{
 		return (1);
 	}
+	if (!start_window(&window, &style->resolution))
+		return (1);
+	game_loop(&window, &style, &map);
 	// check if every mallocced line is freed
 	debug_print_map(&map); // remove this function!!! 
 	debug_print_style(&style);// remove this function!!! 
