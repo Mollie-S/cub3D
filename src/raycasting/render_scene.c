@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 09:07:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/08 10:49:24 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,10 @@ double		dist_to_ver_inters(t_engine_state *engine_state, t_intersection *vert_in
 	return (distance_to_wall(vert_inters, engine_state, map));
 }
 
-void		init_intersection_result(t_intersection_result *inters_result, t_engine_state *engine_state)
+void		init_intersection_result(t_intersection_result *inters_result)
 {
 	inters_result->dist_to_wall = 0;
-	inters_result->wall_height = TILE_SIZE / inters_result->dist_to_wall * engine_state->dist_to_plane;
+	inters_result->wall_height = 0;
 	// inters_result->wall_height = inters_result->dist_to_wall * 500; // temporary result = h in pixels * distance to wall
 	inters_result->is_side_wall = 0;
 	inters_result->current_texture = NULL;
@@ -243,7 +243,7 @@ void		render_scene(t_map *map, t_style *style)
 	double					start_ray_angle;
 
 	init_engine_state(&engine_state, map, &style->resolution);
-	init_intersection_result(&inters_result, &engine_state);
+	init_intersection_result(&inters_result);
 	window = start_window(&window, &style->resolution); // how to return error here?
 	i = 0;
 	start_ray_angle = engine_state.ray_angle;
@@ -274,6 +274,7 @@ void		render_scene(t_map *map, t_style *style)
 					inters_result.current_color = 0x000000FF;
 				//define texture coordinates, define texture path
 			}
+			inters_result.wall_height = TILE_SIZE / inters_result.dist_to_wall * engine_state.dist_to_plane;
 			draw_vertical_line(&window, &inters_result, &style->resolution, &i);
 			i++;
 	}
