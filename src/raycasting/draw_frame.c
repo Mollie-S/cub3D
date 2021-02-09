@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_scene.c                                       :+:    :+:            */
+/*   draw_frame.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 11:30:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:07:41 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw_scene.h"
+#include "draw_frame.h"
 
 #include "mlx.h"
 

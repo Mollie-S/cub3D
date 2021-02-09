@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   render_scene.c                                     :+:    :+:            */
+/*   render_frame.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 00:00:10 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:04:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
+#include "render_frame.h"
 
 #include "distance.h"
 #include "draw_scene.h"
 #include "utils.h"
+#include "result.h"
 
 #include <math.h>
 
@@ -37,7 +38,7 @@ static void		init_intersection_result(t_intersection_result *inters_result)
 	inters_result->texture_y = 0;
 }
 
-void			render_scene(t_game_engine_state *state)
+int			render_frame(t_game_engine_state *state)
 {
 	t_tracer				tracer;
 	t_intersection_result	inters_result;
@@ -58,6 +59,7 @@ void			render_scene(t_game_engine_state *state)
 			i++;
 	}
 	draw_image(state->window);
+	return (SUCCESS);
 }
 
 void			define_current_wall(t_game_engine_state *state, t_tracer *tracer, t_intersection_result *inters_result)

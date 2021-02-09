@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_scene.h                                       :+:    :+:            */
+/*   render_frame.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/08 23:22:53 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:29:18 by osamara       ########   odam.nl         */
+/*   Created: 2021/01/31 22:26:12 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/09 16:03:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAW_SCENE_H
-# define DRAW_SCENE_H
+#ifndef RENDER_FRAME_H
+# define RENDER_FRAME_H
 
-# include "window.h"
+# include "game_engine/game_engine_state.h"
 # include "intersection.h"
-# include "resolution.h"
 
-void	draw_vertical_line(t_window *window, t_intersection_result *inters_res, t_resolution *resolution, int *num);
-void	my_mlx_pixel_put(t_window *window, int x, int y, unsigned int color);
-void	draw_image(t_window *window);
+/*
+**	adding (double)(0.0001) to radian to avoid division by 0 in case with tan(radian) or cos(radian)
+*/
+
+
+int		render_frame(t_game_engine_state *state);
+void		define_current_wall(t_game_engine_state *state, t_tracer *tracer, t_intersection_result *inters_result);
+
 
 #endif
