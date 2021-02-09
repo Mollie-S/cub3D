@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_loop.h                                        :+:    :+:            */
+/*   movement.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/08 20:58:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 19:03:11 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/09 17:14:04 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/09 20:44:31 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_LOOP_H
-# define GAME_LOOP_H
+#ifndef MOVEMENT_H
+# define MOVEMENT_H
 
-# include "game_engine_state.h"
+# define ROT_LEFT -1
+# define ROT_RIGHT 1
+# define ROT_SPEED 10
 
-# define FOV 60
+#include "game_engine_state.h"
 
-void	game_loop(t_window *window, t_style *style, t_map *map);
-void	init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map);
+void	init_movement(t_movement *move);
+void	rotate_player(t_game_engine_state *state);
+
 
 #endif

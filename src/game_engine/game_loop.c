@@ -6,25 +6,27 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 16:04:16 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 20:59:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_loop.h"
-#include "raycasting/render_frame.h"
+#include "movement.h"
 #include "utils.h"
+#include "key_handling.h"
+#include "raycasting/render_frame.h"
 
 #include "mlx.h"
 
 #include <math.h>
 
-void	game_loop(t_window *window, t_style *style, t_map *map)
+int		update_frame(t_game_engine_state *state)
 {
-	t_game_engine_state			state;
-
-	init_game_engine_state(&state, window, style, map);
-	mlx_loop_hook(window->mlx, render_frame, &state);
-	mlx_loop(window->mlx);
+	if (state->move.rotation_dir != 0)
+		rotate_player(state);
+	mlx_clear_window(state->window->mlx, state->window->mlx_win);
+	render_frame(state);
+	return (0);
 }
 
 void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map)
@@ -35,7 +37,19 @@ void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_sty
 	state->dist_to_plane = (style->resolution.x / 2.0) / tan(DEG2RAD(FOV / 2.0));
 	state->pos_x = map->start_pos_x + 0.5;
 	state->pos_y = map->start_pos_y + 0.5;
+	state->direction = map->start_direction;
 }
 
-// mlx_loop_hook;
-	// create a struct that combines the structs needed for rendering
+
+void	game_loop(t_window *window, t_style *style, t_map *map)
+{
+	t_game_engine_state			state;
+	t_movement					move;
+
+	init_game_engine_state(&state, window, style, map);
+	init_movement(&move);
+	setup_key_hooks(&state);
+	mlx_loop_hook(window->mlx, update_frame, &state);
+	mlx_loop(window->mlx);
+}
+

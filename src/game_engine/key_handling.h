@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_loop.h                                        :+:    :+:            */
+/*   key_handling.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/08 20:58:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 19:03:11 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/09 17:10:39 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/09 20:48:30 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_LOOP_H
-# define GAME_LOOP_H
+#ifndef KEY_HANDLING_H
+# define KEY_HANDLING_H
 
 # include "game_engine_state.h"
 
-# define FOV 60
+# define ESC 53
+# define LEFT 123
+# define RIGHT 124
 
-void	game_loop(t_window *window, t_style *style, t_map *map);
-void	init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map);
-
+int		setup_key_hooks(t_game_engine_state *state);
+int		key_pressed(int keycode, t_game_engine_state *state);
+int		key_released(int keycode, t_game_engine_state *state);
 #endif

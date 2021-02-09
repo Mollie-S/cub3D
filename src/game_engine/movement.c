@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_engine_state.h                                     :+:    :+:            */
+/*   movement.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/31 22:26:16 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 21:45:54 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/09 17:13:42 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/09 20:40:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_ENGINE_STATE_H
-# define GAME_ENGINE_STATE_H
+#include "movement.h"
+#include "utils.h"
 
-# include "window.h"
-# include "style.h"
-# include "map.h"
-
-typedef struct		s_movement
+void	init_movement(t_movement *move)
 {
-	int		rotation_dir;
-}					t_movement;
+	move->rotation_dir = 0;
+}
 
-typedef struct		s_game_engine_state
+void	rotate_player(t_game_engine_state *state)
 {
-	double			dist_to_plane;
-	double			pos_x;
-	double			pos_y;
-	double			direction;
-	t_window		*window;
-	t_style			*style;
-	t_map			*map;
-	t_movement		move;
-}					t_game_engine_state;
+	if (state->move.rotation_dir == ROT_LEFT)
+		state->direction -= ROT_SPEED;
+	else if (state->move.rotation_dir == ROT_RIGHT)
+		state->direction += ROT_SPEED;
+	state->direction = wrap_angle(state->direction);
 
-#endif
+}
