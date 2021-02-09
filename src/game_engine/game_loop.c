@@ -6,13 +6,15 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 00:02:03 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:04:16 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_loop.h"
-#include "raycasting/render_scene.h"
+#include "raycasting/render_frame.h"
 #include "utils.h"
+
+#include "mlx.h"
 
 #include <math.h>
 
@@ -21,7 +23,8 @@ void	game_loop(t_window *window, t_style *style, t_map *map)
 	t_game_engine_state			state;
 
 	init_game_engine_state(&state, window, style, map);
-	render_scene(&state);
+	mlx_loop_hook(window->mlx, render_frame, &state);
+	mlx_loop(window->mlx);
 }
 
 void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map)

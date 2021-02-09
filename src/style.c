@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/05 15:45:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 01:05:29 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,6 @@ void	free_map_style(t_style *style)
 		style->textures[i] = NULL;
 		i++;
 	}
-	// free(style->so_texture);
-	// free(style->ea_texture);
-	// free(style->we_texture);
-	// free(style->sprite_texture);
-	// style->no_texture = NULL;
-	// style->so_texture = NULL;
-	// style->ea_texture = NULL;
-	// style->we_texture = NULL;
-	// style->sprite_texture = NULL;
 }
 
 

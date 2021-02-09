@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   start_window.c                                     :+:    :+:            */
+/*   window.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 21:33:17 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:52:25 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 11:36:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "start_window.h"
+#include "window.h"
 
 #include "result.h"
 #include "report_error.h"

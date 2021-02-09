@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:34:07 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 16:05:45 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "parsers/parse_map_header.h"
 #include "parsers/parse_map.h"
 #include "parsers/parsing_utils.h"
-#include "raycasting/render_scene.h"
 #include "report_error.h"
 #include "result.h"
 

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:54:13 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 11:36:56 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h> // needed for system( function, remove)
 
 #include "read_map.h"
-#include "start_window.h"
 #include "game_engine/game_loop.h"
 #include "window.h"
 #include "style.h"
@@ -51,15 +50,14 @@ int		main(int argc, char **argv)
 		return (1);
 	game_loop(&window, &style, &map);
 	// check if every mallocced line is freed
-	debug_print_map(&map); // remove this function!!! 
-	debug_print_style(&style);// remove this function!!! 
+	// debug_print_map(&map); // remove this function!!! 
+	// debug_print_style(&style);// remove this function!!! 
 
 	free_map_style(&style);
 	free_map(&map);
-	// all structures freed?
+	free(window.mlx);
+	// all structures freed? 
+	system("leaks cub3D");
+	// debug flags removed in makefile?
 	return (0);
 }
-
-
-//  check that if screen_size is more than resolution.x and y. it must be adapted to the screen size
-//you get screen_size  from mlx_get_screen_size()

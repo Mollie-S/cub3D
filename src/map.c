@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 15:20:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 01:06:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ static int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 	if ((map->fields[field_index] == FIELD_FLOOR || map->fields[field_index] == FIELD_SPRITE)
 		&& check_array[field_index] == 0)
 	{
-		// printf("%lu\n%lu\n", x, y);
 		if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 			return (report_error("Your map is not surrounded by walls"));
 		check_array[field_index] = 1;
-		debug_print_floodfill_map(map, check_array);
+		// debug_print_floodfill_map(map, check_array);
 		if (!ft_floodfill(x + 1, y, check_array, map))
 			return (ERROR);
 		else if (!ft_floodfill(x - 1, y, check_array, map))
