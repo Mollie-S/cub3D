@@ -6,26 +6,26 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 16:04:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 21:42:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_frame.h"
 
 #include "distance.h"
-#include "draw_scene.h"
+#include "draw_frame.h"
 #include "utils.h"
 #include "result.h"
 
 #include <math.h>
 
-static void		init_tracer(t_tracer *tracer, t_map *map)
+static void		init_tracer(t_tracer *tracer, t_game_engine_state *state)
 {
 	tracer->x = -1.0;
 	tracer->y = -1.0;
 	tracer->step_x = 0.0;
 	tracer->step_y = 0.0;
-	tracer->ray_angle = map->start_direction;
+	tracer->ray_angle = state->direction;
 }
 
 static void		init_intersection_result(t_intersection_result *inters_result)
@@ -42,21 +42,21 @@ int			render_frame(t_game_engine_state *state)
 {
 	t_tracer				tracer;
 	t_intersection_result	inters_result;
-	int						i;
+	int						x;
 
-	init_tracer(&tracer, state->map);
+	init_tracer(&tracer, state);
 	init_intersection_result(&inters_result);
-	i = 0;
-	while (i < state->style->resolution.x)
+	x = 0;
+	while (x < state->style->resolution.x)
 	{
-		tracer.ray_angle = state->map->start_direction + RAD2DEG(atan((i - state->style->resolution.x / 2.0)
+		tracer.ray_angle = state->direction + RAD2DEG(atan((x - state->style->resolution.x / 2.0)
 			/ state->dist_to_plane)));
 			tracer.ray_angle = wrap_angle(tracer.ray_angle);
 			define_current_wall(state, &tracer, &inters_result);
-			inters_result.dist_to_wall *= cos(DEG2RAD(state->map->start_direction - tracer.ray_angle));
+			inters_result.dist_to_wall *= cos(DEG2RAD(state->direction - tracer.ray_angle));
 			inters_result.wall_height = 1.0 / inters_result.dist_to_wall * state->dist_to_plane;
-			draw_vertical_line(state->window, &inters_result, &state->style->resolution, &i);
-			i++;
+			draw_vertical_line(state, &inters_result, x);
+			x++;
 	}
 	draw_image(state->window);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 16:07:41 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/09 21:47:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,35 @@
 
 #include "mlx.h"
 
-void	draw_vertical_line(t_window *window, t_intersection_result *inters_res, t_resolution *resolution, int *num)
+void	draw_vertical_line(t_game_engine_state *state, t_intersection_result *inters_res, int x)
 {
-	int		line_start;
-	int		line_end;
-	int		x;
-	int		y;
+	int		wall_top;
+	int		wall_bottom;
+	int				y;
+	unsigned int	color;
+	char *dst;
 
-	line_start = resolution->y / 2 - (int)inters_res->wall_height / 2;
-	line_end = resolution->y / 2 + (int)inters_res->wall_height / 2;
-	y = line_start;
-	while (y <= line_end)
+
+	wall_top = state->style->resolution.y / 2 - (int)inters_res->wall_height / 2;
+	wall_bottom = state->style->resolution.y / 2 + (int)inters_res->wall_height / 2;
+	dst = state->window->address + x * (state->window->bits_per_pixel / 8);
+	y = 0;
+	while (y < state->style->resolution.y)
 	{
-		x = *num;
-		if (x == *num)
-		{
-			my_mlx_pixel_put(window, x, y, inters_res->current_color);
-			x++;
-		}
+		if (y < wall_top)
+			color = state->style->ceiling_rgb;
+		else if (y >= wall_top && y < wall_bottom)
+			color = inters_res->current_color;
+		else
+			color = state->style->floor_rgb;
+		*(unsigned int*)dst = color;
 		y++;
+		dst += state->window->line_length;
 	}
 }
 
-void	my_mlx_pixel_put(t_window *window, int x, int y, unsigned int color)
-{
-	char *dst;
-
-	dst = window->address + (y * window->line_length + x * (window->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 void	draw_image(t_window *window) // should be either removed or extended
 {
 	mlx_put_image_to_window(window->mlx, window->mlx_win, window->img, 0, 0);
-	// mlx_loop(window->mlx);
 }
