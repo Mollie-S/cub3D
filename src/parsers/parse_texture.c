@@ -6,17 +6,19 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:00:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/30 17:08:26 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/10 14:39:57 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "parse_texture.h"
+
+#include "parsing_utils.h"
+#include "report_error.h"
 
 #include "libft.h"
 
-#include "parse_texture.h"
-#include "parsing_utils.h"
-#include "report_error.h"
+#include <unistd.h>
+#include <fcntl.h>
 
 static t_texture_identifier		g_texture_identifier[] =
 {
@@ -26,6 +28,20 @@ static t_texture_identifier		g_texture_identifier[] =
 	{"WE ", TEXTURE_WE},
 	{"S ", TEXTURE_SPRITE}
 };
+
+int		validate_texture(char *path_name, int line_num)
+{
+	int fd;
+
+	fd = open(path_name, O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
+		return (report_error_with_line(line_num, "Texture path is invalid"));
+	}
+	close(fd);
+	return (SUCCESS);
+}
 
 int		parse_walls_textures(char *line, int line_num, t_style *style)
 {
@@ -39,8 +55,14 @@ int		parse_walls_textures(char *line, int line_num, t_style *style)
 		if (has_identifier(line, g_texture_identifier[i].identifier, &identifier_len))
 		{
 			if (style->textures[g_texture_identifier[i].index] != NULL)
+			{
 				return (report_error_with_line(line_num, "Repeating texture element."));
+			}
 			style->textures[g_texture_identifier[i].index] = ft_strtrim(line + identifier_len, " ");
+			if (!validate_texture(style->textures[g_texture_identifier[i].index], line_num))
+			{
+				return (ERROR);
+			}
 			return (SUCCESS);
 		}
 		i++;
