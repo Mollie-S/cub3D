@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:14:04 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 20:44:31 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/10 11:08:15 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define ROT_LEFT -1
 # define ROT_RIGHT 1
-# define ROT_SPEED 10
+# define ROT_SPEED 1
 
 #include "game_engine_state.h"
 
