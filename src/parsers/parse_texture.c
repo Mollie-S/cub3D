@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:00:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/10 14:39:57 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/10 15:07:54 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ static t_texture_identifier		g_texture_identifier[] =
 	{"S ", TEXTURE_SPRITE}
 };
 
-int		validate_texture(char *path_name, int line_num)
-{
-	int fd;
-
-	fd = open(path_name, O_RDONLY);
-	if (fd == -1)
-	{
-		close(fd);
-		return (report_error_with_line(line_num, "Texture path is invalid"));
-	}
-	close(fd);
-	return (SUCCESS);
-}
 
 int		parse_walls_textures(char *line, int line_num, t_style *style)
 {
@@ -68,4 +55,18 @@ int		parse_walls_textures(char *line, int line_num, t_style *style)
 		i++;
 	}
 	return (NOT_FOUND);
+}
+
+int		validate_texture(char *path_name, int line_num)
+{
+	int fd;
+
+	fd = open(path_name, O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
+		return (report_error_with_line(line_num, "Texture path is invalid"));
+	}
+	close(fd);
+	return (SUCCESS);
 }
