@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 10:50:01 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 12:18:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_vertical_line(t_game_engine_state *state, t_intersection_result *resul
 		else if (y >= wall_top && y < wall_bottom)
 		{
 			result->tex_y = ((double)y - wall_top) / (wall_bottom - wall_top);
-			color = sample_texture(state, result);
+			color = sample_texture(result);
 		}
 		else
 			color = state->style->floor_rgb;
@@ -43,16 +43,16 @@ void	draw_vertical_line(t_game_engine_state *state, t_intersection_result *resul
 	}
 }
 
-unsigned int	sample_texture(t_game_engine_state *state, t_intersection_result *result)
+unsigned int	sample_texture(t_intersection_result *result)
 {
 	char	*tex_color;
 	int x;
 	int y;
 
 	// check that x and y are not less than 0 (clamp coordinates) nice to have
-	x = result->tex_x * state->tex_info->img_width;
-	y = result->tex_y * state->tex_info->img_height;
+	x = result->tex_x * result->current_tex->img_width;
+	y = result->tex_y * result->current_tex->img_height;
 
-	tex_color = state->tex_info->addr + y * state->tex_info->line_length + x * (state->tex_info->bpp / 8);
+	tex_color = result->current_tex->addr + y * result->current_tex->line_length + x * (result->current_tex->bpp / 8);
 	return (*(unsigned int*)tex_color);
 }

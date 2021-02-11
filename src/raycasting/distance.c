@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:43:34 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 00:37:15 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 11:50:55 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,26 @@
 **  so:dist between xi and next xi = height * tan where height = 1.0
 */
 
-double		dist_to_hor_inters(t_game_engine_state *state, t_tracer *hor_inters)
+double		dist_to_hor_inters(t_game_engine_state *state, t_tracer *hor_tracer)
 {
-	hor_inters->type = TRACER_HORIZONTAL;
-	hor_inters->y = floor(state->pos_y);
-	hor_inters->step_y = -1.0;
-	if (hor_inters->ray_angle >= 90.0 && hor_inters->ray_angle < 270.0)
+	hor_tracer->type = TRACER_HORIZONTAL;
+	hor_tracer->y = floor(state->pos_y);
+	hor_tracer->step_y = -1.0;
+	if (hor_tracer->ray_angle >= 90.0 && hor_tracer->ray_angle < 270.0)
 	{
-		hor_inters->y = floor(state->pos_y) + 1.0;
-		hor_inters->step_y = 1.0;
+		hor_tracer->y = floor(state->pos_y) + 1.0;
+		hor_tracer->step_y = 1.0;
 	}
-	hor_inters->x = state->pos_x + fabs((state->pos_y - hor_inters->y)
-		* tan(DEG2RAD(hor_inters->ray_angle)));
-	hor_inters->step_x = fabs(tan(DEG2RAD(hor_inters->ray_angle)));
-	if (hor_inters->ray_angle >= 180.0 && hor_inters->ray_angle < 360.0)
+	hor_tracer->x = state->pos_x + fabs((state->pos_y - hor_tracer->y)
+		* tan(DEG2RAD(hor_tracer->ray_angle)));
+	hor_tracer->step_x = fabs(tan(DEG2RAD(hor_tracer->ray_angle)));
+	if (hor_tracer->ray_angle >= 180.0 && hor_tracer->ray_angle < 360.0)
 	{
-		hor_inters->x = state->pos_x - fabs((state->pos_y - hor_inters->y)
-			* tan(DEG2RAD(hor_inters->ray_angle)));
-		hor_inters->step_x = -hor_inters->step_x;
+		hor_tracer->x = state->pos_x - fabs((state->pos_y - hor_tracer->y)
+			* tan(DEG2RAD(hor_tracer->ray_angle)));
+		hor_tracer->step_x = -hor_tracer->step_x;
 	}
-	return (distance_to_wall(state, hor_inters));
+	return (distance_to_wall(state, hor_tracer));
 }
 
 /*
@@ -73,26 +73,26 @@ double		dist_to_hor_inters(t_game_engine_state *state, t_tracer *hor_inters)
 **  so: dist between yi = width / tan(angle) where width = 1.0
 */
 
-double		dist_to_ver_inters(t_game_engine_state *state, t_tracer *ver_inters)
+double		dist_to_ver_inters(t_game_engine_state *state, t_tracer *ver_tracer)
 {
-	ver_inters->type = TRACER_VERTICAL;
-	ver_inters->x = floor(state->pos_x) + 1.0;
-	ver_inters->step_x = 1.0;
-	if (ver_inters->ray_angle >= 180.0 && ver_inters->ray_angle < 360.0)
+	ver_tracer->type = TRACER_VERTICAL;
+	ver_tracer->x = floor(state->pos_x) + 1.0;
+	ver_tracer->step_x = 1.0;
+	if (ver_tracer->ray_angle >= 180.0 && ver_tracer->ray_angle < 360.0)
 	{
-		ver_inters->x = floor(state->pos_x);
-		ver_inters->step_x = -ver_inters->step_x;
+		ver_tracer->x = floor(state->pos_x);
+		ver_tracer->step_x = -ver_tracer->step_x;
 	}
-	ver_inters->y = state->pos_y - fabs((state->pos_x - ver_inters->x)
-		/ tan(DEG2RAD(ver_inters->ray_angle)));
-	ver_inters->step_y = -1.0 / fabs(tan(DEG2RAD(ver_inters->ray_angle)));
-	if (ver_inters->ray_angle >= 90.0 && ver_inters->ray_angle < 270.0)
+	ver_tracer->y = state->pos_y - fabs((state->pos_x - ver_tracer->x)
+		/ tan(DEG2RAD(ver_tracer->ray_angle)));
+	ver_tracer->step_y = -1.0 / fabs(tan(DEG2RAD(ver_tracer->ray_angle)));
+	if (ver_tracer->ray_angle >= 90.0 && ver_tracer->ray_angle < 270.0)
 	{
-		ver_inters->y = state->pos_y + fabs((state->pos_x - ver_inters->x)
-			/ tan(DEG2RAD(ver_inters->ray_angle)));
-		ver_inters->step_y = -ver_inters->step_y;
+		ver_tracer->y = state->pos_y + fabs((state->pos_x - ver_tracer->x)
+			/ tan(DEG2RAD(ver_tracer->ray_angle)));
+		ver_tracer->step_y = -ver_tracer->step_y;
 	}
-	return (distance_to_wall(state, ver_inters));
+	return (distance_to_wall(state, ver_tracer));
 }
 
 double		distance_to_wall(t_game_engine_state *state, t_tracer *tracer)

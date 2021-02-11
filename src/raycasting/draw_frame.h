@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:22:53 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 10:40:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 12:18:38 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void	draw_vertical_line(t_game_engine_state *state, t_intersection_result *inters_res, int x);
 void	draw_image(t_window *window);
-unsigned int	sample_texture(t_game_engine_state *state, t_intersection_result *result);
+unsigned int	sample_texture(t_intersection_result *result);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 10:41:58 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 12:50:02 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ int		game_loop(t_window *window, t_style *style, t_map *map)
 	mlx_loop(window->mlx);
 	return (SUCCESS);
 }
-
