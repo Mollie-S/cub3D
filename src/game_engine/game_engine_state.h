@@ -22,12 +22,25 @@ typedef struct		s_movement
 	int		rotation_dir;
 }					t_movement;
 
+typedef struct		s_texture_info
+{
+	void		*img;
+	int			img_width;
+	int			img_height;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+}					t_texture_info;
+
+
 typedef struct		s_game_engine_state
 {
 	double			dist_to_plane;
 	double			pos_x;
 	double			pos_y;
 	double			direction;
+	t_texture_info	tex_info[TEXTURE_COUNT];
 	t_window		*window;
 	t_style			*style;
 	t_map			*map;

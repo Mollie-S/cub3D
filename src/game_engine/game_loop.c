@@ -6,19 +6,45 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 20:59:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 10:41:58 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_loop.h"
 #include "movement.h"
-#include "utils.h"
 #include "key_handling.h"
 #include "raycasting/render_frame.h"
+#include "report_error.h"
+#include "result.h"
+#include "utils.h"
 
 #include "mlx.h"
 
 #include <math.h>
+
+int		fill_texture_info(t_game_engine_state *state)
+{
+	int		i;
+	char	*path;
+
+	t_texture_info *ti;
+
+	i = 0;
+	while (i < TEXTURE_COUNT)
+	{
+		path = state->style->textures[i];
+		ti = &state->tex_info[i];
+
+		ti->img = mlx_xpm_file_to_image(state->window->mlx, path, &ti->img_width, &ti->img_height);
+		if (ti->img == NULL)
+		{
+			return (report_error("Error reading a texture image"));
+		}
+		ti->addr = mlx_get_data_addr(ti->img, &ti->bpp, &ti->line_length, &ti->endian);
+		i++;
+	}
+	return (SUCCESS);
+}
 
 int		update_frame(t_game_engine_state *state)
 {
@@ -41,15 +67,18 @@ void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_sty
 }
 
 
-void	game_loop(t_window *window, t_style *style, t_map *map)
+int		game_loop(t_window *window, t_style *style, t_map *map)
 {
 	t_game_engine_state			state;
 	t_movement					move;
 
 	init_game_engine_state(&state, window, style, map);
 	init_movement(&move);
+	if (!fill_texture_info(&state))
+		return (ERROR);
 	setup_key_hooks(&state);
 	mlx_loop_hook(window->mlx, update_frame, &state);
 	mlx_loop(window->mlx);
+	return (SUCCESS);
 }
 

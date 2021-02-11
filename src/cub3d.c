@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 11:36:56 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 07:40:08 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 #include "window.h"
 #include "style.h"
 #include "map.h"
+
+// void	free_window(t_window *window)
+// {
+// 	free(window->mlx);
+// 	free(window->mlx_win);
+// }
 
 int		main(int argc, char **argv)
 {
@@ -48,14 +54,15 @@ int		main(int argc, char **argv)
 	}
 	if (!start_window(&window, &style.resolution))
 		return (1);
-	game_loop(&window, &style, &map);
+	if (!game_loop(&window, &style, &map))
+		return (1);
 	// check if every mallocced line is freed
 	// debug_print_map(&map); // remove this function!!! 
 	// debug_print_style(&style);// remove this function!!! 
 
 	free_map_style(&style);
 	free_map(&map);
-	free(window.mlx);
+	// free(&window);
 	// all structures freed? 
 	system("leaks cub3D");
 	// debug flags removed in makefile?

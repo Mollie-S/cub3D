@@ -6,12 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/04 20:04:19 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 23:17:51 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 10:56:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERSECTION_H
 # define INTERSECTION_H
+
+# include "game_engine/game_engine_state.h"
 
 # include <stddef.h>
 
@@ -33,12 +35,11 @@ typedef struct      s_tracer
 
 typedef struct      s_intersection_result
 {
-	double	dist_to_wall;
-	double	wall_height; // will it be here?
-	char	*current_texture;
-	unsigned int current_color;
-	size_t	texture_x;
-	size_t	texture_y;
+	double			dist_to_wall;
+	double			wall_height;
+	t_texture_info	*current_tex;
+	double			tex_x;
+	double			tex_y;
 }					t_intersection_result;
 
 

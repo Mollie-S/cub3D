@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 21:33:17 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 11:36:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/10 21:58:48 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				start_window(t_window *window, t_resolution *resolution)
 	check_plane_size(window->mlx, resolution);
 	window->mlx_win = mlx_new_window(window->mlx, resolution->x, resolution->y, "cub3D");
 	window->img = mlx_new_image(window->mlx, resolution->x, resolution->y);
-	window->address = mlx_get_data_addr(window->img, &window->bits_per_pixel, &window->line_length,
+	window->addr = mlx_get_data_addr(window->img, &window->bits_per_pixel, &window->line_length,
 		&window->endian);
 	return (SUCCESS);
 }
