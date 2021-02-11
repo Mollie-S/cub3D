@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 11:42:51 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 12:59:35 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,22 @@ void			define_current_wall(t_game_engine_state *state, double ray_angle, t_inter
 	}
 }
 
+/*
+**  common practice for tex coordinates in graphics is to use relative size (1.0)
+**  result->tex_x = 1.0 - offset_on_wall is the correction for north and west walls
+*/
+
 void	set_sidewalls_tex_coord(t_game_engine_state *state, t_tracer *ver_tracer, t_intersection_result *result)
 {
 	double		offset_on_wall;
 
 	offset_on_wall = (ver_tracer->y - floor(ver_tracer->y));
-	if (ver_tracer->step_x < 0) // if it's a WE wall
+	if (ver_tracer->step_x < 0)
 	{
 		result->current_tex = &state->tex_info[TEXTURE_WE];
-		result->tex_x = 1.0 - offset_on_wall; // common practice for tex coordinates in graphics 
+		result->tex_x = 1.0 - offset_on_wall;
 	}
-	else // if EA wall
+	else
 	{
 		result->current_tex = &state->tex_info[TEXTURE_EA];
 		result->tex_x = offset_on_wall;
@@ -115,19 +120,15 @@ void	set_frontwalls_tex_coord(t_game_engine_state *state, t_tracer *hor_tracer, 
 	double		offset_on_wall;
 
 	offset_on_wall = (hor_tracer->x - floor(hor_tracer->x));
-	if (hor_tracer->step_y < 0) //north wall
+	if (hor_tracer->step_y < 0)
 	{
 		result->current_tex = &state->tex_info[TEXTURE_NO];
 		result->tex_x = 1.0 - offset_on_wall;
 	}
-	else // SO wall
+	else
 	{
 		result->current_tex = &state->tex_info[TEXTURE_SO];
 		result->tex_x = offset_on_wall;
 
 	}
 }
-
-// result->current_color = 0x0000FF00; //green
-// result->current_color = 0x000000FF; //south wall blue
-// result->current_color = 0x00FF0000; // east wall red

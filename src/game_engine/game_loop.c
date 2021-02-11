@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 12:50:02 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 16:18:32 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		update_frame(t_game_engine_state *state)
 {
 	if (state->move.rotation_dir != 0)
 		rotate_player(state);
+	if (state->move.move_ver_dir != 0 || state->move.move_hor_dir != 0)
+		move_player(state);
 	mlx_clear_window(state->window->mlx, state->window->mlx_win);
 	render_frame(state);
 	return (0);

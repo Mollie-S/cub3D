@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 07:40:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 16:18:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		main(int argc, char **argv)
 	free_map(&map);
 	// free(&window);
 	// all structures freed? 
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	// debug flags removed in makefile?
 	return (0);
 }

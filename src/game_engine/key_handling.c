@@ -6,11 +6,12 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:10:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 20:54:03 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 14:50:30 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_handling.h"
+#include "movement.h"
 #include "result.h"
 
 #include "mlx.h"
@@ -25,22 +26,43 @@ int		setup_key_hooks(t_game_engine_state *state)
 
 int		key_pressed(int keycode, t_game_engine_state *state)
 {
-
 	if (keycode == LEFT || keycode == RIGHT)
 	{
 		if (keycode == LEFT)
-			state->move.rotation_dir = -1;
+			state->move.rotation_dir = ROT_LEFT;
 		else
-			state->move.rotation_dir = 1;
+			state->move.rotation_dir = ROT_RIGHT;
+	}
+	if (keycode == W || keycode == S)
+	{
+		if (keycode == W)
+			state->move.move_ver_dir = MOVE_FORWARD;
+		else
+			state->move.move_ver_dir = MOVE_BACKWARD;
+	}
+	if (keycode == A || keycode == D)
+	{
+		if (keycode == A)
+			state->move.move_hor_dir = MOVE_LEFT;
+		else
+			state->move.move_hor_dir = MOVE_RIGHT;
 	}
 	return (0);
 }
 int		key_released(int keycode, t_game_engine_state *state)
 {
-
+	// or do I just call init_movement here?
 	if (keycode == LEFT || keycode == RIGHT)
 	{
 		state->move.rotation_dir = 0;
+	}
+	if (keycode == W || keycode == S)
+	{
+		state->move.move_ver_dir = 0;
+	}
+	if (keycode == A || keycode == D)
+	{
+		state->move.move_hor_dir = 0;
 	}
 	return (0);
 }
