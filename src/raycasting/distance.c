@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:43:34 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 11:50:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 20:55:34 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ double		dist_to_ver_inters(t_game_engine_state *state, t_tracer *ver_tracer)
 	}
 	return (distance_to_wall(state, ver_tracer));
 }
+
+/*
+** a correction is needed for left and top walls
+*/
 
 double		distance_to_wall(t_game_engine_state *state, t_tracer *tracer)
 {

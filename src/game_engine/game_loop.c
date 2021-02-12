@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 16:18:32 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 22:36:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include <math.h>
 
-int		fill_texture_info(t_game_engine_state *state)
+int		load_textures(t_game_engine_state *state)
 {
 	int		i;
 	char	*path;
@@ -46,15 +46,19 @@ int		fill_texture_info(t_game_engine_state *state)
 	return (SUCCESS);
 }
 
-int		update_frame(t_game_engine_state *state)
+int		game_loop(t_window *window, t_style *style, t_map *map)
 {
-	if (state->move.rotation_dir != 0)
-		rotate_player(state);
-	if (state->move.move_ver_dir != 0 || state->move.move_hor_dir != 0)
-		move_player(state);
-	mlx_clear_window(state->window->mlx, state->window->mlx_win);
-	render_frame(state);
-	return (0);
+	t_game_engine_state			state;
+	t_movement					move;
+
+	init_game_engine_state(&state, window, style, map);
+	init_movement(&move);
+	if (!load_textures(&state))
+		return (ERROR);
+	setup_key_hooks(&state);
+	mlx_loop_hook(window->mlx, update_frame, &state);
+	mlx_loop(window->mlx);
+	return (SUCCESS);
 }
 
 void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map)
@@ -68,18 +72,13 @@ void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_sty
 	state->direction = map->start_direction;
 }
 
-
-int		game_loop(t_window *window, t_style *style, t_map *map)
+int		update_frame(t_game_engine_state *state)
 {
-	t_game_engine_state			state;
-	t_movement					move;
-
-	init_game_engine_state(&state, window, style, map);
-	init_movement(&move);
-	if (!fill_texture_info(&state))
-		return (ERROR);
-	setup_key_hooks(&state);
-	mlx_loop_hook(window->mlx, update_frame, &state);
-	mlx_loop(window->mlx);
-	return (SUCCESS);
+	if (state->move.rotation_dir != 0)
+		rotate_player(state);
+	if (state->move.move_ver_dir != 0 || state->move.move_hor_dir != 0)
+		move_player(state);
+	mlx_clear_window(state->window->mlx, state->window->mlx_win);
+	render_frame(state);
+	return (0);
 }

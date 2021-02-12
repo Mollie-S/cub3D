@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 12:59:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/12 10:47:10 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			render_frame(t_game_engine_state *state)
 			define_current_wall(state, ray_angle, &result);
 			result.dist_to_wall *= cos(DEG2RAD(state->direction - ray_angle));
 			result.wall_height = 1.0 / result.dist_to_wall * state->dist_to_plane;
-			draw_vertical_line(state, &result, x);
+			draw_vertical_line(state, &result, x, ray_angle);
 			x++;
 	}
 	mlx_put_image_to_window(state->window->mlx, state->window->mlx_win, state->window->img, 0, 0);

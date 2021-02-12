@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_loop.h                                        :+:    :+:            */
+/*   sample_skybox_bonus.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/08 20:58:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 18:58:26 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/12 11:37:29 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/12 11:41:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_LOOP_H
-# define GAME_LOOP_H
+#include "sample_skybox_bonus.h"
 
-# include "game_engine_state.h"
+unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle)
+{
+	double skybox_x;
+	double skybox_y;
 
-# define FOV 60
-
-int     game_loop(t_window *window, t_style *style, t_map *map);
-void	init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map);
-int		update_frame(t_game_engine_state *state);
-
-#endif
+	skybox_x = ray_angle / 360;
+	skybox_y = (double)y / (state->style->resolution.y / 2);
+	return (sample_texture(state->tex_info, skybox_x, skybox_y));
+}

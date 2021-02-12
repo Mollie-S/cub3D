@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_loop.h                                        :+:    :+:            */
+/*   sample_skybox_default.h                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/08 20:58:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 18:58:26 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/12 11:38:08 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/12 11:40:34 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_LOOP_H
-# define GAME_LOOP_H
+#ifndef SAMPLE_SKYBOX_DEFAULT_H
+# define SAMPLE_SKYBOX_DEFAULT_H
 
 # include "game_engine_state.h"
 
-# define FOV 60
-
-int     game_loop(t_window *window, t_style *style, t_map *map);
-void	init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map);
-int		update_frame(t_game_engine_state *state);
+unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle);
 
 #endif

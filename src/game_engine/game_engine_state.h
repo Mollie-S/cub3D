@@ -22,6 +22,8 @@ typedef struct		s_movement
 	int		rotation_dir;
 	int		move_ver_dir;
 	int		move_hor_dir;
+	double	next_pos_x;
+	double	next_pos_y;
 }					t_movement;
 
 typedef struct		s_texture_info

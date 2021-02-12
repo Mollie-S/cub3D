@@ -6,13 +6,12 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:10:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 14:50:30 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/11 18:57:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_handling.h"
 #include "movement.h"
-#include "result.h"
 
 #include "mlx.h"
 
@@ -21,7 +20,7 @@ int		setup_key_hooks(t_game_engine_state *state)
 	mlx_hook(state->window->mlx_win, 2, 1L << 0, key_pressed, state);
 	mlx_hook(state->window->mlx_win, 3, 1L << 1, key_released, state);
 	// mlx_hook(state->window->mlx_win, 17, 1L << 19, exit_window, state); add exit function
-	return (SUCCESS);
+	return (0);
 }
 
 int		key_pressed(int keycode, t_game_engine_state *state)
@@ -51,7 +50,6 @@ int		key_pressed(int keycode, t_game_engine_state *state)
 }
 int		key_released(int keycode, t_game_engine_state *state)
 {
-	// or do I just call init_movement here?
 	if (keycode == LEFT || keycode == RIGHT)
 	{
 		state->move.rotation_dir = 0;

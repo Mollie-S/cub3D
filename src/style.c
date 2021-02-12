@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 01:05:29 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/12 11:04:27 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int     validate_style(t_style *style)
 	{
 		return (report_error("Resolution element is invalid or missing."));
 	}
-	else if (style->resolution.x < 200 || style->resolution.y < 200)
-	{
-		return (report_error("Window resolution must be at least 200"));
-	}
+	// else if (style->resolution.x < 200 || style->resolution.y < 200)
+	// {
+	// 	return (report_error("Window resolution must be at least 200"));
+	// }
 	if (style->ceiling_rgb == INVALID_COLOR || style->floor_rgb == INVALID_COLOR)
 	{
 		return (report_error("Floor or ceiling color element is missing."));
