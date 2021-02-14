@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 10:47:10 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 14:19:29 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@ static void		init_intersection_result(t_intersection_result *result)
 	result->tex_y = 0.0;
 }
 
+/*
+** Multiplying result.dist_to_wall(distorted distance) to the cos() to remove distortion.
+*/
+
 int			render_frame(t_game_engine_state *state)
 {
 	double 					ray_angle;
 	t_intersection_result	result;
 	int						x;
+	double					z_buffer[state->style->resolution.x]; // do I rename it?
 
 	init_intersection_result(&result);
 	x = 0;
@@ -56,6 +61,7 @@ int			render_frame(t_game_engine_state *state)
 			result.dist_to_wall *= cos(DEG2RAD(state->direction - ray_angle));
 			result.wall_height = 1.0 / result.dist_to_wall * state->dist_to_plane;
 			draw_vertical_line(state, &result, x, ray_angle);
+			z_buffer[x] = result.dist_to_wall;
 			x++;
 	}
 	mlx_put_image_to_window(state->window->mlx, state->window->mlx_win, state->window->img, 0, 0);

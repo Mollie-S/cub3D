@@ -6,11 +6,12 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 12:48:49 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/12 13:11:51 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw_frame.h"
+#include "utils.h"
 
 #include "mlx.h"
 
@@ -19,8 +20,9 @@ unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle)
 	double skybox_x;
 	double skybox_y;
 
-	skybox_x = ray_angle / 360;
-	skybox_y = (double)y / (state->style->resolution.y / 2);
+	ray_angle = wrap_angle(ray_angle * 2.0);
+	skybox_x = ray_angle / 360.0;
+	skybox_y = (double)y / (state->style->resolution.y / 2.0);
 	// if (bonus)
 	return (sample_texture(state->tex_info, skybox_x, skybox_y));
 	// else
