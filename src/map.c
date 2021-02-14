@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 01:06:46 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 15:53:45 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			init_map(t_map *map)
 	map->start_pos_x = -1;
 	map->start_pos_y = -1;
 	map->fields = NULL;
+	map->sprites_num = 0;
 }
 
 void			free_map(t_map *map)
@@ -42,8 +43,7 @@ static int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 	field_index = map->width * y + x;
 	if (map->fields[field_index] == FIELD_BLACK_HOLE)
 		return (report_error("There is a whitespace inside your map."));
-	if ((map->fields[field_index] == FIELD_FLOOR || map->fields[field_index] == FIELD_SPRITE)
-		&& check_array[field_index] == 0)
+	if (map->fields[field_index] != FIELD_WALL && check_array[field_index] == 0)
 	{
 		if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 			return (report_error("Your map is not surrounded by walls"));
@@ -61,6 +61,24 @@ static int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 	return (SUCCESS);
 }
 
+void	count_sprites_num(t_map *map, char *check_array)
+{
+	int	map_size;
+	int	i;
+
+	map_size = map->height * map->width;
+	i = 0;
+	while (i < map_size)
+	{
+		if ((map->fields[i] == FIELD_SPRITE_1 || map->fields[i] == FIELD_SPRITE_2)
+			&& check_array[i] == 1)
+		{
+			map->sprites_num++;
+		}
+		i++;
+	}
+}
+
 int				validate_map(t_map *map)
 {
 	char	*check_array;
@@ -72,7 +90,11 @@ int				validate_map(t_map *map)
 	check_array = ft_calloc(map->height * map->width, 1);
 	if (!check_array)
 		return (report_error("Error allocating memory for map validation."));
-	return (ft_floodfill(map->start_pos_x, map->start_pos_y, check_array, map));
+	if (!ft_floodfill(map->start_pos_x, map->start_pos_y, check_array, map))
+		return (ERROR);
+	count_sprites_num(map, check_array);
+	free(check_array);
+	return (SUCCESS);
 }
 
 
