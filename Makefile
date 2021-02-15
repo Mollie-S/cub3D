@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/02/09 20:49:56 by osamara       ########   odam.nl          #
+#    Updated: 2021/02/14 19:18:10 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC = \
 	src/raycasting/draw_frame.c \
 	src/game_engine/game_loop.c \
 	src/game_engine/key_handling.c \
-	src/game_engine/movement.c 
+	src/game_engine/sprite.c \
+	src/game_engine/movement.c
 
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Werror -Wextra -O0 -g
