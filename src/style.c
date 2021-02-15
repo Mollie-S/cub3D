@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 11:04:27 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 14:39:17 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int     validate_style(t_style *style)
 	{
 		return (report_error("Resolution element is invalid or missing."));
 	}
-	// else if (style->resolution.x < 200 || style->resolution.y < 200)
-	// {
-	// 	return (report_error("Window resolution must be at least 200"));
-	// }
+	else if (style->resolution.x < 200 || style->resolution.y < 200)
+	{
+		return (report_error("Window resolution must be at least 200"));
+	}
 	if (style->ceiling_rgb == INVALID_COLOR || style->floor_rgb == INVALID_COLOR)
 	{
 		return (report_error("Floor or ceiling color element is missing."));
@@ -90,10 +90,4 @@ void	debug_print_style(t_style *style)
 
 		i++;
 	}
-
-	// printf("style->no_texture:%s\n", style->no_texture);
-	// printf("style->so_texture:%s\n", style->so_texture);
-	// printf("style->ea_texture:%s\n", style->ea_texture);
-	// printf("style->we_texture:%s\n", style->we_texture);
-	// printf("style->sprite_texture:%s\n", style->sprite_texture);
 }

@@ -6,12 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 22:36:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/15 10:56:43 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_loop.h"
 #include "movement.h"
+#include "sprite.h"
 #include "key_handling.h"
 #include "raycasting/render_frame.h"
 #include "report_error.h"
@@ -48,11 +49,13 @@ int		load_textures(t_game_engine_state *state)
 
 int		game_loop(t_window *window, t_style *style, t_map *map)
 {
-	t_game_engine_state			state;
-	t_movement					move;
+	t_game_engine_state	state;
+	t_movement			move;
+	t_sprite			sprite;
 
 	init_game_engine_state(&state, window, style, map);
 	init_movement(&move);
+	init_sprite(&sprite);
 	if (!load_textures(&state))
 		return (ERROR);
 	setup_key_hooks(&state);
@@ -70,6 +73,7 @@ void		init_game_engine_state(t_game_engine_state *state, t_window *window, t_sty
 	state->pos_x = map->start_pos_x + 0.5;
 	state->pos_y = map->start_pos_y + 0.5;
 	state->direction = map->start_direction;
+	state->sprites = NULL;
 }
 
 int		update_frame(t_game_engine_state *state)
@@ -80,5 +84,6 @@ int		update_frame(t_game_engine_state *state)
 		move_player(state);
 	mlx_clear_window(state->window->mlx, state->window->mlx_win);
 	render_frame(state);
+	load_sprites(state); //it shpuld be probably inside render_frame
 	return (0);
 }

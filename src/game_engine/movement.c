@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:13:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 22:29:25 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/15 11:06:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	move_player(t_game_engine_state *state)
 	}
 	if (state->map->fields[state->map->width * (size_t)prev_y + (size_t)state->pos_x] != FIELD_FLOOR)
 	{
-		state->pos_x = prev_x;
+		state->pos_x = prev_x; // walls collision
 	}
 	if (state->map->fields[state->map->width * (size_t)state->pos_y + (size_t)prev_x] != FIELD_FLOOR)
 	{

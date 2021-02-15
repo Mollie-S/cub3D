@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 15:38:29 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 17:41:36 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,17 @@ typedef enum		e_field {
 	FIELD_BLACK_HOLE = ' ',
 	FIELD_FLOOR = '0',
 	FIELD_WALL = '1',
-	FIELD_SPRITE_1 = '2',
-	FIELD_SPRITE_2 = '3'
+	FIELD_SPRITE = '2'
 }					t_field;
 
 typedef struct		s_map
 {
-	size_t			height;
-	size_t			width;
-	int				start_direction;
-	int				start_pos_x;
-	int				start_pos_y;
-	char			*fields;
-	int			sprites_num;
+	size_t		height;
+	size_t		width;
+	int			start_direction;
+	int			start_pos_x;
+	int			start_pos_y;
+	char		*fields;
 }					t_map;
 
 # define INVALID_START_DIRECTION -1

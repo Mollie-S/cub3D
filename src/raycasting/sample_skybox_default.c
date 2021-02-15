@@ -6,11 +6,11 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 11:37:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 11:44:27 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 14:47:03 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sample_skybox_default.h"
+#include "sample_skybox.h"
 
 unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle)
 {

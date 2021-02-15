@@ -1,13 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sprite.c                                           :+:    :+:            */
+/*   sample_skybox.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/12 17:32:36 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 17:32:49 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/12 11:38:08 by osamara       #+#    #+#                 */
+/*   Updated: 2021/02/14 14:47:29 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sprite.h"
+#ifndef SAMPLE_SKYBOX_H
+# define SAMPLE_SKYBOX_H
+
+# include "game_engine_state.h"
+
+unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle);
+
+#endif

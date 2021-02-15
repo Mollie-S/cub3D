@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 16:18:52 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 14:57:43 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		main(int argc, char **argv)
 	init_map(&map);
 	if (!parse_cub_map(argv[1], &style, &map))
 	{
+		system("leaks cub3D");
+
 		return (1);
 	}
 	if (!start_window(&window, &style.resolution))
@@ -60,11 +62,12 @@ int		main(int argc, char **argv)
 	// debug_print_map(&map); // remove this function!!! 
 	// debug_print_style(&style);// remove this function!!! 
 
-	free_map_style(&style);
-	free_map(&map);
+	// are all these free neded???
+	// free_map_style(&style);
+	// free_map(&map);
 	// free(&window);
 	// all structures freed? 
-	// system("leaks cub3D");
+	system("leaks cub3D");
 	// debug flags removed in makefile?
 	return (0);
 }

@@ -16,6 +16,13 @@
 # include "window.h"
 # include "style.h"
 # include "map.h"
+// # include "sprite.h"
+
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+}               t_sprite;
 
 typedef struct		s_movement
 {
@@ -49,6 +56,7 @@ typedef struct		s_game_engine_state
 	t_style			*style;
 	t_map			*map;
 	t_movement		move;
+	t_sprite		*sprites;
 }					t_game_engine_state;
 
 #endif

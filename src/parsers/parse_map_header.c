@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/05 15:45:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/12 15:53:39 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 #include "parse_color.h"
 #include "parsing_utils.h"
 
-
-int		parse_map_header(char *line, int line_num, t_style *style)
+int	parse_map_header(char *line, int line_num, t_style *style)
 {
-	int result;
+	int	result;
 
 	if (is_empty_line(line))
 		return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 15:53:45 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/14 17:41:30 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void			init_map(t_map *map)
 	map->start_pos_x = -1;
 	map->start_pos_y = -1;
 	map->fields = NULL;
-	map->sprites_num = 0;
 }
 
 void			free_map(t_map *map)
@@ -61,7 +60,7 @@ static int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 	return (SUCCESS);
 }
 
-void	count_sprites_num(t_map *map, char *check_array)
+void	remove_outside_sprites(t_map *map, char *check_array)
 {
 	int	map_size;
 	int	i;
@@ -70,10 +69,9 @@ void	count_sprites_num(t_map *map, char *check_array)
 	i = 0;
 	while (i < map_size)
 	{
-		if ((map->fields[i] == FIELD_SPRITE_1 || map->fields[i] == FIELD_SPRITE_2)
-			&& check_array[i] == 1)
+		if (check_array[i] == 0 && map->fields[i] != FIELD_WALL)
 		{
-			map->sprites_num++;
+			map->fields[i] = FIELD_BLACK_HOLE;
 		}
 		i++;
 	}
@@ -92,8 +90,10 @@ int				validate_map(t_map *map)
 		return (report_error("Error allocating memory for map validation."));
 	if (!ft_floodfill(map->start_pos_x, map->start_pos_y, check_array, map))
 		return (ERROR);
-	count_sprites_num(map, check_array);
+	remove_outside_sprites(map, check_array);
+	// debug_print_floodfill_map(map, check_array);
 	free(check_array);
+	check_array = NULL;
 	return (SUCCESS);
 }
 
