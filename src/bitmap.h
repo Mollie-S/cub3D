@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 21:47:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/23 18:51:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/23 19:57:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 #include "libft.h"
 
 #include <stdint.h>
+
+/*
+**
+*/
+
+#pragma pack(push,1)
 
 typedef struct	s_bmp_header {
 	uint8_t		signature_bytes[2];
@@ -44,6 +50,7 @@ typedef struct	s_bmp {
 	t_bmp_header		bmpheader;
 	t_bmp_infoheader	bmpinfoheader;
 }				t_bmp;
+#pragma pack(pop)
 
 int	create_bmp_file(t_game_engine_state	*state);
 #endif

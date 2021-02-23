@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/23 19:00:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/23 19:47:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int		game_loop(t_window *window, t_style *style, t_map *map, int screenshot)
 		return (ERROR);
 	if (screenshot == TRUE)
 	{
+		update_frame(&state);
 		if (!create_bmp_file(&state))
 			return (ERROR);
 	}
