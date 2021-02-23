@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/11 18:58:26 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/22 22:47:10 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define FOV 60
 
-int     game_loop(t_window *window, t_style *style, t_map *map);
+int		game_loop(t_window *window, t_style *style, t_map *map, int screenshot);
 void	init_game_engine_state(t_game_engine_state *state, t_window *window, t_style *style, t_map *map);
 int		update_frame(t_game_engine_state *state);
 

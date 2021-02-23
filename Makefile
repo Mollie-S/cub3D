@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/02/14 19:18:10 by osamara       ########   odam.nl          #
+#    Updated: 2021/02/23 18:52:48 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC = \
 	src/report_error.c \
 	src/window.c \
 	src/utils.c \
+	src/bitmap.c \
 	src/parsers/parse_map_header.c \
 	src/parsers/parse_resolution.c \
 	src/parsers/parse_color.c \

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/15 10:56:43 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/23 19:00:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "report_error.h"
 #include "result.h"
 #include "utils.h"
+#include "bitmap.h"
 
 #include "mlx.h"
 
@@ -47,20 +48,28 @@ int		load_textures(t_game_engine_state *state)
 	return (SUCCESS);
 }
 
-int		game_loop(t_window *window, t_style *style, t_map *map)
+int		game_loop(t_window *window, t_style *style, t_map *map, int screenshot)
 {
 	t_game_engine_state	state;
 	t_movement			move;
 	t_sprite			sprite;
 
 	init_game_engine_state(&state, window, style, map);
-	init_movement(&move);
 	init_sprite(&sprite);
 	if (!load_textures(&state))
 		return (ERROR);
-	setup_key_hooks(&state);
-	mlx_loop_hook(window->mlx, update_frame, &state);
-	mlx_loop(window->mlx);
+	if (screenshot == TRUE)
+	{
+		if (!create_bmp_file(&state))
+			return (ERROR);
+	}
+	else
+	{
+		init_movement(&move);
+		setup_key_hooks(&state);
+		mlx_loop_hook(window->mlx, update_frame, &state);
+		mlx_loop(window->mlx);
+	}
 	return (SUCCESS);
 }
 

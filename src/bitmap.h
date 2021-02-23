@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 21:47:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/23 14:35:44 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/23 18:51:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ typedef struct	s_bmp {
 	t_bmp_infoheader	bmpinfoheader;
 }				t_bmp;
 
+int	create_bmp_file(t_game_engine_state	*state);
 #endif
