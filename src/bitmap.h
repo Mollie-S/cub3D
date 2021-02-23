@@ -6,14 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 21:47:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/22 22:59:57 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/23 14:35:44 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BITMAP_H
 # define BITMAP_H
 
-#include "window.h"
+#include "game_engine/game_engine_state.h"
 
 #include "libft.h"
 
@@ -27,17 +27,17 @@ typedef struct	s_bmp_header {
 }				t_bmp_header;
 
 typedef struct	s_bmp_infoheader {
-	uint32_t	dibheadersize;
+	uint32_t	size_of_this_header;
 	uint32_t	width;
 	uint32_t	height;
-	uint16_t	planes;
+	uint16_t	number_of_color_planes;
 	uint16_t	bitsperpixel;
-	uint32_t	compression;
-	uint32_t	imagesize;
+	uint32_t	compression_method;
+	uint32_t	raw_bmp_data_size;
 	uint32_t	ypixelpermeter;
 	uint32_t	xpixelpermeter;
 	uint32_t	numcolorspallette;
-	uint32_t	mostimpcolor;
+	uint32_t	important_colors;
 }				t_bmp_infoheader;
 
 typedef struct	s_bmp {
