@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/09 16:05:45 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/24 15:12:35 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #include "parsers/parsing_utils.h"
 #include "report_error.h"
 #include "result.h"
-
 
 int		parse_cub_map(char *file, t_style *style, t_map *map)
 {
@@ -41,6 +40,7 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 		free_map(map);
 		return (ERROR);
 	}
+	count_sprites(map);
 	return (SUCCESS);
 }
 

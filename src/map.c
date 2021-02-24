@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 17:41:30 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/24 15:13:08 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			init_map(t_map *map)
 	map->start_pos_x = -1;
 	map->start_pos_y = -1;
 	map->fields = NULL;
+	map->sprites_num = 0;
 }
 
 void			free_map(t_map *map)
@@ -97,6 +98,25 @@ int				validate_map(t_map *map)
 	return (SUCCESS);
 }
 
+int	count_sprites(t_map *map)
+{
+	int	map_size;
+	int sprites_num;
+	int	i;
+
+	map_size = map->height * map->width;
+	i = 0;
+	sprites_num = 0;
+	while (i < map_size)
+	{
+		if (map->fields[i] == FIELD_SPRITE)
+		{
+			sprites_num++;
+		}
+		i++;
+	}
+	return (sprites_num);
+}
 
 // remove this function before submossion!
 void			debug_print_floodfill_map(t_map *map, char *check_array)
@@ -121,6 +141,7 @@ void			debug_print_floodfill_map(t_map *map, char *check_array)
 	}
 	printf("\n");
 }
+
 void			debug_print_map(t_map *map)
 {
 	unsigned int y;
