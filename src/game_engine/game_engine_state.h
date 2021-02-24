@@ -22,6 +22,7 @@ typedef struct s_sprite
 {
 	double	x;
 	double	y;
+	double	dist_to_sprite;
 }               t_sprite;
 
 typedef struct		s_movement

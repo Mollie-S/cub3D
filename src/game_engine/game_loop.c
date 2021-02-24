@@ -6,13 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/23 19:47:46 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/24 15:51:43 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_loop.h"
 #include "movement.h"
-#include "sprite.h"
+#include "render_sprite.h"
 #include "key_handling.h"
 #include "raycasting/render_frame.h"
 #include "report_error.h"
@@ -55,9 +55,10 @@ int		game_loop(t_window *window, t_style *style, t_map *map, int screenshot)
 	t_sprite			sprite;
 
 	init_game_engine_state(&state, window, style, map);
-	init_sprite(&sprite);
 	if (!load_textures(&state))
 		return (ERROR);
+	init_sprite(&sprite);
+	load_sprite_coordinates(&state);
 	if (screenshot == TRUE)
 	{
 		update_frame(&state);
@@ -94,6 +95,6 @@ int		update_frame(t_game_engine_state *state)
 		move_player(state);
 	mlx_clear_window(state->window->mlx, state->window->mlx_win);
 	render_frame(state);
-	load_sprites(state); //it shpuld be probably inside render_frame
+	render_sprites(state); 	//it shpuld be probably inside render_frame
 	return (0);
 }
