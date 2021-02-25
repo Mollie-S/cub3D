@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/17 12:37:40 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/24 17:32:29 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int			render_frame(t_game_engine_state *state)
 	while (x < state->style->resolution.x)
 	{
 		ray_angle = state->direction + RAD2DEG(atan((x - state->style->resolution.x / 2.0)
-			/ state->dist_to_plane)));
-			ray_angle = wrap_angle(ray_angle);
-			define_current_wall(state, ray_angle, &result);
-			result.dist_to_wall *= cos(DEG2RAD(state->direction - ray_angle));
-			result.wall_height = 1.0 / result.dist_to_wall * state->dist_to_plane;
-			draw_vertical_line(state, &result, x, ray_angle);
-			z_buffer[x] = result.dist_to_wall;
-			x++;
+			/ state->dist_to_plane));
+		ray_angle = wrap_angle(ray_angle);
+		define_current_wall(state, ray_angle, &result);
+		result.dist_to_wall *= cos(DEG2RAD(state->direction - ray_angle));
+		result.wall_height = 1.0 / result.dist_to_wall * state->dist_to_plane;
+		draw_vertical_line(state, &result, x, ray_angle);
+		z_buffer[x] = result.dist_to_wall;
+		x++;
 	}
 	mlx_put_image_to_window(state->window->mlx, state->window->mlx_win, state->window->img, 0, 0);
 	return (SUCCESS);
