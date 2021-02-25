@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 13:11:51 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 14:38:08 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void				draw_vertical_line(t_game_engine_state *state, t_intersection_result *re
 		y++;
 		dst += state->window->line_length;
 	}
+	// check if dist to sprite less than insters.result.dist_towall
+	// second loop over sprites if minx-max inside loop y and draw all sprites pixels
 }
 
 unsigned int		sample_texture(t_texture_info *texture, double tex_x, double tex_y)

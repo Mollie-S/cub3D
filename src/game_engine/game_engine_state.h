@@ -17,12 +17,6 @@
 # include "style.h"
 # include "map.h"
 
-typedef struct s_sprite
-{
-	double	x;
-	double	y;
-	double	dist_to_sprite;
-}               t_sprite;
 
 typedef struct		s_movement
 {
@@ -43,6 +37,18 @@ typedef struct		s_texture_info
 	int			line_length;
 	int			endian;
 }					t_texture_info;
+
+typedef struct s_sprite
+{
+	double			x;
+	double			y;
+	double			dist_to_sprite;
+	t_texture_info	*sprite_tex_info;
+	double			draw_min_x;
+	double			draw_max_x;
+	double			draw_min_y;
+	double			draw_max_y;
+}               t_sprite;
 
 typedef struct		s_game_engine_state
 {

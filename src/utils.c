@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:36:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 23:31:56 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/24 16:24:10 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,4 @@ double  wrap_angle(double angle)
     while (angle > 360.0)
         angle -= 360.0;
     return (angle);
-}
-
-void    swap(double *first, double *second)
-{
-    double temp;
-
-    temp = *first;
-    *first = *second;
-    *second = temp;
 }

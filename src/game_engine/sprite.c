@@ -6,22 +6,28 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 17:32:36 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/24 17:03:16 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 17:23:38 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprite.h"
 #include "utils.h"
 #include "report_error.h"
+#include "result.h"
 
 #include <stdlib.h>
 #include <math.h>
 
-void	init_sprite(t_sprite *sprite)
+void	init_sprite(t_game_engine_state *state, t_sprite *sprite)
 {
 	sprite->x = 0.0;
 	sprite->y = 0.0;
 	sprite->dist_to_sprite = 0.0;
+	sprite->sprite_tex_info = &state->tex_info[TEXTURE_SPRITE];
+	sprite->draw_min_x = 0.0;
+	sprite->draw_max_x = 0.0;
+	sprite->draw_min_y = 0.0;
+	sprite->draw_max_y = 0.0;
 }
 
 int	load_sprite_coordinates(t_game_engine_state *state)
@@ -35,7 +41,9 @@ int	load_sprite_coordinates(t_game_engine_state *state)
 	{
 		state->sprites = malloc(sizeof(t_sprite) * state->map->sprites_num);
 		if (state->sprites == NULL)
+		{
 			return (report_error("Error allocating memory for sprites."));
+		}
 		if (state->map->fields[i] == FIELD_SPRITE)
 		{
 			state->sprites[count].x = (i % state->map->width) + 0.5;
@@ -44,4 +52,5 @@ int	load_sprite_coordinates(t_game_engine_state *state)
 		}
 		i++;
 	}
+	return (SUCCESS);
 }

@@ -15,7 +15,7 @@
 
 # include "game_engine_state.h"
 
-void	sort_sprites(t_game_engine_state *state);
+void	render_sprites(t_game_engine_state *state);
 
 
 #endif

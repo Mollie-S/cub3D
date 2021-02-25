@@ -6,13 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/24 17:32:29 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 17:08:06 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_frame.h"
 
 #include "distance.h"
+#include "game_engine/render_sprite.h"
 #include "draw_frame.h"
 #include "utils.h"
 #include "result.h"
@@ -50,6 +51,7 @@ int			render_frame(t_game_engine_state *state)
 	int						x;
 	double					z_buffer[state->style->resolution.x]; // do I rename it?
 
+	render_sprites(state);
 	init_intersection_result(&result);
 	x = 0;
 	while (x < state->style->resolution.x)
