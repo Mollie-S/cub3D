@@ -15,6 +15,7 @@
 
 # include "game_engine_state.h"
 
-void	sort_sprites(t_game_engine_state *state, int sprites_num);
+void	sort_sprites(t_game_engine_state *state);
+
 
 #endif

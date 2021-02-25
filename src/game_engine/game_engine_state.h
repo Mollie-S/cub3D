@@ -16,7 +16,6 @@
 # include "window.h"
 # include "style.h"
 # include "map.h"
-// # include "sprite.h"
 
 typedef struct s_sprite
 {
@@ -44,7 +43,6 @@ typedef struct		s_texture_info
 	int			line_length;
 	int			endian;
 }					t_texture_info;
-
 
 typedef struct		s_game_engine_state
 {
