@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 17:18:11 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 21:12:10 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ int		game_loop(t_window *window, t_style *style, t_map *map, int screenshot)
 	init_game_engine_state(&state, window, style, map);
 	if (!load_textures(&state))
 		return (ERROR);
-	init_sprite(&state, &sprite);
-	if (!load_sprite_coordinates(&state))
+	if (map->sprites_num > 0)
 	{
-		return (ERROR);
+		init_sprite(&state, &sprite);
+		if (!load_sprite_coordinates(&state))
+			return (ERROR);
 	}
 	if (screenshot == TRUE)
 	{
