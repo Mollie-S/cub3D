@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/24 15:12:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 21:39:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ int		parse_cub_map(char *file, t_style *style, t_map *map)
 	if (!parse_map(list_start, map))
 		return (ERROR);
 	ft_lstclear(&list_start, &free);
-	if (!validate_style(style) || !validate_map(map))
+	if (!validate_style(style) || !validate_map(map, style))
 	{
 		free_map_style(style);
 		free_map(map);
 		return (ERROR);
 	}
-	count_sprites(map);
 	return (SUCCESS);
 }
 

@@ -6,12 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/24 15:13:29 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 21:40:59 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
+
+# include "style.h"
 
 # include <stddef.h>
 /*
@@ -41,7 +43,7 @@ typedef struct		s_map
 
 void	init_map(t_map *map);
 void    free_map(t_map *map);
-int		validate_map(t_map *map);
+int				validate_map(t_map *map, t_style *style);
 int		count_sprites(t_map *map);
 
 void	debug_print_map(t_map *map); // remove!!
