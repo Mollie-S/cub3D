@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 17:32:36 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 17:23:38 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/25 18:34:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	load_sprite_coordinates(t_game_engine_state *state)
 
 	i = 0;
 	count = 0;
+	state->sprites = malloc(sizeof(t_sprite) * state->map->sprites_num);
+	if (state->sprites == NULL)
+	{
+		return (report_error("Error allocating memory for sprites."));
+	}
 	while (count < state->map->sprites_num)
 	{
-		state->sprites = malloc(sizeof(t_sprite) * state->map->sprites_num);
-		if (state->sprites == NULL)
-		{
-			return (report_error("Error allocating memory for sprites."));
-		}
 		if (state->map->fields[i] == FIELD_SPRITE)
 		{
 			state->sprites[count].x = (i % state->map->width) + 0.5;
