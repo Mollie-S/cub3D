@@ -6,17 +6,18 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 15:53:39 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 14:45:04 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
 
 #include "parse_map_header.h"
 #include "parse_resolution.h"
 #include "parse_texture.h"
 #include "parse_color.h"
 #include "parsing_utils.h"
+#include "result.h"
+
+#include <stdlib.h>
 
 int	parse_map_header(char *line, int line_num, t_style *style)
 {

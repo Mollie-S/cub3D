@@ -6,17 +6,18 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/04 10:58:16 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 16:20:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
-
-#include "libft.h"
 
 #include "parsing_utils.h"
 #include "report_error.h"
 #include "result.h"
+#include "utils.h"
+
+#include "libft.h"
+
+#include <stdlib.h>
 
 int		are_valid_characters(char *line, int line_num)
 {
@@ -122,16 +123,3 @@ char		**split_into_components(char *line, char separator, int num_components)
 	return (array);
 }
 
-void		free_array_memory(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array[i] != NULL)
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-	array = NULL;
-}

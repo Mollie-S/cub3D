@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:37:52 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/24 17:32:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 14:53:02 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define RAD2DEG(angle) ((angle) * 180.0 / M_PI)
 
 double	wrap_angle(double angle);
-void    swap(double *first, double *second);
+void	free_array_memory(char **array);
+
 
 #endif

@@ -6,17 +6,18 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/29 23:12:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 14:45:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "parse_map.h"
+#include "report_error.h"
+#include "result.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "parse_map.h"
-#include "report_error.h"
-
-int		parse_map(t_list *list_start, t_map *map)
+int	parse_map(t_list *list_start, t_map *map)
 {
 	if (!calculate_map_size(list_start, map))
 	{
@@ -29,7 +30,7 @@ int		parse_map(t_list *list_start, t_map *map)
 	return (SUCCESS);
 }
 
-int		calculate_map_size(t_list *list_start, t_map *map)
+int	calculate_map_size(t_list *list_start, t_map *map)
 {
 	t_list		*current;
 	size_t		line_len;
@@ -53,7 +54,7 @@ int		calculate_map_size(t_list *list_start, t_map *map)
 	return (SUCCESS);
 }
 
-int		fill_map_fields(t_list *list_start, t_map *map)
+int	fill_map_fields(t_list *list_start, t_map *map)
 {
 	t_list		*current;
 	size_t		fields_size;
@@ -78,7 +79,7 @@ int		fill_map_fields(t_list *list_start, t_map *map)
 	return (SUCCESS);
 }
 
-int		define_start_position(t_list *current, t_map *map, int y)
+int	define_start_position(t_list *current, t_map *map, int y)
 {
 	int		i;
 	int		start_direction;
@@ -86,7 +87,7 @@ int		define_start_position(t_list *current, t_map *map, int y)
 
 	i = 0;
 	start_direction = -1;
-	line = (char*)current->content;
+	line = (char *)current->content;
 	while (line[i] != 0)
 	{
 		if (define_start_direction(line[i], &start_direction) != NOT_FOUND
@@ -100,14 +101,14 @@ int		define_start_position(t_list *current, t_map *map, int y)
 				line[i] = FIELD_FLOOR;
 			}
 			else
-				return (report_error("Two or more characters define the start position."));
+				return (report_error("Two or more start positions."));
 		}
 		i++;
 	}
 	return (SUCCESS);
 }
 
-int		define_start_direction(char c, int *start_direction)
+int	define_start_direction(char c, int *start_direction)
 {
 	if (c == 'N')
 	{

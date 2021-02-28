@@ -6,12 +6,11 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:00:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 16:13:42 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 15:31:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_texture.h"
-
 #include "parsing_utils.h"
 #include "report_error.h"
 
@@ -20,8 +19,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static t_texture_identifier		g_texture_identifier[] =
-{
+static t_texture_identifier		g_tex_identifier[] = {
 	{"NO ", TEXTURE_NO},
 	{"SO ", TEXTURE_SO},
 	{"EA ", TEXTURE_EA},
@@ -29,8 +27,7 @@ static t_texture_identifier		g_texture_identifier[] =
 	{"S ", TEXTURE_SPRITE}
 };
 
-
-int		parse_walls_textures(char *line, int line_num, t_style *style)
+int	parse_walls_textures(char *line, int line_num, t_style *style)
 {
 	int		identifier_len;
 	int		i;
@@ -39,17 +36,16 @@ int		parse_walls_textures(char *line, int line_num, t_style *style)
 	i = 0;
 	while (i < TEXTURE_COUNT)
 	{
-		if (has_identifier(line, g_texture_identifier[i].identifier, &identifier_len))
+		if (has_identifier(line, g_tex_identifier[i].identifier,
+				&identifier_len))
 		{
-			if (style->textures[g_texture_identifier[i].index] != NULL)
-			{
-				return (report_error_with_line(line_num, "Repeating texture element."));
-			}
-			style->textures[g_texture_identifier[i].index] = ft_strtrim(line + identifier_len, " ");
-			if (!validate_texture(style->textures[g_texture_identifier[i].index], line_num))
-			{
+			if (style->textures[g_tex_identifier[i].index] != NULL)
+				return (report_error_with_line(line_num, "Repeating texture."));
+			style->textures[g_tex_identifier[i].index] = ft_strtrim(line
+					+ identifier_len, " ");
+			if (!validate_texture(style->textures[g_tex_identifier[i].index],
+				line_num))
 				return (ERROR);
-			}
 			return (SUCCESS);
 		}
 		i++;
@@ -57,9 +53,9 @@ int		parse_walls_textures(char *line, int line_num, t_style *style)
 	return (NOT_FOUND);
 }
 
-int		validate_texture(char *path_name, int line_num)
+int	validate_texture(char *path_name, int line_num)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path_name, O_RDONLY);
 	if (fd == -1)

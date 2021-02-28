@@ -6,15 +6,16 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/12 15:52:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 14:55:04 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
 
 #include "parse_color.h"
 #include "parsing_utils.h"
 #include "report_error.h"
+#include "utils.h"
+
+#include <stdlib.h>
 
 int	parse_floor_ceiling_colors(char *line, int line_num, t_style *style)
 {
@@ -27,7 +28,7 @@ int	parse_floor_ceiling_colors(char *line, int line_num, t_style *style)
 	if (has_identifier(line, "C ", &identifier_len))
 	{
 		if (style->ceiling_rgb != INVALID_COLOR)
-			return (report_error_with_line(line_num, "Repeating celing color element."));
+			return (report_error_with_line(line_num, "Repeating color."));
 		is_valid_color_component = parse_color(line + identifier_len, &color);
 		if (is_valid_color_component)
 			style->ceiling_rgb = color;
@@ -38,7 +39,7 @@ int	parse_floor_ceiling_colors(char *line, int line_num, t_style *style)
 	if (has_identifier(line, "F ", &identifier_len))
 	{
 		if (style->floor_rgb != INVALID_COLOR)
-			return (report_error_with_line(line_num, "Repeating floor color element."));
+			return (report_error_with_line(line_num, "Repeating floor color."));
 		is_valid_color_component = parse_color(line + identifier_len, &color);
 		if (is_valid_color_component)
 			style->floor_rgb = color;
