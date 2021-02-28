@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 14:26:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 15:56:34 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 22:52:44 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double	calc_sprite_offset_x(t_game_engine_state *state, double sprite_angle)
 	double	plane_dist_to_sprite;
 	double	sprite_screen_x;
 
-	plane_dist_to_sprite = state->dist_to_plane * tan(DEG2RAD(state->direction - sprite_angle));
+	plane_dist_to_sprite = state->dist_to_plane * tan(DEG2RAD(sprite_angle));
 	sprite_screen_x = state->style->resolution.x / 2.0 - plane_dist_to_sprite;
 	return (sprite_screen_x);
 }
@@ -53,12 +53,15 @@ void	calc_sprite_pos_on_screen(t_game_engine_state *state, t_sprite *sprite)
 
 	delta_y = state->pos_y - sprite->y;
 	sprite_angle = RAD2DEG(acos(delta_y / sprite->dist_to_sprite));
+	if (state->pos_x > sprite->x)
+		sprite_angle = -sprite_angle;
+	sprite_angle = wrap_angle(state->direction - sprite_angle);
 	corrected_dist = 0.0;
 	sprite_screen_x = 0.0;
-	if (sprite_angle > -90.0 + state->direction && sprite_angle < 90.0 + state->direction) // removed sprites behind me
+	if (sprite_angle < 90.0 || sprite_angle > 270.0)
 	{
 		sprite_screen_x = calc_sprite_offset_x(state, sprite_angle);
-		corrected_dist = cos(DEG2RAD(fabs(state->direction - sprite_angle))) * sprite->dist_to_sprite;
+		corrected_dist = cos(DEG2RAD(sprite_angle)) * sprite->dist_to_sprite;
 		sprite->dist_to_sprite = corrected_dist;
 		calc_sprite_draw_range(state, sprite, sprite_screen_x);
 	}
@@ -74,8 +77,8 @@ void	calc_dist_to_sprites(t_game_engine_state *state, t_sprite *sprites)
 	while (i < state->map->sprites_num)
 	{
 
-		sprites[i].dist_to_sprite = sqrt(pow(fabs(state->pos_x - sprites[i].x), 2.0)
-			+ pow(fabs(state->pos_y - sprites[i].y), 2.0));
+		sprites[i].dist_to_sprite = sqrt(pow(state->pos_x - sprites[i].x, 2.0)
+			+ pow(state->pos_y - sprites[i].y, 2.0)); // multiplying is faster
 		i++;
 	}
 }
@@ -105,13 +108,11 @@ void	sort_sprites(t_game_engine_state *state)
 	}
 }
 
-
 void	handle_sprites(t_game_engine_state *state)
 {
 	int i;
 
 	sort_sprites(state);
-	// in a loop for all the sprites: 
 	i = 0;
 	while (i < state->map->sprites_num)
 	{
