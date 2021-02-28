@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 11:23:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 16:11:22 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,21 @@ void			draw_sprites_vertical_pixels(t_game_engine_state *state, int x, double di
 	while (i < state->map->sprites_num)
 	{
 		if (state->sprites[i].dist_to_sprite < dist_to_wall
+			&& state->sprites[i].dist_to_sprite > 0.0
 			&& x >= state->sprites[i].draw_min_x && x <= state->sprites[i].draw_max_x)
 		{
-			dst = state->window->addr + x * (state->window->bits_per_pixel / 8);
 			y = state->sprites[i].draw_min_y;
+			dst = state->window->addr + x * (state->window->bits_per_pixel / 8)
+				+ y * state->window->line_length;
 			while (y <= state->sprites[i].draw_max_y)
 			{
-				sprite_tex_x = (x - state->sprites[i].draw_min_x)
+				sprite_tex_x = ((double)x - (state->sprites[i].draw_min_x))
 					/ (state->sprites[i].draw_max_x - state->sprites[i].draw_min_x);
-				sprite_tex_y = (y - state->sprites[i].draw_min_y)
+				sprite_tex_y = ((double)y - (state->sprites[i].draw_min_y))
 					/ state->sprites[i].projected_height;
 				color = sample_texture(&state->tex_info[TEXTURE_SPRITE], sprite_tex_x, sprite_tex_y);
-				if ((color & 0x00FFFFFF) != 0)
+				// if ((color & 0x00FFFFFF) != 0)
+				if (color != 0x00000000)
 				{
 					*(unsigned int*)dst = color;
 				}

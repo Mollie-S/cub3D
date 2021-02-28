@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   render_sprite.c                                      :+:    :+:            */
+/*   render_sprite.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 14:26:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/24 14:29:31 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 15:56:34 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,24 @@ double	calc_sprite_offset_x(t_game_engine_state *state, double sprite_angle)
 	double	sprite_screen_x;
 
 	plane_dist_to_sprite = state->dist_to_plane * tan(DEG2RAD(state->direction - sprite_angle));
-	if (sprite_angle < state->direction)
-		sprite_screen_x = state->style->resolution.x / 2.0 - plane_dist_to_sprite;
-	else
-		sprite_screen_x = state->style->resolution.x / 2.0 + plane_dist_to_sprite;
+	sprite_screen_x = state->style->resolution.x / 2.0 - plane_dist_to_sprite;
 	return (sprite_screen_x);
 }
 
-void	calc_sprite_draw_range(t_game_engine_state *state, t_sprite *sprite, double	sprite_screen_x)
+void	calc_sprite_draw_range(t_game_engine_state *state,
+	t_sprite *sprite, double	sprite_screen_x)
 {
 	double	projected_sprite_width;
 
 	sprite->projected_height = 1.0 / sprite->dist_to_sprite * state->dist_to_plane;
-	sprite->draw_min_y = -sprite->projected_height / 2.0 + state->style->resolution.y / 2.0 ;
+	sprite->draw_min_y = -sprite->projected_height / 2.0 + state->style->resolution.y / 2.0;
 	if (sprite->draw_min_y < 0)
 		sprite->draw_min_y = 0;
-	sprite->draw_max_y = sprite->projected_height / 2.0 + state->style->resolution.y / 2.0 ;
+	sprite->draw_max_y = sprite->projected_height / 2.0 + state->style->resolution.y / 2.0;
 	if (sprite->draw_max_y >= state->style->resolution.y)
 		sprite->draw_max_y = state->style->resolution.y - 1;
-	projected_sprite_width = sprite->projected_height ;
+	projected_sprite_width = sprite->projected_height *
+		(state->tex_info[TEXTURE_SPRITE].img_width / state->tex_info[TEXTURE_SPRITE].img_height);
 	sprite->draw_min_x = -projected_sprite_width / 2.0 + sprite_screen_x;
 	sprite->draw_max_x = projected_sprite_width / 2.0 + sprite_screen_x;
 }
