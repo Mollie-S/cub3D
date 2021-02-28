@@ -6,14 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 17:08:06 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 10:05:36 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_frame.h"
 
 #include "distance.h"
-#include "game_engine/render_sprite.h"
+#include "render_sprite.h"
 #include "draw_frame.h"
 #include "utils.h"
 #include "result.h"
@@ -51,7 +51,7 @@ int			render_frame(t_game_engine_state *state)
 	int						x;
 	double					z_buffer[state->style->resolution.x]; // do I rename it?
 
-	render_sprites(state);
+	handle_sprites(state); // do you need check if sprites_num > 0 here? or inside the render sprites function?
 	init_intersection_result(&result);
 	x = 0;
 	while (x < state->style->resolution.x)
@@ -64,6 +64,7 @@ int			render_frame(t_game_engine_state *state)
 		result.wall_height = 1.0 / result.dist_to_wall * state->dist_to_plane;
 		draw_vertical_line(state, &result, x, ray_angle);
 		z_buffer[x] = result.dist_to_wall;
+		draw_sprites_vertical_pixels(state, x, z_buffer[x]);
 		x++;
 	}
 	mlx_put_image_to_window(state->window->mlx, state->window->mlx_win, state->window->img, 0, 0);

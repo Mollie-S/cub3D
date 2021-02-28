@@ -48,6 +48,7 @@ typedef struct s_sprite
 	double			draw_max_x;
 	double			draw_min_y;
 	double			draw_max_y;
+	double			projected_height;
 }               t_sprite;
 
 typedef struct		s_game_engine_state

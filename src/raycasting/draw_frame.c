@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 14:38:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 10:11:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,46 @@
 
 #include "mlx.h"
 
-unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle)
+void			draw_sprites_vertical_pixels(t_game_engine_state *state, int x, double dist_to_wall)
+{
+	int				i;
+	int				y;
+	unsigned int	color;
+	double			sprite_tex_x;
+	double			sprite_tex_y;
+	char			*dst;
+
+	i = 0;
+	while (i < state->map->sprites_num)
+	{
+		if (state->sprites[i].dist_to_sprite < dist_to_wall
+			&& x >= state->sprites[i].draw_min_x && x <= state->sprites[i].draw_max_x)
+		{
+			dst = state->window->addr + x * (state->window->bits_per_pixel / 8);
+			y = 0;
+			while (y >= state->sprites[i].draw_min_y && y <= state->sprites[i].draw_max_y)
+			{
+				sprite_tex_x = (x - state->sprites[i].draw_min_x)
+					/ (state->sprites[i].draw_max_x - state->sprites[i].draw_min_x);
+				sprite_tex_y = (y - state->sprites[i].draw_min_y)
+					/ state->sprites[i].projected_height;
+				color = sample_texture(&state->tex_info[TEXTURE_SPRITE], sprite_tex_x, sprite_tex_y);
+				if ((color & 0x00FFFFFF) != 0)
+				{
+					*(unsigned int*)dst = color;
+				}
+				y++;
+				dst += state->window->line_length;
+			}
+		}
+		i++;
+	}
+
+	// check if dist to sprite less than insters.result.dist_towall
+	// second loop over sprites if minx-max inside loop on y and draw all sprites pixels
+}
+
+unsigned int	sample_skybox(t_game_engine_state *state, int y, double ray_angle)
 {
 	double skybox_x;
 	double skybox_y;
@@ -29,7 +68,7 @@ unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle)
 	// return (state->style->ceiling_rgb);
 }
 
-void				draw_vertical_line(t_game_engine_state *state, t_intersection_result *result, int x, double ray_angle)
+void			draw_vertical_line(t_game_engine_state *state, t_intersection_result *result, int x, double ray_angle)
 {
 	int				wall_top;
 	int				wall_bottom;
@@ -56,11 +95,9 @@ void				draw_vertical_line(t_game_engine_state *state, t_intersection_result *re
 		y++;
 		dst += state->window->line_length;
 	}
-	// check if dist to sprite less than insters.result.dist_towall
-	// second loop over sprites if minx-max inside loop y and draw all sprites pixels
 }
 
-unsigned int		sample_texture(t_texture_info *texture, double tex_x, double tex_y)
+unsigned int	sample_texture(t_texture_info *texture, double tex_x, double tex_y)
 {
 	char	*tex_color;
 	int x;

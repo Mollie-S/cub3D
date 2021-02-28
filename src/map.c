@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 21:44:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/27 22:58:22 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	remove_outside_sprites(t_map *map, char *check_array)
 int				validate_map(t_map *map, t_style *style)
 {
 	char	*check_array;
-	int		sprites_num;
 
 	if (map->start_direction == INVALID_START_DIRECTION)
 		return (report_error("Player's start position is not set"));
@@ -96,8 +95,8 @@ int				validate_map(t_map *map, t_style *style)
 	// debug_print_floodfill_map(map, check_array);
 	free(check_array);
 	check_array = NULL;
-	sprites_num = count_sprites(map);
-	if (sprites_num == 0 && style->textures[TEXTURE_SPRITE] != NULL)
+	map->sprites_num = count_sprites(map);
+	if (map->sprites_num == 0 && style->textures[TEXTURE_SPRITE] != NULL)
 		return(report_error("The texture for sprites is stated but the map contains no sprites "));
 	return (SUCCESS);
 }

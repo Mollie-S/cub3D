@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 17:32:36 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 18:34:26 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 09:11:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_sprite(t_game_engine_state *state, t_sprite *sprite)
 	sprite->draw_max_x = 0.0;
 	sprite->draw_min_y = 0.0;
 	sprite->draw_max_y = 0.0;
+	sprite->projected_height = 0.0;
 }
 
 int	load_sprite_coordinates(t_game_engine_state *state)

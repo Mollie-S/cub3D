@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/02/25 17:06:55 by osamara       ########   odam.nl          #
+#    Updated: 2021/02/27 21:22:09 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,10 @@ SRC = \
 	src/raycasting/distance.c \
 	src/raycasting/render_frame.c \
 	src/raycasting/draw_frame.c \
+	src/raycasting/render_sprite.c \
 	src/game_engine/game_loop.c \
 	src/game_engine/key_handling.c \
 	src/game_engine/sprite.c \
-	src/game_engine/render_sprite.c \
 	src/game_engine/movement.c
 
 OBJ = $(SRC:.c=.o)

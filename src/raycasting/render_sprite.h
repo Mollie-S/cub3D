@@ -13,9 +13,9 @@
 #ifndef RENDER_SPRITE_H
 # define RENDER_SPRITE_H
 
-# include "game_engine_state.h"
+# include "game_engine/game_engine_state.h"
 
-void	render_sprites(t_game_engine_state *state);
+void	handle_sprites(t_game_engine_state *state);
 
 
 #endif
