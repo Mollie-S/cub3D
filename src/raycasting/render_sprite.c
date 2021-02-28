@@ -21,7 +21,7 @@ double	calc_sprite_offset_x(t_game_engine_state *state, double sprite_angle)
 	double	plane_dist_to_sprite;
 	double	sprite_screen_x;
 
-	plane_dist_to_sprite = state->dist_to_plane / tan(DEG2RAD(state->direction - sprite_angle));
+	plane_dist_to_sprite = state->dist_to_plane * tan(DEG2RAD(state->direction - sprite_angle));
 	if (sprite_angle < state->direction)
 		sprite_screen_x = state->style->resolution.x / 2.0 - plane_dist_to_sprite;
 	else
@@ -52,7 +52,7 @@ void	calc_sprite_pos_on_screen(t_game_engine_state *state, t_sprite *sprite)
 	double	corrected_dist;
 	double	sprite_screen_x;
 
-	delta_y = fabs(state->pos_y - sprite->y);
+	delta_y = state->pos_y - sprite->y;
 	sprite_angle = RAD2DEG(acos(delta_y / sprite->dist_to_sprite));
 	corrected_dist = 0.0;
 	sprite_screen_x = 0.0;

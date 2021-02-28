@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 10:11:07 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 11:23:17 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void			draw_sprites_vertical_pixels(t_game_engine_state *state, int x, double di
 			&& x >= state->sprites[i].draw_min_x && x <= state->sprites[i].draw_max_x)
 		{
 			dst = state->window->addr + x * (state->window->bits_per_pixel / 8);
-			y = 0;
-			while (y >= state->sprites[i].draw_min_y && y <= state->sprites[i].draw_max_y)
+			y = state->sprites[i].draw_min_y;
+			while (y <= state->sprites[i].draw_max_y)
 			{
 				sprite_tex_x = (x - state->sprites[i].draw_min_x)
 					/ (state->sprites[i].draw_max_x - state->sprites[i].draw_min_x);
