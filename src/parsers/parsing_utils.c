@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 16:20:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/02/28 16:24:48 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 #include <stdlib.h>
 
-int		are_valid_characters(char *line, int line_num)
+int	are_valid_characters(char *line, int line_num)
 {
-	char 	*chars_in_map;
+	char	*chars_in_map;
 	int		i;
 	int		j;
 	int		found;
@@ -42,13 +42,13 @@ int		are_valid_characters(char *line, int line_num)
 			j++;
 		}
 		if (!found)
-			return (report_error_with_line(line_num, "Invalid characters in map."));
+			return (report_error_with_line(line_num, "Invalid chars in map."));
 		i++;
 	}
 	return (TRUE);
 }
 
-int		is_empty_line(char *line)
+int	is_empty_line(char *line)
 {
 	int	i;
 
@@ -64,10 +64,10 @@ int		is_empty_line(char *line)
 	return (TRUE);
 }
 
-int		has_identifier(char *line, char *identifier, int *identifier_len)
+int	has_identifier(char *line, char *identifier, int *identifier_len)
 {
 	size_t	len;
-	int     is_identifier;
+	int		is_identifier;
 
 	len = ft_strlen(identifier);
 	is_identifier = ft_strncmp(line, identifier, len);
@@ -80,12 +80,12 @@ int		has_identifier(char *line, char *identifier, int *identifier_len)
 	}
 }
 
-int		is_valid_component(const char *string, int *component)
+int	is_valid_component(const char *string, int *component)
 {
 	int		num_chars;
 	int		accumulator;
 	int		is_valid_component;
-	char 	*trimmed_string;
+	char	*trimmed_string;
 
 	num_chars = 0;
 	is_valid_component = 1;
@@ -100,7 +100,8 @@ int		is_valid_component(const char *string, int *component)
 	return (is_valid_component);
 }
 
-char		**split_into_components(char *line, char separator, int num_components)
+char	**split_into_components(char *line, char separator,
+		int num_components)
 {
 	char	**array;
 	int		i;
@@ -122,4 +123,3 @@ char		**split_into_components(char *line, char separator, int num_components)
 	}
 	return (array);
 }
-
