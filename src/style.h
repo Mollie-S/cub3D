@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 16:13:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 08:51:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum		e_texture_index {
 	TEXTURE_EA,
 	TEXTURE_WE,
 	TEXTURE_SPRITE,
+	TEXTURE_SKYBOX,
 	TEXTURE_COUNT
 }					t_texture_index;
 

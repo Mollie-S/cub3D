@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/27 23:16:02 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 09:17:42 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int		load_textures(t_game_engine_state *state)
 	while (i < TEXTURE_COUNT)
 	{
 		path = state->style->textures[i];
-		ti = &state->tex_info[i];
-
-		ti->img = mlx_xpm_file_to_image(state->window->mlx, path, &ti->img_width, &ti->img_height);
-		if (ti->img == NULL)
+		if (path != NULL)
 		{
-			return (report_error("Error reading a texture image"));
+			ti = &state->tex_info[i];
+			ti->img = mlx_xpm_file_to_image(state->window->mlx, path, &ti->img_width, &ti->img_height);
+			if (ti->img == NULL)
+			{
+				return (report_error("Error reading a texture image"));
+			}
+			ti->addr = mlx_get_data_addr(ti->img, &ti->bpp, &ti->line_length, &ti->endian);
 		}
-		ti->addr = mlx_get_data_addr(ti->img, &ti->bpp, &ti->line_length, &ti->endian);
 		i++;
 	}
 	return (SUCCESS);
