@@ -1,0 +1,25 @@
+
+R 600 600
+
+
+NO  textures/concrete+cement+wall-64x64.xpm
+WE textures/stone+wall-512x512.xpm
+SO textures/dark+parquet-64x64.xpm
+
+EA textures/holey-cheese-64x64.xpm
+
+S textures/sprite_1.xpm
+
+SKY textures/sky.xpm
+
+
+F 220, 00,0
+  
+C  255,255,250  
+
+
+1111111111
+100E000001
+1000000001
+1000002001
+1111111111
