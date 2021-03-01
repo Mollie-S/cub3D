@@ -38,14 +38,14 @@ int	parse_walls_textures(char *line, int line_num, t_style *style)
 	while (i < TEXTURE_COUNT)
 	{
 		if (has_identifier(line, g_tex_identifier[i].identifier,
-			&identifier_len))
+				&identifier_len))
 		{
 			if (style->textures[g_tex_identifier[i].index] != NULL)
 				return (report_error_with_line(line_num, "Repeating texture."));
 			style->textures[g_tex_identifier[i].index] = ft_strtrim(line
-				+ identifier_len, " ");
+					+ identifier_len, " ");
 			if (!validate_texture(style->textures[g_tex_identifier[i].index],
-				line_num))
+					line_num))
 				return (ERROR);
 			return (SUCCESS);
 		}

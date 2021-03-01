@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sample_skybox_default.c                            :+:    :+:            */
+/*   init_intersection.h                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/02/12 11:37:23 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/14 14:47:03 by osamara       ########   odam.nl         */
+/*   Created: 2021/03/01 17:18:04 by osamara       #+#    #+#                 */
+/*   Updated: 2021/03/01 17:52:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sample_skybox.h"
+#ifndef INIT_INTERSECTION_H
+# define INIT_INTERSECTION_H
 
-unsigned int		sample_skybox(t_game_engine_state *state, int y, double ray_angle)
-{
-	double skybox_x;
-	double skybox_y;
+# include "intersection.h"
 
-	skybox_x = ray_angle / 360;
-	skybox_y = (double)y / (state->style->resolution.y / 2);
-	return (state->style->ceiling_rgb);
-}
+void	init_intersection_result(t_intersection_result *result);
+void	init_tracer(t_tracer *tracer, double ray_angle);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/07 17:33:01 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/10 21:58:39 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:07:18 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "resolution.h"
 
-typedef struct		s_window
+typedef struct s_window
 {
 	void		*mlx;
 	void		*mlx_win;
@@ -24,7 +24,7 @@ typedef struct		s_window
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}					t_window;
+}				t_window;
 
 int				start_window(t_window *window, t_resolution *resolution);
 #endif

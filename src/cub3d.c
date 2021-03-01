@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/23 18:49:44 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:03:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@
 #include "map.h"
 #include "report_error.h"
 #include "result.h"
-
-// void	free_window(t_window *window)
-// {
-// 	free(window->mlx);
-// 	free(window->mlx_win);
-// }
 
 int	check_arguments(int argc, char **argv)
 {

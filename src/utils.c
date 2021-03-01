@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:36:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 10:04:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:15:42 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdlib.h>
 
-double  wrap_angle(double angle)
+double	wrap_angle(double angle)
 {
 	while (angle < 0.0)
 		angle += 360.0;
@@ -25,7 +25,7 @@ double  wrap_angle(double angle)
 
 void	free_array_memory(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i] != NULL)

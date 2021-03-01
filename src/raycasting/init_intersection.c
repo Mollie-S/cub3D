@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   data.h                                             :+:    :+:            */
+/*   init_intersection.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/12 18:58:39 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/07 20:45:00 by osamara       ########   odam.nl         */
+/*   Created: 2021/03/01 17:16:52 by osamara       #+#    #+#                 */
+/*   Updated: 2021/03/01 17:52:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-# define DATA_H
+#include "init_intersection.h"
 
-typedef struct		s_data
+void	init_intersection_result(t_intersection_result *result)
 {
-	// void    *img;
-	// char    *address;
-	// int     bits_per_pixel;
-	// int     line_length;
-	// int     endian;
-}               	t_data;
+	result->dist_to_wall = 0.0;
+	result->wall_height = 0.0;
+	result->current_tex = NULL;
+	result->tex_x = 0.0;
+	result->tex_y = 0.0;
+}
 
-#endif
+void	init_tracer(t_tracer *tracer, double ray_angle)
+{
+	tracer->x = -1.0;
+	tracer->y = -1.0;
+	tracer->step_x = 0.0;
+	tracer->step_y = 0.0;
+	tracer->ray_angle = ray_angle;
+}

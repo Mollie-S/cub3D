@@ -16,6 +16,6 @@
 # include "game_engine/game_engine_state.h"
 
 unsigned int	sample_skybox(t_game_engine_state *state, int y,
-	double ray_angle);
+					double ray_angle);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 14:26:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 12:49:01 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 15:48:51 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sort_sprites(t_game_engine_state *state)
 		while (j < state->map->sprites_num)
 		{
 			if (state->sprites[j].dist_to_sprite
-		> state->sprites[i].dist_to_sprite)
+				> state->sprites[i].dist_to_sprite)
 			{
 				temp = state->sprites[i];
 				state->sprites[i] = state->sprites[j];
@@ -67,7 +67,7 @@ void	calc_dist_to_sprites(t_game_engine_state *state)
 		delta_x = state->pos_x - state->sprites[i].x;
 		delta_y = state->pos_y - state->sprites[i].y;
 		state->sprites[i].dist_to_sprite = sqrt(delta_x * delta_x
-			+ delta_y * delta_y);
+				+ delta_y * delta_y);
 		i++;
 	}
 }
@@ -114,9 +114,9 @@ void	calc_sprite_draw_range(t_game_engine_state *state,
 		+ state->style->resolution.y / 2.0;
 	if (sprite->draw_max_y >= state->style->resolution.y)
 		sprite->draw_max_y = state->style->resolution.y - 1;
-	projected_sprite_width = sprite->projected_height;
-	// * ((double)state->tex_info[TEXTURE_SPRITE].img_width
-	// 	/ (double)state->tex_info[TEXTURE_SPRITE].img_height);
+	projected_sprite_width = sprite->projected_height
+		* ((double)state->tex_info[TEXTURE_SPRITE].img_width
+			/ (double)state->tex_info[TEXTURE_SPRITE].img_height);
 	sprite->draw_min_x = -projected_sprite_width / 2.0 + sprite_screen_x;
 	sprite->draw_max_x = projected_sprite_width / 2.0 + sprite_screen_x;
 }
