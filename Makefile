@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/02/27 21:22:09 by osamara       ########   odam.nl          #
+#    Updated: 2021/03/01 09:00:41 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 NAME =		cub3D
 
 SRC = \
+	src/raycasting/sample_skybox_bonus.c \
 	src/cub3d.c \
 	src/style.c \
 	src/map.c \
@@ -57,7 +58,7 @@ $(NAME):	$(OBJ) $(INCLUDES)
 			-o $(NAME) $(OBJ) $(CFLAGS)
 
 %.o:		%.c
-			$(CC) $(CFLAGS)  -Ilibft/include -Iget_next_line -Isrc -Imlx -c $< -o $@
+			$(CC) $(CFLAGS) -DBONUS=1 -Ilibft/include -Iget_next_line -Isrc -Imlx -c $< -o $@
 
 clean:
 			/bin/rm -f $(OBJ)
