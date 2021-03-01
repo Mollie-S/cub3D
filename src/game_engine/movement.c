@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:13:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 13:41:36 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:19:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	move_back_forth(t_game_engine_state *state)
 	double	x_displacement;
 	double	y_displacement;
 
-	x_displacement = sin(DEG2RAD(-state->direction)) * MOVE_SPEED;
-	y_displacement = cos(DEG2RAD(-state->direction)) * MOVE_SPEED;
+	x_displacement = sin(deg2rad(-state->direction)) * MOVE_SPEED;
+	y_displacement = cos(deg2rad(-state->direction)) * MOVE_SPEED;
 	if (state->move.move_ver_dir == MOVE_FORWARD)
 	{
 		state->pos_x -= x_displacement;
@@ -83,8 +83,8 @@ void	move_left_right(t_game_engine_state *state)
 	double	x_displacement;
 	double	y_displacement;
 
-	x_displacement = cos(DEG2RAD(state->direction)) * MOVE_SPEED;
-	y_displacement = sin(DEG2RAD(state->direction)) * MOVE_SPEED;
+	x_displacement = cos(deg2rad(state->direction)) * MOVE_SPEED;
+	y_displacement = sin(deg2rad(state->direction)) * MOVE_SPEED;
 	if (state->move.move_hor_dir == MOVE_LEFT)
 	{
 		state->pos_x -= x_displacement;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   report_error_with_line.c                                     :+:    :+:            */
+/*   report_error.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 12:47:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 18:47:47 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:43:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 #include "report_error.h"
 
-int		report_error_with_line(int line_num, char *message)
+int	report_error_with_line(int line_num, char *message)
 {
-	char *line_num_to_alpha;
+	char	*line_num_to_alpha;
 
 	line_num_to_alpha = ft_itoa(line_num);
 	write(1, "Line ", 5);
@@ -28,14 +28,12 @@ int		report_error_with_line(int line_num, char *message)
 	write(1, message, ft_strlen(message));
 	write(1, "\n", 1);
 	free(line_num_to_alpha);
-
-	return(ERROR);
+	return (ERROR);
 }
 
-int		report_error(char *message)
+int	report_error(char *message)
 {
 	write(1, message, ft_strlen(message));
 	write(1, "\n", 1);
-
-	return(ERROR);
+	return (ERROR);
 }

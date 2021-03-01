@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/25 21:40:59 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:48:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 ** but this way it's more visual for testing the map I'm parsing
 */
 
-typedef enum		e_field {
+typedef enum e_field {
 	FIELD_BLACK_HOLE = ' ',
 	FIELD_FLOOR = '0',
 	FIELD_WALL = '1',
 	FIELD_SPRITE = '2'
-}					t_field;
+}			t_field;
 
-typedef struct		s_map
+typedef struct s_map
 {
 	size_t	height;
 	size_t	width;
@@ -37,16 +37,13 @@ typedef struct		s_map
 	int		start_pos_y;
 	char	*fields;
 	int		sprites_num;
-}					t_map;
+}				t_map;
 
 # define INVALID_START_DIRECTION -1
 
 void	init_map(t_map *map);
-void    free_map(t_map *map);
-int				validate_map(t_map *map, t_style *style);
+void	free_map(t_map *map);
+int		validate_map(t_map *map, t_style *style);
 int		count_sprites(t_map *map);
-
-void	debug_print_map(t_map *map); // remove!!
-void	debug_print_floodfill_map(t_map *map, char *check_array); // remove!!
 
 #endif

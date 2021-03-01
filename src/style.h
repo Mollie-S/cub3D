@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 21:51:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 08:51:11 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:46:06 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define INVALID_COLOR 0xFFFFFFFF
 
-typedef enum		e_texture_index {
+typedef enum e_texture_index {
 	TEXTURE_NO,
 	TEXTURE_SO,
 	TEXTURE_EA,
@@ -25,26 +25,24 @@ typedef enum		e_texture_index {
 	TEXTURE_SPRITE,
 	TEXTURE_SKYBOX,
 	TEXTURE_COUNT
-}					t_texture_index;
+}			t_texture_index;
 
-typedef struct		s_texture_identifier
+typedef struct s_texture_identifier
 {
 	char			*identifier;
 	t_texture_index	index;
-}					t_texture_identifier;
+}				t_texture_identifier;
 
-typedef struct		s_style
+typedef struct s_style
 {
 	char			*textures[TEXTURE_COUNT];
 	unsigned int	floor_rgb;
 	unsigned int	ceiling_rgb;
-	t_resolution    resolution;
-}					t_style;
+	t_resolution	resolution;
+}				t_style;
 
 void	init_map_style(t_style *style);
-int     validate_style(t_style *style);
+int		validate_style(t_style *style);
 void	free_map_style(t_style *style);
-void	debug_print_style(t_style *style); //remove!
-
 
 #endif

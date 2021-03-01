@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:25:09 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 17:42:33 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:19:45 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	render_frame(t_game_engine_state *state)
 	while (x < state->style->resolution.x)
 	{
 		ray_angle = state->direction
-			 + RAD2DEG(atan((x - state->style->resolution.x
-						 / 2.0) / state->dist_to_plane));
+			+ rad2deg(atan((x - state->style->resolution.x
+						/ 2.0) / state->dist_to_plane));
 		ray_angle = wrap_angle(ray_angle);
 		define_current_wall(state, ray_angle, &result);
-		result.dist_to_wall *= cos(DEG2RAD(state->direction - ray_angle));
+		result.dist_to_wall *= cos(deg2rad(state->direction - ray_angle));
 		result.wall_height = 1.0 / result.dist_to_wall * state->dist_to_plane;
 		draw_vertical_line(state, &result, x, ray_angle);
 		draw_sprites_vertical_line(state, x, result.dist_to_wall);

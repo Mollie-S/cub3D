@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:43:34 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 23:39:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:19:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ double	dist_to_hor_inters(t_game_engine_state *state, t_tracer *hor_tracer)
 		hor_tracer->step_y = 1.0;
 	}
 	hor_tracer->x = state->pos_x + fabs((state->pos_y - hor_tracer->y)
-			* tan(DEG2RAD(hor_tracer->ray_angle)));
-	hor_tracer->step_x = fabs(tan(DEG2RAD(hor_tracer->ray_angle)));
+			* tan(deg2rad(hor_tracer->ray_angle)));
+	hor_tracer->step_x = fabs(tan(deg2rad(hor_tracer->ray_angle)));
 	if (hor_tracer->ray_angle >= 180.0 && hor_tracer->ray_angle < 360.0)
 	{
 		hor_tracer->x = state->pos_x - fabs((state->pos_y - hor_tracer->y)
-				* tan(DEG2RAD(hor_tracer->ray_angle)));
+				* tan(deg2rad(hor_tracer->ray_angle)));
 		hor_tracer->step_x = -hor_tracer->step_x;
 	}
 	return (distance_to_wall(state, hor_tracer));
@@ -84,12 +84,12 @@ double	dist_to_ver_inters(t_game_engine_state *state, t_tracer *ver_tracer)
 		ver_tracer->step_x = -ver_tracer->step_x;
 	}
 	ver_tracer->y = state->pos_y - fabs((state->pos_x - ver_tracer->x)
-			/ tan(DEG2RAD(ver_tracer->ray_angle)));
-	ver_tracer->step_y = -1.0 / fabs(tan(DEG2RAD(ver_tracer->ray_angle)));
+			/ tan(deg2rad(ver_tracer->ray_angle)));
+	ver_tracer->step_y = -1.0 / fabs(tan(deg2rad(ver_tracer->ray_angle)));
 	if (ver_tracer->ray_angle >= 90.0 && ver_tracer->ray_angle < 270.0)
 	{
 		ver_tracer->y = state->pos_y + fabs((state->pos_x - ver_tracer->x)
-				/ tan(DEG2RAD(ver_tracer->ray_angle)));
+				/ tan(deg2rad(ver_tracer->ray_angle)));
 		ver_tracer->step_y = -ver_tracer->step_y;
 	}
 	return (distance_to_wall(state, ver_tracer));
@@ -119,7 +119,7 @@ double	distance_to_wall(t_game_engine_state *state, t_tracer *tracer)
 		if (state->map->fields[index] == FIELD_WALL)
 		{
 			distance = fabs((state->pos_x - tracer->x)
-					/ sin(DEG2RAD(tracer->ray_angle)));
+					/ sin(deg2rad(tracer->ray_angle)));
 			break ;
 		}
 		tracer->x += tracer->step_x;

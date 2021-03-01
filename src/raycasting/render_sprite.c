@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 14:26:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 15:48:51 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:19:45 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	calc_sprite_pos_on_screen(t_game_engine_state *state, t_sprite *sprite)
 	double	sprite_dist_screen;
 
 	delta_y = state->pos_y - sprite->y;
-	sprite_angle = RAD2DEG(acos(delta_y / sprite->dist_to_sprite));
+	sprite_angle = rad2deg(acos(delta_y / sprite->dist_to_sprite));
 	if (state->pos_x > sprite->x)
 		sprite_angle = -sprite_angle;
 	sprite_angle = wrap_angle(state->direction - sprite_angle);
@@ -89,9 +89,9 @@ void	calc_sprite_pos_on_screen(t_game_engine_state *state, t_sprite *sprite)
 	sprite_screen_x = 0.0;
 	if (sprite_angle < 90.0 || sprite_angle > 270.0)
 	{
-		sprite_dist_screen = state->dist_to_plane * tan(DEG2RAD(sprite_angle));
+		sprite_dist_screen = state->dist_to_plane * tan(deg2rad(sprite_angle));
 		sprite_screen_x = state->style->resolution.x / 2.0 - sprite_dist_screen;
-		corrected_dist = cos(DEG2RAD(sprite_angle)) * sprite->dist_to_sprite;
+		corrected_dist = cos(deg2rad(sprite_angle)) * sprite->dist_to_sprite;
 		sprite->dist_to_sprite = corrected_dist;
 		calc_sprite_draw_range(state, sprite, sprite_screen_x);
 	}

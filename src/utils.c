@@ -6,13 +6,24 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:36:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:15:42 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:21:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 #include <stdlib.h>
+#include <math.h>
+
+double	deg2rad(double angle)
+{
+	return (angle * M_PI / 180.0 + (double)(0.0001));
+}
+
+double	rad2deg(double angle)
+{
+	return (angle * 180.0 / M_PI);
+}
 
 double	wrap_angle(double angle)
 {

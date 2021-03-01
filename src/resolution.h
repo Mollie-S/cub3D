@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   resolution.h                                :+:    :+:            */
+/*   resolution.h                       	            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -15,10 +15,10 @@
 
 # define INVALID_RESOLUTION -1
 
-typedef struct      s_resolution
+typedef struct s_resolution
 {
 	int				x;
 	int				y;
-}                   t_resolution;
+}				t_resolution;
 
 #endif

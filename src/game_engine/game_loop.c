@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 14:39:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:19:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_game_engine_state(t_game_engine_state *state, t_window *window,
 	state->style = style;
 	state->map = map;
 	state->dist_to_plane = (style->resolution.x / 2.0)
-		/ tan(DEG2RAD(FOV / 2.0));
+		/ tan(deg2rad(FOV / 2.0));
 	state->pos_x = map->start_pos_x + 0.5;
 	state->pos_y = map->start_pos_y + 0.5;
 	state->direction = map->start_direction;
