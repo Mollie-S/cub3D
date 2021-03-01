@@ -6,33 +6,30 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 21:47:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/23 19:57:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 18:57:41 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BITMAP_H
 # define BITMAP_H
 
-#include "game_engine/game_engine_state.h"
+# include "game_engine/game_engine_state.h"
 
-#include "libft.h"
+# include "libft.h"
 
-#include <stdint.h>
+# include <stdint.h>
 
 /*
 **
 */
 
-#pragma pack(push,1)
-
-typedef struct	s_bmp_header {
-	uint8_t		signature_bytes[2];
+typedef struct s_bmp_header {
 	uint32_t	filesize;
 	uint32_t	reserved_bytes;
 	uint32_t	pixel_data_offset;
 }				t_bmp_header;
 
-typedef struct	s_bmp_infoheader {
+typedef struct s_bmp_infoheader {
 	uint32_t	size_of_this_header;
 	uint32_t	width;
 	uint32_t	height;
@@ -46,11 +43,10 @@ typedef struct	s_bmp_infoheader {
 	uint32_t	important_colors;
 }				t_bmp_infoheader;
 
-typedef struct	s_bmp {
+typedef struct s_bmp {
 	t_bmp_header		bmpheader;
 	t_bmp_infoheader	bmpinfoheader;
 }				t_bmp;
-#pragma pack(pop)
 
 int	create_bmp_file(t_game_engine_state	*state);
 #endif
