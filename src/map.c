@@ -6,18 +6,19 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/27 22:58:22 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 10:04:41 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h> // remove the header!!!
-#include <stdlib.h>
-
-#include "libft.h"
 
 #include "map.h"
 #include "report_error.h"
 #include "result.h"
+#include "utils.h"
+
+#include "libft.h"
+
+#include <stdio.h> // remove the header!!!
+#include <stdlib.h>
 
 void			init_map(t_map *map)
 {
@@ -28,12 +29,6 @@ void			init_map(t_map *map)
 	map->start_pos_y = -1;
 	map->fields = NULL;
 	map->sprites_num = 0;
-}
-
-void			free_map(t_map *map)
-{
-	free(map->fields);
-	map->fields = NULL;
 }
 
 static int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
@@ -97,7 +92,7 @@ int				validate_map(t_map *map, t_style *style)
 	check_array = NULL;
 	map->sprites_num = count_sprites(map);
 	if (map->sprites_num == 0 && style->textures[TEXTURE_SPRITE] != NULL)
-		return(report_error("The texture for sprites is stated but the map contains no sprites "));
+		return (report_error("The map contains no accessible sprites"));
 	return (SUCCESS);
 }
 

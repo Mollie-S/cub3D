@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_engine_state.h                                     :+:    :+:            */
+/*   game_engine_state.h                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:16 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/08 21:45:54 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 14:16:12 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 # include "style.h"
 # include "map.h"
 
-
-typedef struct		s_movement
+typedef struct s_movement
 {
 	int		rotation_dir;
 	int		move_ver_dir;
 	int		move_hor_dir;
 	double	next_pos_x;
 	double	next_pos_y;
-}					t_movement;
+}				t_movement;
 
-typedef struct		s_texture_info
+typedef struct s_texture_info
 {
 	void		*img;
 	int			img_width;
@@ -36,7 +35,7 @@ typedef struct		s_texture_info
 	int			bpp;
 	int			line_length;
 	int			endian;
-}					t_texture_info;
+}				t_texture_info;
 
 typedef struct s_sprite
 {
@@ -49,9 +48,9 @@ typedef struct s_sprite
 	double			draw_min_y;
 	double			draw_max_y;
 	double			projected_height;
-}               t_sprite;
+}				t_sprite;
 
-typedef struct		s_game_engine_state
+typedef struct s_game_engine_state
 {
 	double			dist_to_plane;
 	double			pos_x;
@@ -63,6 +62,6 @@ typedef struct		s_game_engine_state
 	t_map			*map;
 	t_movement		move;
 	t_sprite		*sprites;
-}					t_game_engine_state;
+}				t_game_engine_state;
 
 #endif

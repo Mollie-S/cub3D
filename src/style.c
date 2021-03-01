@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 09:01:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 14:09:49 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,20 @@ int     validate_style(t_style *style)
 	i = 0;
 	while (i < TEXTURE_COUNT)
 	{
-		// if (!BONUS)
-		// {
+		if (BONUS && style->textures[TEXTURE_SKYBOX] == NULL)
+		{
+			return (report_error("The skybox texture for bonus compilation is missing."));
+		}
 		if (i != TEXTURE_SKYBOX && style->textures[i] == NULL)
 		{
 			return (report_error("A wall or sprite texture element is missing."));
 		}
-		// }
-		// else
-		// 	if (style->textures[i] == NULL)
-		// 		return (report_error("One of the texture elements is missing."));
 		i++;
 	}
 	return (SUCCESS);
 }
 
-void	free_map_style(t_style *style)
+void	free_map_style(t_style * style)
 {
 	int i;
 
@@ -76,7 +74,7 @@ void	free_map_style(t_style *style)
 }
 
 // remove this function before submossion!
-void	debug_print_style(t_style *style)
+void	debug_print_style(t_style * style)
 {
 	int i;
 

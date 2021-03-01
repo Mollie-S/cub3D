@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:36:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 16:17:20 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 10:04:17 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,10 @@ void	free_array_memory(char **array)
 	}
 	free(array);
 	array = NULL;
+}
+
+void	free_map(t_map *map)
+{
+	free(map->fields);
+	map->fields = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:13:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/15 11:06:25 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 13:41:36 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,38 @@ void	rotate_player(t_game_engine_state *state)
 	state->direction = wrap_angle(state->direction);
 }
 
+/*
+**  BONUS condition is needed for walls collision
+*/
+
 void	move_player(t_game_engine_state *state)
 {
-	double prev_x;
-	double prev_y;
+	double	prev_x;
+	double	prev_y;
 
 	prev_x = state->pos_x;
 	prev_y = state->pos_y;
-	if (state->move.move_ver_dir == MOVE_FORWARD || state->move.move_ver_dir == MOVE_BACKWARD)
-	{
+	if (state->move.move_ver_dir == MOVE_FORWARD
+		|| state->move.move_ver_dir == MOVE_BACKWARD)
 		move_back_forth(state);
-	}
-	if (state->move.move_hor_dir == MOVE_LEFT || state->move.move_hor_dir == MOVE_RIGHT)
-	{
+	if (state->move.move_hor_dir == MOVE_LEFT
+		|| state->move.move_hor_dir == MOVE_RIGHT)
 		move_left_right(state);
-	}
-	if (state->map->fields[state->map->width * (size_t)prev_y + (size_t)state->pos_x] != FIELD_FLOOR)
+	if (BONUS)
 	{
-		state->pos_x = prev_x; // walls collision
-	}
-	if (state->map->fields[state->map->width * (size_t)state->pos_y + (size_t)prev_x] != FIELD_FLOOR)
-	{
-		state->pos_y = prev_y;
+		if (state->map->fields[state->map->width * (size_t)prev_y
+			+ (size_t)state->pos_x] != FIELD_FLOOR)
+			state->pos_x = prev_x;
+		if (state->map->fields[state->map->width * (size_t)state->pos_y
+			+ (size_t)prev_x] != FIELD_FLOOR)
+			state->pos_y = prev_y;
 	}
 }
 
-void		move_back_forth(t_game_engine_state *state)
+void	move_back_forth(t_game_engine_state *state)
 {
-	double x_displacement;
-	double y_displacement;
+	double	x_displacement;
+	double	y_displacement;
 
 	x_displacement = sin(DEG2RAD(-state->direction)) * MOVE_SPEED;
 	y_displacement = cos(DEG2RAD(-state->direction)) * MOVE_SPEED;
@@ -75,10 +78,10 @@ void		move_back_forth(t_game_engine_state *state)
 	}
 }
 
-void		move_left_right(t_game_engine_state *state)
+void	move_left_right(t_game_engine_state *state)
 {
-	double x_displacement;
-	double y_displacement;
+	double	x_displacement;
+	double	y_displacement;
 
 	x_displacement = cos(DEG2RAD(state->direction)) * MOVE_SPEED;
 	y_displacement = sin(DEG2RAD(state->direction)) * MOVE_SPEED;
