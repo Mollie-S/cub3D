@@ -6,14 +6,14 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/13 11:47:52 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 15:44:50 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 23:34:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-int			handle_newline(char **line, t_vector *b)
+int	handle_newline(char **line, t_vector *b)
 {
 	ssize_t		newline_len;
 
@@ -38,7 +38,7 @@ int			handle_newline(char **line, t_vector *b)
 	return (FOUND);
 }
 
-ssize_t		count_newline_len(t_vector *b)
+ssize_t	count_newline_len(t_vector *b)
 {
 	ssize_t		length;
 	char		*ptr;
@@ -61,14 +61,14 @@ ssize_t		count_newline_len(t_vector *b)
 	return (GNL_NOT_FOUND);
 }
 
-char		*copy_newline(char *src, long long n)
+char	*copy_newline(char *src, long long n)
 {
-	char *dst;
-	char *dst_current;
+	char	*dst;
+	char	*dst_current;
 
 	if (!src)
 		return (NULL);
-	dst = (char*)malloc(sizeof(char) * (n + 1));
+	dst = (char *)malloc(sizeof(char) * (n + 1));
 	if (!dst)
 	{
 		return (NULL);
@@ -85,7 +85,7 @@ char		*copy_newline(char *src, long long n)
 	return (dst);
 }
 
-char		*move_content(char *dst, char *src, ssize_t len)
+char	*move_content(char *dst, char *src, ssize_t len)
 {
 	char	*dst_current;
 
@@ -100,7 +100,7 @@ char		*move_content(char *dst, char *src, ssize_t len)
 	return (dst);
 }
 
-void		free_memory(t_vector *b)
+void	free_memory(t_vector *b)
 {
 	free(b->container);
 	b->container = NULL;

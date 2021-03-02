@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_toupper.c                                       :+:    :+:            */
+/*   sample_skybox_default.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/29 21:46:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/02 13:25:28 by osamara       ########   odam.nl         */
+/*   Created: 2021/02/12 11:37:23 by osamara       #+#    #+#                 */
+/*   Updated: 2021/03/02 00:19:38 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "sample_skybox.h"
 
-int	ft_toupper(int c)
+/*
+** Stub function
+*/
+
+unsigned int	sample_skybox(t_game_engine_state *state,
+	int y, double ray_angle)
 {
-	if (c >= 'a' && c <= 'z')
-	{
-		c -= ('a' - 'A');
-	}
-	return (c);
+	(void)state;
+	(void)y;
+	(void)ray_angle;
+	return (0);
 }

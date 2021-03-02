@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_toupper.c                                       :+:    :+:            */
+/*   check_arguments.h                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/29 21:46:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/02 13:25:28 by osamara       ########   odam.nl         */
+/*   Created: 2021/03/01 20:04:12 by osamara       #+#    #+#                 */
+/*   Updated: 2021/03/01 20:06:23 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CHECK_ARGUMENTS_H
+# define CHECK_ARGUMENTS_H
 
-int	ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-	{
-		c -= ('a' - 'A');
-	}
-	return (c);
-}
+int	check_arguments(int argc, char **argv);
+
+#endif

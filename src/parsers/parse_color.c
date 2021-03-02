@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 14:55:04 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 23:17:35 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,45 @@
 
 #include <stdlib.h>
 
-int	parse_floor_ceiling_colors(char *line, int line_num, t_style *style)
+int	parse_colors(char *line, int line_num, t_style *style)
 {
 	int					identifier_len;
-	unsigned int		color;
-	int					is_valid_color_component;
 
 	identifier_len = 0;
-	color = 0;
 	if (has_identifier(line, "C ", &identifier_len))
 	{
-		if (style->ceiling_rgb != INVALID_COLOR)
-			return (report_error_with_line(line_num, "Repeating color."));
-		is_valid_color_component = parse_color(line + identifier_len, &color);
-		if (is_valid_color_component)
-			style->ceiling_rgb = color;
-		else
-			return (report_error_with_line(line_num, "Invalid celing color."));
-		return (SUCCESS);
+		return (get_color_value(&style->ceiling_rgb,
+				line, line_num, identifier_len));
 	}
 	if (has_identifier(line, "F ", &identifier_len))
 	{
-		if (style->floor_rgb != INVALID_COLOR)
-			return (report_error_with_line(line_num, "Repeating floor color."));
-		is_valid_color_component = parse_color(line + identifier_len, &color);
-		if (is_valid_color_component)
-			style->floor_rgb = color;
-		else
-			return (report_error_with_line(line_num, "Invalid floor color."));
-		return (SUCCESS);
+		return (get_color_value(&style->floor_rgb, line,
+				line_num, identifier_len));
 	}
 	return (NOT_FOUND);
 }
 
-int	parse_color(char *line, unsigned int *color)
+int	get_color_value(unsigned int *rgb, char *line, int line_num,
+	int identifier_len)
+{
+	unsigned int		color;
+	int					is_valid_color_component;
+
+	color = 0;
+	if (*rgb != INVALID_COLOR)
+		return (report_error_with_line(line_num, "Repeating color."));
+	is_valid_color_component = validate_color(line + identifier_len, &color);
+	if (is_valid_color_component)
+		*rgb = color;
+	else
+	{
+		return (report_error_with_line(line_num,
+				"Invalid floor or ceiling color."));
+	}
+	return (SUCCESS);
+}
+
+int	validate_color(char *line, unsigned int *color)
 {
 	char	**array;
 	int		num_components;

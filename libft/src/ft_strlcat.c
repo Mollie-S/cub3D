@@ -6,17 +6,17 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 18:02:59 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/12 17:28:19 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:19:20 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t src_index;
-	size_t dst_len;
-	size_t src_len;
+	size_t	src_index;
+	size_t	dst_len;
+	size_t	src_len;
 
 	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);

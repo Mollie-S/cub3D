@@ -6,14 +6,14 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/13 11:47:14 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/25 12:02:11 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 23:35:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static t_vector		b;
 	int					newline_result;
@@ -37,7 +37,7 @@ int		get_next_line(int fd, char **line)
 	return (0);
 }
 
-int		initialize_buffer(t_vector *b)
+int	initialize_buffer(t_vector *b)
 {
 	if (b->container == NULL)
 	{
@@ -47,7 +47,7 @@ int		initialize_buffer(t_vector *b)
 	return (1);
 }
 
-int		read_text(int fd, char **line, t_vector *b)
+int	read_text(int fd, char **line, t_vector *b)
 {
 	ssize_t				bytes_read;
 
@@ -68,7 +68,7 @@ int		read_text(int fd, char **line, t_vector *b)
 	return (1);
 }
 
-int		realloc_buffer(t_vector *b, ssize_t newline_len)
+int	realloc_buffer(t_vector *b, ssize_t newline_len)
 {
 	ssize_t		unused_mem;
 
@@ -87,7 +87,7 @@ int		realloc_buffer(t_vector *b, ssize_t newline_len)
 	return (1);
 }
 
-int		alloc_big_container(t_vector *b, ssize_t newln_len)
+int	alloc_big_container(t_vector *b, ssize_t newln_len)
 {
 	ssize_t		temp_size;
 	ssize_t		more_capacity;
@@ -98,7 +98,7 @@ int		alloc_big_container(t_vector *b, ssize_t newln_len)
 		more_capacity = 128;
 	else
 		more_capacity = b->capacity + (BUFFER_SIZE - (b->capacity - b->size));
-	big_container = (char*)malloc(sizeof(char) * more_capacity);
+	big_container = (char *)malloc(sizeof(char) * more_capacity);
 	if (!big_container)
 	{
 		free_memory(b);

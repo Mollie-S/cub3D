@@ -6,13 +6,13 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:20:51 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/16 18:28:23 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:19:40 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		*move_forward(void *dst, const void *src, size_t len)
+static void	*move_forward(void *dst, const void *src, size_t len)
 {
 	unsigned char		*dst_current;
 	const unsigned char	*src_current;
@@ -29,7 +29,7 @@ static void		*move_forward(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-static void		*move_backwards(void *dst, const void *src, size_t len)
+static void	*move_backwards(void *dst, const void *src, size_t len)
 {
 	unsigned char		*dst_current;
 	const unsigned char	*src_current;
@@ -46,7 +46,7 @@ static void		*move_backwards(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-void			*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	if (!src && !dst)
 		return (0);

@@ -6,19 +6,22 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:58:20 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/02 16:12:43 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:14:29 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int		is_negative(long long n)
+static int	is_negative(long long n)
 {
-	return (n < 0 ? 1 : 0);
+	if (n < 0)
+		return (1);
+	else
+		return (0);
 }
 
-static int		count_str_length(long long n)
+static int	count_str_length(long long n)
 {
 	int		str_length;
 
@@ -40,7 +43,7 @@ static int		count_str_length(long long n)
 	return (str_length);
 }
 
-static void		convert_digit(long long n, char *digit)
+static void	convert_digit(long long n, char *digit)
 {
 	*digit = '\0';
 	digit--;
@@ -52,7 +55,7 @@ static void		convert_digit(long long n, char *digit)
 	}
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int			str_length;
 	char		*str_start;
@@ -61,7 +64,7 @@ char			*ft_itoa(int n)
 
 	number = ((long long)n);
 	str_length = count_str_length(number);
-	str_start = (char*)malloc(sizeof(char) * (str_length + 1));
+	str_start = (char *)malloc(sizeof(char) * (str_length + 1));
 	if (str_start == NULL)
 		return (NULL);
 	if (number == 0)

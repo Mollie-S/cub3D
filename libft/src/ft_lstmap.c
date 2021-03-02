@@ -6,18 +6,18 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:42:47 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/16 15:04:41 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:25:58 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *new_lst;
-	t_list *ptr;
-	t_list **nptr;
+	t_list	*new_lst;
+	t_list	*ptr;
+	t_list	**nptr;
 
 	if (lst == NULL || f == NULL)
 		return (NULL);

@@ -6,16 +6,16 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/04 17:52:08 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/04 21:09:10 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:30:42 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-t_list		*ft_lstnew(void *content)
+t_list	*ft_lstnew(void *content)
 {
-	t_list *element;
+	t_list	*element;
 
 	element = (t_list*)malloc(sizeof(t_list));
 	if (element == NULL)

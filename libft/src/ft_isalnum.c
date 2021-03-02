@@ -6,14 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 21:28:44 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/02 06:25:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:15:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
-	return ((c >= 'A' && c <= 'Z') ||
-		(c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'));
+	return ((c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'));
 }

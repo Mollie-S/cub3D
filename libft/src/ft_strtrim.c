@@ -6,16 +6,16 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/30 15:19:51 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/16 19:07:36 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:21:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int		char_found(char const *set, char character)
+static int	char_found(char const *set, char character)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (set[j] != 0)
@@ -30,11 +30,11 @@ static int		char_found(char const *set, char character)
 	return (0);
 }
 
-static char		*find_start(char const *s1, char const *set)
+static char	*find_start(char const *s1, char const *set)
 {
-	char *start;
+	char	*start;
 
-	start = ((char*)s1);
+	start = ((char *)s1);
 	while (*start != 0)
 	{
 		if (!char_found(set, *start))
@@ -45,7 +45,7 @@ static char		*find_start(char const *s1, char const *set)
 	return (start);
 }
 
-static char		*find_end(char *start, char const *set)
+static char	*find_end(char *start, char const *set)
 {
 	int		len;
 	char	*end;
@@ -63,12 +63,12 @@ static char		*find_end(char *start, char const *set)
 	return (end);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char *s_trimmed;
-	char *ptr;
-	char *start;
-	char *end;
+	char	*s_trimmed;
+	char	*ptr;
+	char	*start;
+	char	*end;
 
 	if (!s1)
 		return (NULL);
@@ -77,7 +77,7 @@ char			*ft_strtrim(char const *s1, char const *set)
 		end = start - 1;
 	else
 		end = find_end(start, set);
-	s_trimmed = (char*)malloc(sizeof(char) * (end - start) + 2);
+	s_trimmed = (char *)malloc(sizeof(char) * (end - start) + 2);
 	if (s_trimmed == NULL)
 		return (NULL);
 	ptr = s_trimmed;

@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/03 17:25:36 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/10 17:48:11 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:28:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static	void	print_recursively(int nb, int fd)
 {
-	int digit_to_print;
+	int	digit_to_print;
 
 	if (nb > 0)
 	{
@@ -25,7 +25,7 @@ static	void	print_recursively(int nb, int fd)
 	}
 }
 
-void			ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == 0)
 	{

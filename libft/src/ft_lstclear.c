@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 13:12:35 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/17 09:39:13 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:28:02 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list *current;
-	t_list *temp;
+	t_list	*current;
+	t_list	*temp;
 
 	if (!*lst || !lst)
 	{

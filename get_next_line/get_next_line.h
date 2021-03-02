@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/13 11:47:27 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/26 15:46:22 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 23:35:48 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define GNL_NOT_FOUND 0
 # define FOUND 1
 
-typedef	struct	s_vector
+typedef struct s_vector
 {
 	char		*container;
 	ssize_t		size;

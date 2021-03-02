@@ -79,13 +79,13 @@ int	load_textures(t_game_engine_state *state)
 		{
 			ti = &state->tex_info[i];
 			ti->img = mlx_xpm_file_to_image(state->window->mlx, path,
-				&ti->img_width, &ti->img_height);
+					&ti->img_width, &ti->img_height);
 			if (ti->img == NULL)
 			{
 				return (report_error("Error reading a texture image"));
 			}
 			ti->addr = mlx_get_data_addr(ti->img, &ti->bpp,
-				&ti->line_length, &ti->endian);
+					&ti->line_length, &ti->endian);
 		}
 		i++;
 	}

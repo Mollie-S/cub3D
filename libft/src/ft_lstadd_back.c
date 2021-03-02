@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 10:47:43 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/08 17:24:03 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:30:25 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *ptr;
+	t_list	*ptr;
 
 	if (*lst == NULL)
 	{

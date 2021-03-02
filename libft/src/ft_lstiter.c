@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 14:43:02 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/12 18:59:59 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:27:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list *current;
+	t_list	*current;
 
 	if (lst == NULL)
 	{

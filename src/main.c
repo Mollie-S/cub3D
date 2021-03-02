@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cub3d.c                                            :+:    :+:            */
+/*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:40:12 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 20:16:34 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h> // needed for system( function, remove)
-
 #include "read_map.h"
+#include "check_arguments.h"
 #include "game_engine/game_loop.h"
 #include "window.h"
 #include "style.h"
 #include "map.h"
-#include "report_error.h"
 #include "result.h"
 
-int	check_arguments(int argc, char **argv)
-{
-	if (argv[1] == NULL)
-		return(report_error("Incorrect filename."));
-	if (argc < 2)
-		return(report_error("Invalid map name."));
-	if (argc > 3)
-		return(report_error("Too many arguments specified."));
-	if (argc == 3 && ft_strncmp("--save", argv[2], 7) != 0)
-		return(report_error("Incorrect argument for creating a screenshot specified."));
-	return (SUCCESS);
-}
-
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_style		style;
 	t_map	 	map;
@@ -42,7 +26,7 @@ int		main(int argc, char **argv)
 	int			screenshot;
 
 	if (!check_arguments(argc, argv))
-		return(1);
+		return (1);
 	screenshot = FALSE;
 	if (argc == 3)
 		screenshot = TRUE;
@@ -56,16 +40,5 @@ int		main(int argc, char **argv)
 		return (1);
 	if (!game_loop(&window, &style, &map, screenshot))
 		return (1);
-	// check if every mallocced line is freed
-	// debug_print_map(&map); // remove this function!!! 
-	// debug_print_style(&style);// remove this function!!! 
-
-	// are all these free neded???
-	// free_map_style(&style);
-	// free_map(&map);
-	// free(&window);
-	// all structures freed? 
-	system("leaks cub3D");
-	// debug flags removed in makefile?
 	return (0);
 }

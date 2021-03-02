@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 11:57:38 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 14:45:04 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 23:13:15 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_map_header(char *line, int line_num, t_style *style)
 	result = parse_walls_textures(line, line_num, style);
 	if (result != NOT_FOUND)
 		return (result);
-	result = parse_floor_ceiling_colors(line, line_num, style);
+	result = parse_colors(line, line_num, style);
 	if (result != NOT_FOUND)
 		return (result);
 	return (NOT_FOUND);

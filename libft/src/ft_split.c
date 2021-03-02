@@ -6,17 +6,17 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 13:18:20 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/16 22:20:07 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:25:09 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int		count_strings(char const *ch, char sep)
+static int	count_strings(char const *ch, char sep)
 {
-	int count;
-	int char_between_sep;
+	int	count;
+	int	char_between_sep;
 
 	count = 0;
 	char_between_sep = 0;
@@ -41,9 +41,9 @@ static int		count_strings(char const *ch, char sep)
 	return (count);
 }
 
-static void		free_memory(char **array, int string_index)
+static void	free_memory(char **array, int string_index)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (string_index > count)
@@ -54,9 +54,9 @@ static void		free_memory(char **array, int string_index)
 	free(array);
 }
 
-static int		fill_string(char **array, char const *ch, char sep, int index)
+static int	fill_string(char **array, char const *ch, char sep, int index)
 {
-	size_t char_count;
+	size_t	char_count;
 
 	char_count = 0;
 	while (*ch != sep && *ch != '\0')
@@ -75,7 +75,7 @@ static int		fill_string(char **array, char const *ch, char sep, int index)
 	return (((int)char_count));
 }
 
-char			**ft_split(char const *str, char sep)
+char	**ft_split(char const *str, char sep)
 {
 	char	**array;
 	int		string_index;

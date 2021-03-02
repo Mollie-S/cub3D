@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 17:36:14 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/10 14:34:12 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:30:04 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t hstack_index;
-	size_t needle_location;
-	size_t i;
+	size_t	hstack_index;
+	size_t	needle_location;
+	size_t	i;
 
 	if (*needle == '\0')
 		return (((char*)haystack));

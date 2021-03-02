@@ -6,14 +6,14 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 09:49:12 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/06 09:49:18 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:25:35 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	t_list	*element;
 	int		size;

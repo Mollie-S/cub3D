@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/28 16:31:21 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/01 23:23:39 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:31:08 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	const char *ptr;
+	const char	*ptr;
 
 	ptr = s;
 	while (*ptr)

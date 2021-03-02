@@ -6,13 +6,13 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 20:22:35 by osamara       #+#    #+#                 */
-/*   Updated: 2021/01/23 00:18:13 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:16:05 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int			index;
 	int			is_minus;
@@ -22,8 +22,8 @@ int		ft_atoi(const char *str)
 	is_minus = 0;
 	int_accumulator = 0;
 	while (str[index] != '\0' && (str[index] == '\t' || str[index] == '\n'
-		|| str[index] == '\v' || str[index] == '\f'
-		|| str[index] == '\r' || str[index] == ' '))
+			|| str[index] == '\v' || str[index] == '\f'
+			|| str[index] == '\r' || str[index] == ' '))
 		index++;
 	if (str[index] == '-' || str[index] == '+')
 	{
@@ -41,7 +41,7 @@ int		ft_atoi(const char *str)
 	return ((int)int_accumulator);
 }
 
-int				ft_printf_atoi(const char *start, int *num)
+int	ft_printf_atoi(const char *start, int *num)
 {
 	int		index;
 	int		ptr;

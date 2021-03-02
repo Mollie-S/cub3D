@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 20:10:54 by osamara       #+#    #+#                 */
-/*   Updated: 2020/11/16 19:11:30 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/02 13:21:46 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (!s || !f)
 		return (NULL);
 	length = ft_strlen(s);
-	new_str = (char*)malloc(sizeof(char) * (length + 1));
+	new_str = (char *)malloc(sizeof(char) * (length + 1));
 	if (new_str == NULL)
 		return (NULL);
 	index = 0;
 	while (index < length)
 	{
-		*new_str = f(index, *((char*)s));
+		*new_str = f(index, *((char *)s));
 		index++;
 		new_str++;
 		s++;

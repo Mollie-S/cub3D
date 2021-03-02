@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 21:47:05 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:57:41 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/01 19:41:30 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdint.h>
 
 /*
-**
+** Structures needed for creating bmp
 */
 
 typedef struct s_bmp_header {
