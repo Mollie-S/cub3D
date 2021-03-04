@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 16:24:48 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/04 18:04:22 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	are_valid_characters(char *line, int line_num)
 			j++;
 		}
 		if (!found)
-			return (report_error_with_line(line_num, "Invalid chars in map."));
+			return (report_error_with_line(line_num, "Invalid map."));
 		i++;
 	}
 	return (TRUE);
