@@ -6,18 +6,68 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:32:36 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/04 18:15:07 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h> //remove
+
 #include "map.h"
-#include "report_error.h"
+#include "report_error.h" 
 #include "result.h"
 #include "utils.h"
 
 #include "libft.h"
 
 #include <stdlib.h>
+
+void			debug_print_floodfill_map(t_map *map, char *check_array)
+{
+	unsigned int y;
+	unsigned int x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (check_array[y * map->width + x] == 0)
+				printf("%c", map->fields[y * map->width + x]);
+			else
+				printf("x");
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	printf("\n");
+}
+
+void			debug_print_map(t_map *map)
+{
+	unsigned int y;
+	unsigned int x;
+
+	y = 0;
+	printf("map->height:%lu\n", map->height);
+	printf("map->width:%lu\n", map->width);
+	printf("map->start_direction:%d\n", map->start_direction);
+	printf("map->start_pos_x:%d\n", map->start_pos_x);
+	printf("map->start_pos_y:%d\n", map->start_pos_y);
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			printf("%c", map->fields[y * map->width + x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	printf("\n");
+}
 
 void	init_map(t_map *map)
 {
@@ -42,6 +92,7 @@ static int	ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 		if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
 			return (report_error("Your map is not surrounded by walls"));
 		check_array[field_index] = 1;
+		debug_print_floodfill_map(map,check_array);
 		if (!ft_floodfill(x + 1, y, check_array, map))
 			return (ERROR);
 		else if (!ft_floodfill(x - 1, y, check_array, map))
