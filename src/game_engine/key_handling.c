@@ -6,22 +6,25 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:10:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 14:19:32 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/04 17:43:17 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_handling.h"
 #include "movement.h"
 #include "bitmap.h"
+#include "exit.h"
 
 #include "mlx.h"
 
 #include <stdlib.h>
 
+
 int	setup_key_hooks(t_game_engine_state *state)
 {
 	mlx_hook(state->window->mlx_win, 2, 1L << 0, key_pressed, state);
 	mlx_hook(state->window->mlx_win, 3, 1L << 1, key_released, state);
+	mlx_hook(state->window->mlx_win, 17, 0L, exit_window, state);
 	return (0);
 }
 

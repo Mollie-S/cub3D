@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/03/02 00:26:16 by osamara       ########   odam.nl          #
+#    Updated: 2021/03/04 17:42:12 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC = \
 	src/raycasting/render_sprite.c \
 	src/game_engine/game_loop.c \
 	src/game_engine/key_handling.c \
+	src/game_engine/exit.c \
 	src/game_engine/sprite.c \
 	src/game_engine/movement.c
 
