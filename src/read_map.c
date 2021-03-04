@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/04 19:04:52 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/04 19:48:42 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ int	parse_cub_map(char *file, t_style *style, t_map *map)
 
 	list_start = NULL;
 	if (!load_map_from_file(file, style, &list_start))
+	{
+		free_map_style(style);
 		return (ERROR);
+	}
 	if (!parse_map(list_start, map))
 		return (ERROR);
 	ft_lstclear(&list_start, &free);
-	if (!validate_style(style) || !validate_map(map, style))
+	if (!validate_map(map, style))
 	{
-		free_map_style(style);
 		free_map(map);
 		return (ERROR);
 	}
@@ -100,6 +102,8 @@ int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 	}
 	if (inside_map)
 	{
+		if (!validate_style(style))
+		return (report_error("Map description must precede the map content."));
 		result = handle_map_line(line, line_num, list_start);
 		if (result == ERROR)
 		{
@@ -114,7 +118,7 @@ int	handle_map_line(char *line, int line_num, t_list **list_start)
 {
 	t_list	*new_node;
 	if (*line == '\0')
-	return (report_error_with_line(line_num, "Empty line inside the map."));
+	return (report_error_with_line(line_num, "Empty line is not allowed here."));
 	if (!are_valid_characters(line, line_num))
 		return (ERROR);
 	else
