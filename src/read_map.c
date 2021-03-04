@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 19:42:26 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/04 19:04:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ int	read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 
 int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 {
-	int	inside_map;
-	int	result;
+	static int	inside_map;
+	int			result;
 
-	inside_map = 0;
 	result = 0;
 	if (!inside_map)
 	{
@@ -114,7 +113,8 @@ int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 int	handle_map_line(char *line, int line_num, t_list **list_start)
 {
 	t_list	*new_node;
-
+	if (*line == '\0')
+	return (report_error_with_line(line_num, "Empty line inside the map."));
 	if (!are_valid_characters(line, line_num))
 		return (ERROR);
 	else
