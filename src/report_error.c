@@ -21,6 +21,7 @@ int	report_error_with_line(int line_num, char *message)
 {
 	char	*line_num_to_alpha;
 
+	write(1, "Error\n", 6);
 	line_num_to_alpha = ft_itoa(line_num);
 	write(1, "Line ", 5);
 	write(1, line_num_to_alpha, ft_strlen(line_num_to_alpha));
