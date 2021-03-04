@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 17:05:42 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/04 17:48:28 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ unsigned int	draw_ceiling(t_game_engine_state *state, int y, double angle)
 {
 	unsigned int	color;
 
-	if (state->style->textures[TEXTURE_SKYBOX] != NULL)
+	if (BONUS && state->style->textures[TEXTURE_SKYBOX] != NULL)
 		color = sample_skybox(state, y, angle);
 	else
 		color = state->style->ceiling_rgb;
@@ -77,9 +77,10 @@ unsigned int	sample_texture(t_texture_info *tex, double tex_x, double tex_y)
 }
 
 /*
-**  It would
+**  It would be more readable to have it like this
 ** 	dst = state->window->addr + x * (state->window->bits_per_pixel / 8)
 **		+ y * state->window->line_length;
+**  but because of 25  I have to write an ugly solution
 */
 
 void	draw_sprites_vertical_line(t_game_engine_state *state, int x,
