@@ -6,15 +6,9 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/04 19:48:42 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/05 14:10:55 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-#include "get_next_line.h"
 
 #include "read_map.h"
 #include "parsers/parse_map_header.h"
@@ -22,7 +16,13 @@
 #include "parsers/parsing_utils.h"
 #include "report_error.h"
 #include "result.h"
-#include "utils.h"
+#include "validate_map.h"
+
+#include "get_next_line.h"
+
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 int	parse_cub_map(char *file, t_style *style, t_map *map)
 {
@@ -37,8 +37,9 @@ int	parse_cub_map(char *file, t_style *style, t_map *map)
 	if (!parse_map(list_start, map))
 		return (ERROR);
 	ft_lstclear(&list_start, &free);
-	if (!validate_map(map, style))
+	if (!validate_style(style) || !validate_map(map, style))
 	{
+		free_map_style(style);
 		free_map(map);
 		return (ERROR);
 	}
@@ -84,6 +85,14 @@ int	read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 	}
 	return (SUCCESS);
 }
+/*
+** As the subject says
+** that the map content must be the last element:
+**
+** if the line was not found inside the map header(descriptor)
+** I assume that the map contents(the maze itself) has started
+** and handle the line as the map content from now.
+*/
 
 int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 {
@@ -98,13 +107,12 @@ int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 			free(line);
 		if (result == ERROR)
 			return (ERROR);
-		inside_map = (result == NOT_FOUND);
+		if (result == NOT_FOUND)
+			inside_map = TRUE;
 	}
 	if (inside_map)
 	{
-		if (!validate_style(style))
-		return (report_error("Map description must precede the map content."));
-		result = handle_map_line(line, line_num, list_start);
+		result = handle_map_content_line(line, line_num, list_start);
 		if (result == ERROR)
 		{
 			ft_lstclear(list_start, &free);
@@ -114,11 +122,11 @@ int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 	return (SUCCESS);
 }
 
-int	handle_map_line(char *line, int line_num, t_list **list_start)
+int	handle_map_content_line(char *line, int line_num, t_list **list_start)
 {
 	t_list	*new_node;
 	if (*line == '\0')
-	return (report_error_with_line(line_num, "Empty line is not allowed here."));
+		return (report_error_with_line(line_num, "Empty line is not allowed here."));
 	if (!are_valid_characters(line, line_num))
 		return (ERROR);
 	else
@@ -126,7 +134,7 @@ int	handle_map_line(char *line, int line_num, t_list **list_start)
 	if (!new_node)
 	{
 		return (report_error_with_line(line_num,
-				"Error allocating memory for a line."));
+			"Error allocating memory for a line."));
 	}
 	ft_lstadd_back(list_start, new_node);
 	return (SUCCESS);
