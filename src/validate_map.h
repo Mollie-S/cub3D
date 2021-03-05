@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map.c                                              :+:    :+:            */
+/*   validate_map.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/01/26 12:06:50 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/05 13:54:20 by osamara       ########   odam.nl         */
+/*   Created: 2021/03/05 13:43:26 by osamara       #+#    #+#                 */
+/*   Updated: 2021/03/05 13:48:00 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef VALIDATE_MAP_H
+# define VALIDATE_MAP_H
+
 #include "map.h"
 
-#include <stdlib.h>
+int		validate_map(t_map *map, t_style *style);
+int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map);
+int     is_closed_by_walls(t_map *map);
+void	remove_outside_sprites(t_map *map, char *check_array);
+int		count_sprites(t_map *map);
 
-void	init_map(t_map *map)
-{
-	map->height = 0;
-	map->width = 0;
-	map->start_direction = -1;
-	map->start_pos_x = -1;
-	map->start_pos_y = -1;
-	map->fields = NULL;
-	map->sprites_num = 0;
-}
-
-void	free_map(t_map *map)
-{
-	free(map->fields);
-	map->fields = NULL;
-}
+#endif
