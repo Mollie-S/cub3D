@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:48:20 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/05 11:19:41 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ typedef struct s_map
 # define INVALID_START_DIRECTION -1
 
 void	init_map(t_map *map);
-void	free_map(t_map *map);
 int		validate_map(t_map *map, t_style *style);
+int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map);
+void	remove_outside_sprites(t_map *map, char *check_array);
 int		count_sprites(t_map *map);
 
 #endif
