@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:13:42 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:19:20 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/05 14:16:44 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	rotate_player(t_game_engine_state *state)
 }
 
 /*
-**  BONUS condition is needed for walls collision
+**  the walls collision implemented in the mandatory compilation
 */
 
 void	move_player(t_game_engine_state *state)
@@ -48,15 +48,12 @@ void	move_player(t_game_engine_state *state)
 	if (state->move.move_hor_dir == MOVE_LEFT
 		|| state->move.move_hor_dir == MOVE_RIGHT)
 		move_left_right(state);
-	if (BONUS)
-	{
-		if (state->map->fields[state->map->width * (size_t)prev_y
-			+ (size_t)state->pos_x] != FIELD_FLOOR)
-			state->pos_x = prev_x;
-		if (state->map->fields[state->map->width * (size_t)state->pos_y
-			+ (size_t)prev_x] != FIELD_FLOOR)
-			state->pos_y = prev_y;
-	}
+	if (state->map->fields[state->map->width * (size_t)prev_y
+		+ (size_t)state->pos_x] != FIELD_FLOOR)
+		state->pos_x = prev_x;
+	if (state->map->fields[state->map->width * (size_t)state->pos_y
+		+ (size_t)prev_x] != FIELD_FLOOR)
+		state->pos_y = prev_y;
 }
 
 void	move_back_forth(t_game_engine_state *state)
