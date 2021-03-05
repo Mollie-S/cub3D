@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/03/04 17:42:12 by osamara       ########   odam.nl          #
+#    Updated: 2021/03/05 13:53:11 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,15 @@ NAME =		cub3D
 
 SRC = \
 	src/main.c \
+	src/bitmap.c \
 	src/check_arguments.c \
-	src/style.c \
 	src/map.c \
 	src/read_map.c \
 	src/report_error.c \
-	src/window.c \
+	src/style.c \
 	src/utils.c \
-	src/bitmap.c \
+	src/validate_map.c \
+	src/window.c \
 	src/parsers/parse_map_header.c \
 	src/parsers/parse_resolution.c \
 	src/parsers/parse_color.c \
