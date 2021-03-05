@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:06:13 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 14:45:52 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/05 11:02:10 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ int	fill_map_fields(t_list *list_start, t_map *map)
 	}
 	return (SUCCESS);
 }
+
+/*
+** initializing start position as -1
+** and defining it as INVALID_START_DIRECTION
+** to be able to check that the start position is not repeating
+*/
 
 int	define_start_position(t_list *current, t_map *map, int y)
 {
