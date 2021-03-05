@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/26 12:22:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:37:02 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/05 13:09:22 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	validate_style(t_style *style)
 	if (style->resolution.x == INVALID_RESOLUTION
 		|| style->resolution.y == INVALID_RESOLUTION)
 		return (report_error("Resolution element is invalid or missing."));
-	else if (style->resolution.x < 200 || style->resolution.y < 20)
-		return (report_error("Window resolution must be at least 200"));
+	else if (style->resolution.x < 1 || style->resolution.y < 1)
+		return (report_error("Invalid window resolution."));
 	if (style->ceiling_rgb == INVALID_COLOR
 		|| style->floor_rgb == INVALID_COLOR)
 		return (report_error("Floor or ceiling color element is missing."));
