@@ -6,14 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/20 19:07:21 by osamara       #+#    #+#                 */
-/*   Updated: 2021/02/28 15:48:57 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:01:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_MAP_H
 # define PARSE_MAP_H
 
-# include "map.h"
+# include "map/map.h"
 # include "libft.h"
 
 int		parse_map(t_list *list_start, t_map *map);

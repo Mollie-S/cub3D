@@ -6,14 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 22:37:52 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/05 13:56:11 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:01:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "map.h"
+# include "map/map.h"
 
 double	deg2rad(double angle);
 double	rad2deg(double angle);

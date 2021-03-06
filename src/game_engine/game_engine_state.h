@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 22:26:16 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 14:16:12 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:01:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "window.h"
 # include "style.h"
-# include "map.h"
+# include "map/map.h"
 
 typedef struct s_movement
 {

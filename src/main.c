@@ -6,16 +6,16 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 20:16:34 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:00:56 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "read_map.h"
+#include "map/read_map.h"
 #include "check_arguments.h"
 #include "game_engine/game_loop.h"
 #include "window.h"
 #include "style.h"
-#include "map.h"
+#include "map/map.h"
 #include "result.h"
 
 int	main(int argc, char **argv)
