@@ -1,0 +1,27 @@
+## 2 color components; 
+
+F  0 ,  120
+
+// color is bigger than range
+
+F  0 ,  355, 12
+
+// VALID!: 4 digits with 0 in front (should ignore 0)
+
+F  0 ,  0155, 12 
+
+// two digits separated by space
+
+F  0 ,  3 5, 12
+
+// letters instead of digits
+
+F  0 ,  155, ab
+
+// 4 color components
+
+F  0 ,  155, 0, 0
+
+// negative numbers
+
+F  0 ,  -155, 0
