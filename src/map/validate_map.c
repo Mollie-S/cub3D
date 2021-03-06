@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 13:43:33 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/05 13:54:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:31:31 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 
 int	is_closed_by_walls(t_map *map)
 {
-	int	x;
-	int	y;
+	size_t	x;
+	size_t	y;
 
 	x = 0;
 	y = 1;
