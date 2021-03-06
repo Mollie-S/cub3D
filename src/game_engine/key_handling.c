@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:10:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/04 17:43:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:06:54 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "mlx.h"
 
 #include <stdlib.h>
-
 
 int	setup_key_hooks(t_game_engine_state *state)
 {

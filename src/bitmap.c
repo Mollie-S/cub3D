@@ -74,7 +74,7 @@ int	create_bmp_file(t_game_engine_state	*state)
 	while (y > 0)
 	{
 		write(fd, ((char *)state->window->addr + (y - 1)
-			* state->window->line_length), img_width);
+				* state->window->line_length), img_width);
 		y--;
 	}
 	return (SUCCESS);

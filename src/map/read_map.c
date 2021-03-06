@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/05 14:10:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/06 20:23:17 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,10 @@ int	handle_line(char *line, int line_num, t_style *style, t_list **list_start)
 int	handle_map_content_line(char *line, int line_num, t_list **list_start)
 {
 	t_list	*new_node;
+
 	if (*line == '\0')
-		return (report_error_with_line(line_num, "Empty line is not allowed here."));
+		return (report_error_with_line(line_num,
+				"Empty line is not allowed here."));
 	if (!are_valid_characters(line, line_num))
 		return (ERROR);
 	else
@@ -134,7 +136,7 @@ int	handle_map_content_line(char *line, int line_num, t_list **list_start)
 	if (!new_node)
 	{
 		return (report_error_with_line(line_num,
-			"Error allocating memory for a line."));
+				"Error allocating memory for a line."));
 	}
 	ft_lstadd_back(list_start, new_node);
 	return (SUCCESS);
