@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/10 22:11:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/06 20:00:56 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 23:10:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	{
 		return (1);
 	}
-	if (!start_window(&window, &style.resolution))
+	if (!start_window(&window, &style.resolution, screenshot))
 		return (1);
 	if (!game_loop(&window, &style, &map, screenshot))
 		return (1);

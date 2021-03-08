@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/07 17:33:01 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:07:18 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 23:11:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ typedef struct s_window
 	int			endian;
 }				t_window;
 
-int				start_window(t_window *window, t_resolution *resolution);
+int	start_window(t_window *window, t_resolution *resolution, int screenshot);
+
 #endif
