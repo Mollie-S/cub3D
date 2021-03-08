@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 20:22:35 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/02 13:16:05 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 20:29:33 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	ft_atoi(const char *str)
 	is_minus = 0;
 	int_accumulator = 0;
 	while (str[index] != '\0' && (str[index] == '\t' || str[index] == '\n'
-			|| str[index] == '\v' || str[index] == '\f'
-			|| str[index] == '\r' || str[index] == ' '))
+		|| str[index] == '\v' || str[index] == '\f'
+		|| str[index] == '\r' || str[index] == ' '))
 		index++;
 	if (str[index] == '-' || str[index] == '+')
 	{
@@ -41,11 +41,16 @@ int	ft_atoi(const char *str)
 	return ((int)int_accumulator);
 }
 
+/*
+** 10 == num of digits in max int
+*/
+
 int	ft_printf_atoi(const char *start, int *num)
 {
-	int		index;
-	int		ptr;
-	int		accumulator;
+	int			index;
+	int			ptr;
+	long long	accumulator;
+	int			start_index;
 
 	index = 0;
 	accumulator = 0;
@@ -53,10 +58,16 @@ int	ft_printf_atoi(const char *start, int *num)
 	{
 		index++;
 	}
+	start_index = index;
 	while (start[index] >= '0' && start[index] <= '9')
 	{
 		ptr = start[index] - '0';
 		accumulator = accumulator * 10 + ptr;
+		if (accumulator > 2147483647 || index >= start_index + 10)
+		{
+			*num = 0;
+			return (0);
+		}
 		index++;
 	}
 	*num = index;
