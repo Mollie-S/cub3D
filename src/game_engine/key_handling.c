@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:10:15 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/06 20:06:54 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 13:50:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	setup_key_hooks(t_game_engine_state *state)
 {
 	mlx_hook(state->window->mlx_win, 2, 1L << 0, key_pressed, state);
 	mlx_hook(state->window->mlx_win, 3, 1L << 1, key_released, state);
-	mlx_hook(state->window->mlx_win, 17, 0L, exit_window, state);
+	mlx_hook(state->window->mlx_win, 17, 0L, exit_window, state->window);
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int	key_pressed(int keycode, t_game_engine_state *state)
 	else if (keycode == KEYCODE_P)
 		create_bmp_file(state);
 	else if (keycode == KEYCODE_ESC)
-		exit(0);
+		exit_window(state->window);
 	return (0);
 }
 
@@ -63,6 +63,6 @@ int	key_released(int keycode, t_game_engine_state *state)
 		state->move.move_hor_dir = 0;
 	}
 	if (keycode == KEYCODE_ESC)
-		exit(0);
+		exit_window(state->window);
 	return (0);
 }

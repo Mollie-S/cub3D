@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 17:38:36 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/06 20:07:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 13:49:33 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 #include <stdlib.h>
 
-int	exit_window(t_game_engine_state *state)
+int	exit_window(t_window *window)
 {
-	mlx_destroy_window(state->window->mlx, state->window->mlx_win);
+	mlx_destroy_window(window->mlx, window->mlx_win);
 	exit(0);
 	return (0);
 }

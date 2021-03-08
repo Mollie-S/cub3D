@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 17:40:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/04 17:44:25 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 13:49:41 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "game_engine_state.h"
 
-int	exit_window(t_game_engine_state *state);
+int	exit_window(t_window *window);
 
 #endif
