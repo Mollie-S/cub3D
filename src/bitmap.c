@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 21:47:08 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 19:03:38 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 13:59:30 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #include <unistd.h>
 
 /*
-** ypixelpermeter & xpixelpermeter- 72 dpi
+** ypixelpermeter & xpixelpermeter-
+** 2835 pixels per meter == 72 dpi(dots per inch)
 **
 ** 2 bytes are added to filesize and pixel data offset
 ** because BM is removed from s_bmp_header struct
@@ -77,5 +78,6 @@ int	create_bmp_file(t_game_engine_state	*state)
 				* state->window->line_length), img_width);
 		y--;
 	}
+	close(fd);
 	return (SUCCESS);
 }
