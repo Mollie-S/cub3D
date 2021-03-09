@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/06 20:23:17 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 21:41:44 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 	{
 		line_num++;
 		gnl_result = get_next_line(fd, &line);
+		if (gnl_result == END_OF_FILE && line[0] == 0)
+			break ;
 		if (gnl_result == -1)
 			return (report_error_with_line(line_num, "Error getting a line."));
 		if (handle_line(line, line_num, style, list_start) == ERROR)
@@ -85,6 +87,7 @@ int	read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 	}
 	return (SUCCESS);
 }
+
 /*
 ** As the subject says
 ** that the map content must be the last element:
