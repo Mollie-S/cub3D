@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/05 13:40:06 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/09 15:48:21 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ int	has_identifier(char *line, char *identifier, int *identifier_len)
 	}
 }
 
+/*
+** If atoi returns error(if non-int value is sent)
+** I'm setting num_chars to 0 to mark the  parsing error;
+*/
+
 int	is_valid_component(const char *string, int *component)
 {
 	int		num_chars;
@@ -91,7 +96,7 @@ int	is_valid_component(const char *string, int *component)
 	is_valid_component = 1;
 	trimmed_string = ft_strtrim(string, " ");
 	accumulator = ft_printf_atoi(trimmed_string, &num_chars);
-	if (trimmed_string[num_chars] != 0)
+	if (trimmed_string[num_chars] != 0 || num_chars == 0)
 	{
 		is_valid_component = 0;
 	}
