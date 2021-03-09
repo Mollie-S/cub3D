@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:07:48 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 23:17:35 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/09 15:09:40 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ int	parse_colors(char *line, int line_num, t_style *style)
 {
 	int					identifier_len;
 
+	while (*line == ' ')
+		line++;
 	identifier_len = 0;
 	if (has_identifier(line, "C ", &identifier_len))
 	{
 		return (get_color_value(&style->ceiling_rgb,
-				line, line_num, identifier_len));
+			line, line_num, identifier_len));
 	}
 	if (has_identifier(line, "F ", &identifier_len))
 	{
 		return (get_color_value(&style->floor_rgb, line,
-				line_num, identifier_len));
+			line_num, identifier_len));
 	}
 	return (NOT_FOUND);
 }
@@ -50,7 +52,7 @@ int	get_color_value(unsigned int *rgb, char *line, int line_num,
 	else
 	{
 		return (report_error_with_line(line_num,
-				"Invalid floor or ceiling color."));
+			"Invalid floor or ceiling color."));
 	}
 	return (SUCCESS);
 }

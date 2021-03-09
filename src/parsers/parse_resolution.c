@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:13:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 20:01:37 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/09 15:09:33 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	parse_window_resolution(char *line, int line_num, t_resolution *resolution)
 {
 	int	identifier_len;
 
+	while (*line == ' ')
+		line++;
 	identifier_len = 0;
 	if (has_identifier(line, "R ", &identifier_len))
 	{
@@ -29,7 +31,7 @@ int	parse_window_resolution(char *line, int line_num, t_resolution *resolution)
 			|| resolution->y != INVALID_RESOLUTION)
 			return (report_error_with_line(line_num, "Repeating resolution."));
 		if (!parse_resolution_components(line + identifier_len,
-				line_num, resolution))
+			line_num, resolution))
 			return (ERROR);
 	}
 	else
