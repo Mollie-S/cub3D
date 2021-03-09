@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 12:53:44 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/08 14:14:50 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/05 13:56:17 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ typedef struct s_map
 
 void	init_map(t_map *map);
 void	free_map(t_map *map);
-int		count_sprites(t_map *map);
 
 #endif
