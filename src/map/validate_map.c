@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 13:43:33 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/06 20:31:31 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/08 23:46:52 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,20 @@ int	ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 
 	field_index = map->width * y + x;
 	if (map->fields[field_index] == FIELD_BLACK_HOLE)
-		return (report_error("The map must be surrounded by walls."));
+		return (report_error("The map must be surrounded by walls (hole)"));
 	if (map->fields[field_index] != FIELD_WALL && check_array[field_index] == 0)
 	{
 		if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
-			return (report_error("The map is not surrounded by walls"));
+			return (report_error("The map is not surrounded by walls (edge)"));
 		check_array[field_index] = 1;
-		if (!ft_floodfill(x + 1, y, check_array, map))
-			return (ERROR);
-		else if (!ft_floodfill(x - 1, y, check_array, map))
-			return (ERROR);
-		else if (!ft_floodfill(x, y + 1, check_array, map))
-			return (ERROR);
-		else if (!ft_floodfill(x, y - 1, check_array, map))
+		if (!ft_floodfill(x + 1, y, check_array, map)
+			|| !ft_floodfill(x - 1, y, check_array, map)
+			|| !ft_floodfill(x, y + 1, check_array, map)
+			|| !ft_floodfill(x, y - 1, check_array, map)
+			|| !ft_floodfill(x + 1, y + 1, check_array, map)
+			|| !ft_floodfill(x + 1, y - 1, check_array, map)
+			|| !ft_floodfill(x - 1, y + 1, check_array, map)
+			|| !ft_floodfill(x - 1, y - 1, check_array, map))
 			return (ERROR);
 	}
 	return (SUCCESS);
