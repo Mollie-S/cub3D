@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 12:47:47 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/04 19:53:09 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/11 23:32:30 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 int	report_error_with_line(int line_num, char *message)
 {
 	char	*line_num_to_alpha;
+	char	*err;
 
-	write(1, "Error\n", 6);
+	err = "\e[31m Error\n \e[0m";
+	write(1, err, ft_strlen(err));
 	line_num_to_alpha = ft_itoa(line_num);
 	write(1, "Line ", 5);
 	write(1, line_num_to_alpha, ft_strlen(line_num_to_alpha));
@@ -34,7 +36,10 @@ int	report_error_with_line(int line_num, char *message)
 
 int	report_error(char *message)
 {
-	write(1, "Error\n", 6);
+	char	*err;
+
+	err = "\e[31m Error\n \e[0m";
+	write(1, err, ft_strlen(err));
 	write(1, message, ft_strlen(message));
 	write(1, "\n", 1);
 	return (ERROR);
