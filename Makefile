@@ -6,7 +6,7 @@
 #    By: osamara <osamara@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/11 22:14:55 by osamara       #+#    #+#                  #
-#    Updated: 2021/03/06 20:02:35 by osamara       ########   odam.nl          #
+#    Updated: 2021/03/11 00:24:37 by osamara       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC = \
 	src/raycasting/init_intersection.c \
 	src/raycasting/draw_frame.c \
 	src/raycasting/render_sprite.c \
+	src/raycasting/draw_utils.c \
 	src/game_engine/game_loop.c \
 	src/game_engine/key_handling.c \
 	src/game_engine/exit.c \
