@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 14:26:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 18:19:45 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/12 00:23:42 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,8 @@ void	calc_sprite_draw_range(t_game_engine_state *state,
 		* state->dist_to_plane;
 	sprite->draw_min_y = -sprite->projected_height / 2.0
 		+ state->style->resolution.y / 2.0;
-	if (sprite->draw_min_y < 0)
-		sprite->draw_min_y = 0;
 	sprite->draw_max_y = sprite->projected_height / 2.0
 		+ state->style->resolution.y / 2.0;
-	if (sprite->draw_max_y >= state->style->resolution.y)
-		sprite->draw_max_y = state->style->resolution.y - 1;
 	projected_sprite_width = sprite->projected_height
 		* ((double)state->tex_info[TEXTURE_SPRITE].img_width
 			/ (double)state->tex_info[TEXTURE_SPRITE].img_height);

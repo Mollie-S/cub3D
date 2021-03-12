@@ -6,13 +6,14 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 23:23:11 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/04 17:48:28 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/12 22:51:19 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw_frame.h"
 #include "utils.h"
 #include "sample_skybox.h"
+#include "draw_utils.h"
 
 #include "mlx.h"
 
@@ -77,10 +78,13 @@ unsigned int	sample_texture(t_texture_info *tex, double tex_x, double tex_y)
 }
 
 /*
-**  It would be more readable to have it like this
+**  It would be more readable to assign the  address like in wall draw:
 ** 	dst = state->window->addr + x * (state->window->bits_per_pixel / 8)
 **		+ y * state->window->line_length;
+**  and then to assign color to dst
 **  but because of 25  I have to write an ugly solution
+**
+**  t_sprite *sp stands for *sprite - also 25 lines :( 
 */
 
 void	draw_sprites_vertical_line(t_game_engine_state *state, int x,
@@ -89,17 +93,17 @@ void	draw_sprites_vertical_line(t_game_engine_state *state, int x,
 	int				i;
 	int				y;
 	unsigned int	color;
+	t_sprite		*sp;
 
 	i = 0;
 	while (i < state->map->sprites_num)
 	{
-		if (state->sprites[i].dist_to_sprite < dist_to_wall
-			&& state->sprites[i].dist_to_sprite > 0.0
-			&& x >= state->sprites[i].draw_min_x
-			&& x <= state->sprites[i].draw_max_x)
+		sp = &state->sprites[i];
+		if (sp->dist_to_sprite < dist_to_wall && sp->dist_to_sprite > 0.0
+			&& x >= sp->draw_min_x && x <= sp->draw_max_x)
 		{
-			y = state->sprites[i].draw_min_y;
-			while (y <= state->sprites[i].draw_max_y)
+			y = max(sp->draw_min_y, 0);
+			while (y <= min(sp->draw_max_y, state->style->resolution.y - 1))
 			{
 				color = sample_sprites_vertical_line(state, x, y, i);
 				if (color != 0x00000000)
