@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:56:07 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/08 21:41:44 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/12 14:04:23 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	load_map_from_file(char *file, t_style *style, t_list **list_start)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Can't open the file");
+		perror("The map you are trying to open does not exist");
 		return (ERROR);
 	}
 	if (!read_from_file(fd, line, style, list_start))
@@ -79,7 +79,10 @@ int	read_from_file(int fd, char *line, t_style *style, t_list **list_start)
 		line_num++;
 		gnl_result = get_next_line(fd, &line);
 		if (gnl_result == END_OF_FILE && line[0] == 0)
+		{
+			free(line);
 			break ;
+		}
 		if (gnl_result == -1)
 			return (report_error_with_line(line_num, "Error getting a line."));
 		if (handle_line(line, line_num, style, list_start) == ERROR)
