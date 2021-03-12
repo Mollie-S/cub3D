@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/08 20:58:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/01 19:09:13 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/10 10:35:37 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	init_game_engine_state(t_game_engine_state *state, t_window *window,
 	state->direction = map->start_direction;
 	state->sprites = NULL;
 }
+
+/*
+** ti stands for texture_info. Had to contract it for the sake of
+** compliance with Norminette
+*/
 
 int	load_textures(t_game_engine_state *state)
 {

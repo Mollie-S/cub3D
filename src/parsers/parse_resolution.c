@@ -31,7 +31,7 @@ int	parse_window_resolution(char *line, int line_num, t_resolution *resolution)
 			|| resolution->y != INVALID_RESOLUTION)
 			return (report_error_with_line(line_num, "Repeating resolution."));
 		if (!parse_resolution_components(line + identifier_len,
-			line_num, resolution))
+				line_num, resolution))
 			return (ERROR);
 	}
 	else

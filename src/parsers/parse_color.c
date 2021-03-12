@@ -27,12 +27,12 @@ int	parse_colors(char *line, int line_num, t_style *style)
 	if (has_identifier(line, "C ", &identifier_len))
 	{
 		return (get_color_value(&style->ceiling_rgb,
-			line, line_num, identifier_len));
+				line, line_num, identifier_len));
 	}
 	if (has_identifier(line, "F ", &identifier_len))
 	{
 		return (get_color_value(&style->floor_rgb, line,
-			line_num, identifier_len));
+				line_num, identifier_len));
 	}
 	return (NOT_FOUND);
 }
@@ -52,7 +52,7 @@ int	get_color_value(unsigned int *rgb, char *line, int line_num,
 	else
 	{
 		return (report_error_with_line(line_num,
-			"Invalid floor or ceiling color."));
+				"Invalid floor or ceiling color."));
 	}
 	return (SUCCESS);
 }
