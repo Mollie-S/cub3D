@@ -22,8 +22,8 @@ int	ft_atoi(const char *str)
 	is_minus = 0;
 	int_accumulator = 0;
 	while (str[index] != '\0' && (str[index] == '\t' || str[index] == '\n'
-		|| str[index] == '\v' || str[index] == '\f'
-		|| str[index] == '\r' || str[index] == ' '))
+			|| str[index] == '\v' || str[index] == '\f'
+			|| str[index] == '\r' || str[index] == ' '))
 		index++;
 	if (str[index] == '-' || str[index] == '+')
 	{
