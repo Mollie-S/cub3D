@@ -4,7 +4,7 @@ WE textures/clear+sea+water-512x512.xpm
 SO textures/red+hot+fire+flames-512x512.xpm
 EA textures/rocky+soil-512x512.xpm
 S textures/sprite_1.xpm
-F 232,232,210
+F 122,122,122	
 C 70,7,16
 
 11111111111111111

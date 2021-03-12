@@ -1,13 +1,19 @@
 NO  textures/ice+and+snow+ground-512x512.xpm
-R 900 600
+R 1500 600
 F 220, 00,0
 WE textures/concrete+cement+wall-64x64.xpm
 SO textures/dark+parquet-64x64.xpm
 EA textures/holey-cheese-64x64.xpm
-C  255,255,250  
 S textures/sprite_1.xpm
+C  255,255,250  
+
 1111111111
 1000000001
-1000020001
-100000W001
+1000000001
+100002W001
+1111111111101 111
 1111111111
+1000000001
+1000000001
+100002001
+1111111111101
