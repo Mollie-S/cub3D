@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 17:00:29 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/09 15:18:55 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/12 09:14:47 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	parse_walls_textures(char *line, int line_num, t_style *style)
 	while (i < TEXTURE_COUNT)
 	{
 		if (has_identifier(line, g_tex_identifier[i].identifier,
-			&identifier_len))
+				&identifier_len))
 		{
 			if (style->textures[g_tex_identifier[i].index] != NULL)
 				return (report_error_with_line(line_num, "Repeating texture."));
 			style->textures[g_tex_identifier[i].index] = ft_strtrim(line
-				+ identifier_len, " ");
+					+ identifier_len, " \t");
 			if (!validate_texture(style->textures[g_tex_identifier[i].index],
-				line_num))
+					line_num))
 				return (ERROR);
 			return (SUCCESS);
 		}

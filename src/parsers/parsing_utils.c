@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 16:52:28 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/09 15:48:21 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/12 09:15:26 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	is_valid_component(const char *string, int *component)
 
 	num_chars = 0;
 	is_valid_component = 1;
-	trimmed_string = ft_strtrim(string, " ");
+	trimmed_string = ft_strtrim(string, " \t");
 	accumulator = ft_printf_atoi(trimmed_string, &num_chars);
 	if (trimmed_string[num_chars] != 0 || num_chars == 0)
 	{
