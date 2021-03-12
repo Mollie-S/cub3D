@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 13:43:33 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/08 23:46:52 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/12 00:58:03 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "libft.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 int	validate_map(t_map *map, t_style *style)
 {
@@ -32,9 +33,7 @@ int	validate_map(t_map *map, t_style *style)
 		return (report_error("Error allocating memory for map validation."));
 	if (!ft_floodfill(map->start_pos_x, map->start_pos_y, check_array, map))
 		return (ERROR);
-	if (!is_closed_by_walls(map))
-		return (ERROR);
-	remove_outside_sprites(map, check_array);
+	check_unreachable_space(map, check_array);
 	free(check_array);
 	check_array = NULL;
 	map->sprites_num = count_sprites(map);
@@ -49,7 +48,7 @@ int	ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 
 	field_index = map->width * y + x;
 	if (map->fields[field_index] == FIELD_BLACK_HOLE)
-		return (report_error("The map must be surrounded by walls (hole)"));
+		return (report_error("The map is not surrounded by walls (hole)"));
 	if (map->fields[field_index] != FIELD_WALL && check_array[field_index] == 0)
 	{
 		if (x == 0 || x == map->width - 1 || y == 0 || y == map->height - 1)
@@ -68,35 +67,7 @@ int	ft_floodfill(size_t x, size_t y, char *check_array, t_map *map)
 	return (SUCCESS);
 }
 
-int	is_closed_by_walls(t_map *map)
-{
-	size_t	x;
-	size_t	y;
-
-	x = 0;
-	y = 1;
-	while (x < (map->height * map->width))
-	{
-		while (map->fields[x] != FIELD_WALL)
-		{
-			if (map->fields[x] != FIELD_BLACK_HOLE)
-				return (report_error("The map must be closed by walls."));
-			x++;
-		}
-		x = y * map->width - 1;
-		while (map->fields[x] != FIELD_WALL)
-		{
-			if (map->fields[x] != FIELD_BLACK_HOLE)
-				return (report_error("The map must be closed by walls."));
-			x--;
-		}
-		x = y * map->width;
-		y++;
-	}
-	return (SUCCESS);
-}
-
-void	remove_outside_sprites(t_map *map, char *check_array)
+void	check_unreachable_space(t_map *map, char *check_array)
 {
 	int	map_size;
 	int	i;
@@ -105,12 +76,45 @@ void	remove_outside_sprites(t_map *map, char *check_array)
 	i = 0;
 	while (i < map_size)
 	{
-		if (check_array[i] == 0 && map->fields[i] != FIELD_WALL)
+		if (check_array[i] == 0 && map->fields[i] != FIELD_WALL
+			&& map->fields[i] != FIELD_BLACK_HOLE)
 		{
-			map->fields[i] = FIELD_BLACK_HOLE;
+			printf(ANSI_COLOR_YELLOW "Warning:\n" ANSI_COLOR_RESET);
+			printf(ANSI_BOLD_BLACK "The map has the space that the player "
+				"is unable to access\n\n" ANSI_COLOR_RESET);
+			print_map_with_warning(map, check_array);
+			return ;
 		}
 		i++;
 	}
+}
+
+void	print_map_with_warning(t_map *map, char *check_array)
+{
+	unsigned int	y;
+	unsigned int	x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (check_array[y * map->width + x] == 1)
+				printf("%c", map->fields[y * map->width + x]);
+			else if (check_array[y * map->width + x] == 0
+				&& (map->fields[y * map->width + x] == FIELD_BLACK_HOLE
+					|| map->fields[y * map->width + x] == FIELD_WALL))
+				printf("%c", map->fields[y * map->width + x]);
+			else
+				printf(ANSI_COLOR_YELLOW "%c" ANSI_COLOR_RESET,
+					map->fields[y * map->width + x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+	printf("\n");
 }
 
 int	count_sprites(t_map *map)

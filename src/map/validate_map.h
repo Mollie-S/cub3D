@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/05 13:43:26 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/08 23:47:08 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/11 23:22:24 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int		validate_map(t_map *map, t_style *style);
 int		ft_floodfill(size_t x, size_t y, char *check_array, t_map *map);
-int		is_closed_by_walls(t_map *map);
-void	remove_outside_sprites(t_map *map, char *check_array);
+void	check_unreachable_space(t_map *map, char *check_array);
+void	print_map_with_warning(t_map *map, char *check_array);
 int		count_sprites(t_map *map);
 
 #endif
