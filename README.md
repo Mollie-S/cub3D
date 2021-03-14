@@ -36,8 +36,7 @@ or
 ```
 
 And here you are
-![inside the map.cub maze](screenshots/map_screenshot.png)
-or![inside the skybox_basic maze](screenshots/skybox_maze_basic.png)
+![inside the map.cub maze](screenshots/map_screenshot.png)![inside the skybox_basic maze](screenshots/skybox_maze_basic.png)
 
 Use **W**, **S**, **A**, **D** to move inside the maze
 and :arrow_right: :arrow_left: to rotate.
