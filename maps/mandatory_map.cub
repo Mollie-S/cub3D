@@ -1,4 +1,4 @@
-R 1200000 800
+R 800 600
 NO   textures/Bricks_001.xpm
 SO textures/clear+sea+water-512x512.xpm
 WE textures/true+seattle+ground+soil-64x64.xpm

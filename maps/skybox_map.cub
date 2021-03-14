@@ -1,6 +1,5 @@
 
-R 1000 800
-
+R 600 480
 
 NO  textures/concrete+cement+wall-64x64.xpm
 WE textures/stone+wall-512x512.xpm
@@ -8,7 +7,7 @@ SO textures/dark+parquet-64x64.xpm
 
 EA textures/holey-cheese-64x64.xpm
 
-S textures/sprite_1.xpm
+S textures/pillar.xpm
 
 SKY textures/sky.xpm
 

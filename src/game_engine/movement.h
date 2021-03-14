@@ -6,7 +6,7 @@
 /*   By: osamara <osamara@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 17:14:04 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/08 16:44:22 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/14 12:43:11 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define ROT_LEFT -1
 # define ROT_RIGHT 1
-# define ROT_SPEED 1.5
-# define MOVE_SPEED 0.1
+# define ROT_SPEED 1.1
+# define MOVE_SPEED 0.05
 # define MOVE_FORWARD  -1
 # define MOVE_BACKWARD 1
 # define MOVE_RIGHT 1
