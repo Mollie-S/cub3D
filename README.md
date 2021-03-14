@@ -2,6 +2,7 @@
 
 This project relates to the Codam Core curriculum.
 Codam is part of the #42network, with 9.000 students around the world.
+
 ------------------------------------------------------------------------------------------------------
 ## Project overview
 ------------------------------------------------------------------------------------------------------
