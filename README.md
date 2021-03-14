@@ -36,10 +36,13 @@ or
 ```
 
 And here you are
-![inside the map.cub maze](screenshots/map_screenshot.png)
-![inside the skybox_basic maze](screenshots/skybox_maze_basic.png)
+
+![](screenshots/screenshot_map.png)![](screenshots/screenshot_skybox_basic.png)
+
 Use **W**, **S**, **A**, **D** to move inside the maze
 and :arrow_right: :arrow_left: to rotate.
+
+![](screenshots/cub3d_video_1.mp4)
 
 In order to compile the bonus part (skybox)
 
@@ -58,5 +61,4 @@ and run the skybox map
 ```
 ./cub3D maps/skybox_map.cub                                                        
 ```
-![inside the skybox bonus maze](screenshots/skybox_bonus.png)
-![bonus map](screenshots/bonus_map.png)
+![](screenshots/screenshot_skybox_bonus.png)![](screenshots/screenshot_bonus.png)
