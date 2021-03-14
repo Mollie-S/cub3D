@@ -30,17 +30,18 @@ For example:
 ```
 ./cub3D maps/map.cub
 ```
+or
+```
+./cub3D maps/skybox_map.cub
+```
 
 And here you are
-
-![inside the map.cub maze](screenshots/cub3D_maze.png)
-
+![inside the map.cub maze](screenshots/map_screenshot.png)
 or
-
 ![inside the skybox_basic maze](screenshots/skybox_maze_basic.png)
 
 Use **W**, **S**, **A**, **D** to move inside the maze
-and :arrow_right: :arrow_right: to rotate.
+and :arrow_right: :arrow_left: to rotate.
 
 In order to compile the bonus part (skybox)
 
@@ -59,5 +60,6 @@ and run the skybox map
 ```
 ./cub3D maps/skybox_map.cub                                                        
 ```
-
 ![inside the skybox bonus maze](screenshots/skybox_bonus.png)
+or
+![inside the skybox bonus maze](screenshots/bonus_map.png)
