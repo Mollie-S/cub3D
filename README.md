@@ -12,7 +12,9 @@ Codam is part of the #42network, with 9.000 students around the world.
 ------------------------------------------------------------------------------------------------------
 #### Usage
 ------------------------------------------------------------------------------------------------------
-```git clone git@github.com:Mollie-S/cub3D.git```
+```
+git clone git@github.com:Mollie-S/cub3D.git
+```
 
 then
 
@@ -29,6 +31,5 @@ For example:
 ```
 
 And here you are
-
 ![inside the map.cub maze](screenshots/cub3D_maze.png)
-![moving inside the maze](screenshots/cub3d_video.mov)
+![](screenshots/cub3d_video.mov)
