@@ -16,15 +16,19 @@ Codam is part of the #42network, with 9.000 students around the world.
 
 then
 
-```cd cub3D && make```
+```
+cd cub3D && make                                                           
+```
 
 To start the maze window choose one of the maps inside the `maps` directory.
 
 For example:
 
-```./cub3D maps/map.cub```
+```
+./cub3D maps/map.cub
+```
 
 And here you are
 
-![inside the map.cub maze](cub3d/screenshots/cub3D_maze.png)
-![moving inside the maze](cub3d/screenshots/cub3d_video.mov)
+![inside the map.cub maze](screenshots/cub3D_maze.png)
+![moving inside the maze](screenshots/cub3d_video.mov)
