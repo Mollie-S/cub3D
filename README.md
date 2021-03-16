@@ -41,6 +41,7 @@ And here you are
 
 Use **W**, **S**, **A**, **D** to move inside the maze
 and :arrow_right: :arrow_left: to rotate.
+Use **ESC** key to exit the window. 
 
 ![](screenshots/cub3d_video_1.mp4)
 
@@ -61,4 +62,10 @@ and run the skybox map
 ```
 ./cub3D maps/skybox_map.cub                                                        
 ```
-![](screenshots/screenshot_skybox_bonus.png)![](screenshots/screenshot_bonus.png)
+![](screenshots/screenshot_skybox_bonus.png)![](screenshots/screenshot_bonus.png
+
+## Resources to learn raycasting
+
+- [The main resource I was using](https://permadi.com/1996/05/ray-casting-tutorial-1/)
+- [Is also a good one](https://lodev.org/cgtutor/raycasting.html)
+- [If you like listening instead of reading](https://www.youtube.com/watch?v=eOCQfxRQ2pY)
