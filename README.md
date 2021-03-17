@@ -11,6 +11,8 @@ Codam is part of the #42network, with 9.000 students around the world.
 >make a dynamic view inside a maze, in which you’ll have to find your way.
 
 
+![](screenshots/screenshot_map.png)
+
 ## Usage
 
 ```
@@ -28,16 +30,12 @@ To start the maze window choose one of the maps inside the `maps` directory.
 For example:
 
 ```
-./cub3D maps/map.cub
-```
-or
-```
 ./cub3D maps/skybox_map.cub
 ```
 
 And here you are
 
-![](screenshots/screenshot_map.png)![](screenshots/screenshot_skybox_basic.png)
+![](screenshots/screenshot_skybox_basic.png)
 
 Use **W**, **S**, **A**, **D** to move inside the maze
 and :arrow_right: :arrow_left: to rotate.
