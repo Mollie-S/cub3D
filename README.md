@@ -60,7 +60,7 @@ and run the skybox map
 ```
 ./cub3D maps/skybox_map.cub                                                        
 ```
-![](screenshots/screenshot_skybox_bonus.png)![](screenshots/screenshot_bonus.png
+![](screenshots/screenshot_skybox_bonus.png)![](screenshots/screenshot_bonus.png)
 
 ## Resources to learn raycasting
 
