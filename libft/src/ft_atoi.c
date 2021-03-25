@@ -6,7 +6,7 @@
 /*   By: osamara <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 20:22:35 by osamara       #+#    #+#                 */
-/*   Updated: 2021/03/08 20:29:33 by osamara       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:01:06 by osamara       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	ft_atoi(const char *str)
 }
 
 /*
+** index >= start_index + 10
 ** 10 == num of digits in max int
+** checking that no long long is passed
 */
 
 int	ft_printf_atoi(const char *start, int *num)
